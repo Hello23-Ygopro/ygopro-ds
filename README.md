@@ -5,7 +5,7 @@
 </p>
 
 ## How to play
-1. Start `ygopro.exe`.
+1. Start YGOPro.
 2. Click on `Deck Edit` to build your deck. Remember to add 1 _Dragon Ball Super Card Game Rules_ and 1 Leader Card!<br>
 If you do not build your deck according to the following rules, you will lose the game and have to rebuild your deck:<br>
 ● Your deck must be exactly 50 cards.<br>
