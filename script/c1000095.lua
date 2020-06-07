@@ -1,35 +1,35 @@
---P-064 Trunks, Hope at Hand
+--P-081 Frieza, Striking Back
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
-	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
+	aux.AddCharacter(c,CHARACTER_FRIEZA)
+	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
+	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--reduce skill cost
-	aux.AddPermanentUpdateSkillCost(c,-3,nil,LOCATION_HAND,0,scard.tg1,aux.SelfEvolvingCondition)
-	--play
-	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg2,EFFECT_FLAG_CARD_TARGET)
+	--tap
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
+	--search (play)
+	aux.AddSingleAutoSkill(c,1,EVENT_BATTLE_KOING,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET,aux.bdocon)
 end
-scard.specified_cost={COLOR_BLUE,3}
+scard.specified_cost={COLOR_YELLOW,1}
 scard.combo_cost=0
---reduce skill cost
-function scard.tg1(e,c)
-	return c:IsCharacter(CHARACTER_TRUNKS_FUTURE) and c:IsHasEffect(EFFECT_EVOLVE)
-end
---play
-scard.cost1=aux.SelfSendtoDeckCost(SEQ_DECK_BOTTOM)
+--tap
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),0,LOCATION_BATTLE,0,1,HINTMSG_TOREST)
+scard.op1=aux.TargetCardsOperation(Duel.SwitchtoRest,REASON_EFFECT)
+--search (play)
 function scard.playfilter(c,e,tp)
-	return c:IsCode(CARD_RESTLESS_SPIRIT_SSB_VEGETA) and c:IsCanBePlayed(e,0,tp,false,false)
+	return c:IsBattle() and c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_FRIEZAS_ARMY)
+		and c:IsHasNoSkill() and c:IsEnergyBelow(3) and c:IsCanBePlayed(e,0,tp,false,false) and c:IsCanBeEffectTarget(e)
 end
 function scard.tg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local f=aux.HandFilter(scard.playfilter)
-	if chkc then return chkc:IsLocation(LOCATION_HAND) and chkc:IsControler(tp) and f(chkc,e,tp) end
+	if chkc then return false end
 	if chk==0 then return true end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	if Duel.GetEnergyCount(tp)>=4 then
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_PLAY)
-		Duel.SelectTarget(tp,f,tp,LOCATION_HAND,0,0,1,nil,e,tp)
-	end
+	local g1=Duel.GetMatchingGroup(scard.playfilter,tp,LOCATION_DECK,0,nil,e,tp)
+	local g2=Duel.GetMatchingGroup(aux.DropAreaFilter(scard.playfilter),tp,LOCATION_DROP,0,nil,e,tp)
+	g1:Merge(g2)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_PLAY)
+	local sg=g1:Select(tp,0,1,nil)
+	Duel.SetTargetCard(sg)
 end
-scard.op1=aux.TargetPlayOperation(POS_FACEUP_ACTIVE)
+scard.op2=aux.TargetPlayOperation(POS_FACEUP_ACTIVE)

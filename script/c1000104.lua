@@ -1,33 +1,28 @@
---P-070 Saiyan Power Baby
+--P-089 One-Star Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_BABY,CHARACTER_VEGETA_GT)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_MACHINE_MUTANT)
-	aux.AddEra(c,ERA_BABY_SAGA)
-	aux.AddCategory(c,NAME_CATEGORY_BABY,CHAR_CATEGORY_GT)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--draw
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
-	--gain skill
-	local e1=aux.AddActivateMainSkill(c,1,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
-	e1:SetCountLimit(1)
+	--extra card
+	aux.EnableExtraAttribute(c)
+	--dragon ball
+	aux.EnableDragonBall(c)
+	--draw, drop
+	aux.AddActivateMainSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_SHENRON))
 end
-scard.front_side_code=sid-1
---gain skill
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),LOCATION_BATTLE,0,1,1,HINTMSG_TARGET)
+--draw, drop
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local tc1=Duel.GetFirstTarget()
-	if not tc1 or not tc1:IsRelateToEffect(e) or not tc1:IsFaceup() then return end
-	local c=e:GetHandler()
-	--lose power
-	aux.AddTempSkillUpdatePower(c,tc1,2,-15000)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	local g=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(Card.IsCanBeEffectTarget),tp,0,LOCATION_BATTLE,0,2,nil,e)
+	Duel.Draw(tp,1,REASON_EFFECT)
+	Duel.ShuffleHand(tp)
+	Duel.BreakEffect()
+	scard.drop(e,tp)
+	scard.drop(e,1-tp)
+end
+function scard.dropfilter(c,e)
+	return c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)
+end
+function scard.drop(e,tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
+	local g=Duel.SelectMatchingCard(tp,aux.HandFilter(scard.dropfilter),tp,LOCATION_HAND,0,1,1,nil,e)
 	if g:GetCount()==0 then return end
 	Duel.SetTargetCard(g)
-	for tc2 in aux.Next(g) do
-		--lose power
-		aux.AddTempSkillUpdatePower(c,tc2,3,-10000)
-	end
+	Duel.SendtoDrop(g,REASON_EFFECT)
 end

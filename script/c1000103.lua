@@ -1,27 +1,44 @@
---P-070 Baby
+--P-088 Negating Fist SSB Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_BABY,CHARACTER_VEGETA_GT)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_MACHINE_MUTANT)
-	aux.AddEra(c,ERA_BABY_SAGA)
-	aux.AddCategory(c,NAME_CATEGORY_BABY,CHAR_CATEGORY_GT)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--draw
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT),nil,aux.SelfAttackTargetCondition(Card.IsLeader))
-	--gain skill
-	local e1=aux.AddActivateMainSkill(c,1,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
-	e1:SetCountLimit(1)
-	--awaken
-	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
+	aux.AddCharacter(c,CHARACTER_SON_GOKU)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
+	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--play, negate attack
+	aux.AddCounterAttackSkill(c,0,scard.op1,nil,aux.SelfPlayTarget)
+	--search (play)
+	aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.back_side_code=sid+1
---gain skill
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_TARGET)
+scard.specified_cost={COLOR_YELLOW,2}
+scard.combo_cost=0
+--play, negate attack
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or not tc:IsFaceup() then return end
-	--lose power
-	aux.AddTempSkillUpdatePower(e:GetHandler(),tc,2,-5000)
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
+	Duel.Play(c,0,tp,tp,false,false,POS_FACEUP_ACTIVE)
+	Duel.NegateAttack()
 end
+--search (play)
+scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_YELLOW,3,0),aux.SelfDropCost)
+function scard.playfilter1(c,e,tp)
+	return c:IsBattle() and c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_SAIYAN)
+		and c:IsHasNoSkill() and c:IsEnergyBelow(3) and c:IsCanBePlayed(e,0,tp,false,false)
+end
+function scard.playfilter2(c,e,tp)
+	return scard.playfilter1(c,e,tp) and c:IsCanBeEffectTarget(e)
+end
+function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return false end
+	if chk==0 then return true end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	local g1=Duel.GetMatchingGroup(scard.playfilter2,tp,LOCATION_DECK,0,nil,e,tp)
+	local g2=Duel.GetMatchingGroup(aux.DropAreaFilter(scard.playfilter2),tp,LOCATION_DROP,0,nil,e,tp)
+	g1:Merge(g2)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_PLAY)
+	local sg=g1:Select(tp,0,1,nil)
+	Duel.SetTargetCard(sg)
+end
+scard.op2=aux.TargetPlayOperation(POS_FACEUP_ACTIVE)

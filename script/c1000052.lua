@@ -1,35 +1,32 @@
---P-035_PR Bardock, Will of Iron (Alias)
+--P-045 Saiyan Delusion Hercule
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_BARDOCK)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
-	aux.AddEra(c,ERA_BARDOCK_SAGA)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--double strike
-	aux.EnableDoubleStrike(c)
-	--blocker
-	aux.EnableBlocker(c)
-	--evolve
-	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
+	aux.AddCharacter(c,CHARACTER_HERCULE)
+	aux.AddSpecialTrait(c,TRAIT_DELUSION_WARRIOR)
+	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
+	--leader card
+	aux.EnableLeaderAttribute(c)
+	--gain skill
+	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1)
+	e1:SetCountLimit(1)
+	--draw
+	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
---evolve
-scard.con1=aux.TurnPlayerCondition(PLAYER_SELF)
-function scard.evofilter(c,e)
-	return c:IsCanEvolve() and c:IsCharacter(CHARACTER_BARDOCK) and c:IsCanBeEffectTarget(e)
+scard.front_side_code=sid-1
+--gain skill
+function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
+	local f=aux.HandFilter(Card.IsAbleToDrop)
+	if chk==0 then return Duel.IsExistingMatchingCard(f,tp,LOCATION_HAND,0,1,nil) end
+	local g=Duel.GetMatchingGroup(f,tp,LOCATION_HAND,0,nil)
+	local ct=Duel.SendtoDrop(g,REASON_COST)
+	e:SetLabel(ct)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EVOLVE)
-	local tc=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.evofilter),tp,LOCATION_BATTLE,0,0,1,nil,e):GetFirst()
-	if not tc then return end
-	Duel.SetTargetCard(tc)
-	local pos=tc:GetPosition()
-	if Duel.GetAttacker()==tc then pos=POS_FACEUP_REST end --fix battle card not being tapped when attacking
-	tc:SetStatus(STATUS_EVOLVING,true)
-	c:SetMaterial(Group.FromCards(tc))
-	Duel.PlaceOnTop(c,tc)
-	Duel.Play(c,SUMMON_TYPE_EVOLVE,tp,tp,false,false,pos)
+	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
+	--gain power
+	aux.AddTempSkillUpdatePower(c,c,2,50000)
+	if e:GetLabel()<5 then return end
+	--triple strike
+	aux.AddTempSkillCustom(c,c,3,EFFECT_TRIPLE_STRIKE)
 end

@@ -1,18 +1,31 @@
---P-005_PR Light of Hope Trunks (Alias)
+--P-008 Clan of Terror Mecha Frieza
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
-	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
+	aux.AddCharacter(c,CHARACTER_FRIEZA)
+	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
+	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--gain power
-	aux.AddPermanentUpdatePower(c,5000,scard.con1,LOCATION_BATTLE,0,scard.tg1)
+	--double strike
+	aux.EnableDoubleStrike(c)
+	--confirm hand, play
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
---gain power
-scard.con1=aux.AND(aux.TurnPlayerCondition(PLAYER_SELF),aux.EnergyEqualAboveCondition(PLAYER_SELF,5))
-function scard.tg1(e,c)
-	return c:IsLeader() or c==e:GetHandler()
+scard.specified_cost={COLOR_YELLOW,2}
+scard.combo_cost=1
+--confirm hand, play
+function scard.playfilter(c,e,tp)
+	return c:IsBattle() and c:IsCanBePlayed(e,0,tp,false,false) and c:IsCanBeEffectTarget(e)
+end
+function scard.op1(e,tp,eg,ep,ev,re,r,rp)
+	local g1=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
+	Duel.ConfirmCards(tp,g1)
+	local g2=Duel.GetMatchingGroup(aux.HandFilter(scard.playfilter),tp,0,LOCATION_HAND,nil,e,tp)
+	if g2:GetCount()>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_PLAY)
+		local sg=g2:Select(tp,0,1,nil)
+		Duel.SetTargetCard(sg)
+		Duel.Play(sg,0,1-tp,1-tp,false,false,POS_FACEUP_REST)
+	end
+	Duel.ShuffleHand(1-tp)
 end

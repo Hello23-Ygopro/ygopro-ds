@@ -1,26 +1,16 @@
---P-007 Forceful Strike Cell
+--P-010 Intrepid Determination Bardock
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_CELL)
-	aux.AddSpecialTrait(c,TRAIT_ANDROID)
-	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
+	aux.AddCharacter(c,CHARACTER_BARDOCK)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_CHILLED_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--double strike
-	aux.EnableDoubleStrike(c)
-	--revenge
-	aux.EnableRevenge(c)
-	--drop
-	local e1=aux.AddAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
-	e1:SetCountLimit(1)
+	--ko
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=1
---drop
-function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	return (Duel.GetAttacker()==c or Duel.GetAttackTarget()==c) and ep~=tp
-end
-scard.con2=aux.TurnPlayerCondition(PLAYER_SELF)
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.ComboAreaFilter(Card.IsAbleToDrop),0,LOCATION_COMBO,1,1,HINTMSG_DROP,scard.con2)
-scard.op1=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)
+scard.specified_cost={COLOR_GREEN,2}
+scard.combo_cost=0
+--ko
+scard.tg1=aux.TargetTotalCostBelowTarget(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,3,HINTMSG_KO)
+scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

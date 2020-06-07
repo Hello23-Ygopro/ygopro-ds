@@ -1,56 +1,16 @@
---P-028 Bionic Strike Mecha Frieza
+--P-036 Scientist Fu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_FRIEZA)
-	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
-	aux.AddEra(c,ERA_FRIEZA_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--gain skill
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(sid,0))
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_CUSTOM+EVENT_ACTIVATE_EXTRA_CARD)
-	e1:SetRange(LOCATION_LEADER)
-	e1:SetCondition(scard.con1)
-	e1:SetOperation(scard.op1)
-	c:RegisterEffect(e1)
+	aux.AddCharacter(c,CHARACTER_FU)
+	aux.AddSpecialTrait(c,TRAIT_SCIENTIST)
+	aux.AddEra(c,ERA_UNKNOWN)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--over realm
+	aux.EnableOverRealm(c,7,aux.PaySkillCost(COLOR_COLORLESS,0,1))
+	--double strike
+	aux.EnableDoubleStrike(c)
 	--draw
-	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,2,REASON_EFFECT),nil,aux.OverRealmPlayCondition)
 end
-scard.front_side_code=sid-1
---gain skill
-function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	local p=e:GetHandlerPlayer()
-	return Duel.GetTurnPlayer()~=p and rp==p
-end
-function scard.thfilter(c,e)
-	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
-end
-function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.LifeAreaFilter(scard.thfilter),tp,LOCATION_LIFE,0,nil,e)
-	if g:GetCount()==0 or not Duel.SelectYesNo(tp,aux.Stringid(sid,2)) then return end
-	Duel.Hint(HINT_CARD,0,sid)
-	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=g:Select(tp,1,1,nil)
-	Duel.SetTargetCard(sg)
-	if Duel.SendtoHand(sg,PLAYER_OWNER,REASON_EFFECT)==0 then return end
-	local c=e:GetHandler()
-	local rc=re:GetHandler()
-	--reduce energy cost
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_UPDATE_TOTAL_ENERGY_COST)
-	e1:SetValue(-2)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-	rc:RegisterEffect(e1)
-	if rc:GetEnergy()<1 then
-		--no specified cost
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetCode(EFFECT_NO_SPECIFIED_COST)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		rc:RegisterEffect(e2)
-	end
-end
+scard.combo_cost=1

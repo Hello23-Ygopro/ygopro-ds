@@ -1,16 +1,21 @@
---P-036 Scientist Fu
+--P-046 Bardock
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_FU)
-	aux.AddSpecialTrait(c,TRAIT_SCIENTIST)
-	aux.AddEra(c,ERA_UNKNOWN)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--over realm
-	aux.EnableOverRealm(c,7,aux.PaySkillCost(COLOR_COLORLESS,0,1))
-	--double strike
-	aux.EnableDoubleStrike(c)
-	--draw
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,2,REASON_EFFECT),nil,aux.OverRealmPlayCondition)
+	aux.AddCharacter(c,CHARACTER_BARDOCK)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_BARDOCK_SAGA)
+	--leader card
+	aux.EnableLeaderAttribute(c)
+	--tap
+	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
+	e1:SetCountLimit(1)
+	--awaken
+	aux.EnableAwaken(c)
 end
-scard.combo_cost=1
+scard.back_side_code=sid+1
+--tap
+function scard.tapfilter(c)
+	return c:IsEnergyBelow(3) and c:IsAbleToSwitchToRest()
+end
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(scard.tapfilter),0,LOCATION_BATTLE,1,1,HINTMSG_TOREST)
+scard.op1=aux.TargetCardsOperation(Duel.SwitchtoRest,REASON_EFFECT)

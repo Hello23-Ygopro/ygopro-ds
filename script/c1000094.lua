@@ -1,42 +1,41 @@
---P-063 Glory-Obsessed Prince of Destruction Vegeta
---Not fully implemented: Cards do not switch to Rest Mode when attacking
+--P-080 Super 17, the Infernal Machine
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_VEGETA)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
-	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
+	aux.AddCharacter(c,CHARACTER_SUPER_17)
+	aux.AddSpecialTrait(c,TRAIT_ANDROID,TRAIT_MACHINE_MUTANT)
+	aux.AddEra(c,ERA_SUPER_17_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--attack active
-	aux.AddSinglePermanentSkill(c,EFFECT_ATTACK_ACTIVE_MODE,aux.SelfLeaderCondition(Card.IsColor,COLOR_RED))
-	--untap, gain skill
-	local e1=aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,aux.SelfAttackTargetCondition(Card.IsBattle))
-	e1:SetCountLimit(1)
-	--workaround to untap
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCode(EVENT_CUSTOM+EVENT_ATTACK_END)
-	e2:SetCountLimit(1)
-	e2:SetCondition(scard.con1)
-	e2:SetOperation(scard.op2)
-	c:RegisterEffect(e2)
+	--double strike
+	aux.EnableDoubleStrike(c)
+	--cannot negate attack
+	aux.AddSinglePermanentSkill(c,EFFECT_CANNOT_NEGATE_ATTACK)
+	--drop
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
+scard.specified_cost={COLOR_GREEN,3}
 scard.combo_cost=0
---untap, gain skill
+--drop
+function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return false end
+	if chk==0 then return true end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	if not Duel.IsExistingTarget(aux.HandFilter(Card.IsAbleToDrop),tp,LOCATION_HAND,0,2,nil)
+		or not Duel.SelectYesNo(tp,YESNOMSG_DROP) then return end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
+	Duel.SelectTarget(tp,aux.HandFilter(Card.IsAbleToDrop),tp,LOCATION_HAND,0,2,2,nil)
+end
+function scard.dropfilter(c,e)
+	return c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)
+end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
-	--gain power
-	aux.AddTempSkillUpdatePower(c,c,1,10000,RESET_PHASE+PHASE_DAMAGE)
-	c:RegisterFlagEffect(sid,RESET_EVENT+RESETS_STANDARD+RESET_DISABLE+RESET_PHASE+PHASE_END,0,1)
-end
-function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetFlagEffect(sid)>0
-end
-function scard.op2(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if not c:IsAbleToSwitchToActive() then return end
-	Duel.Hint(HINT_CARD,0,sid)
-	Duel.SwitchtoActive(c,REASON_EFFECT)
+	local g1=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	if not g1 then return end
+	local sg=g1:Filter(Card.IsRelateToEffect,nil,e)
+	if Duel.SendtoDrop(sg,REASON_EFFECT)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DROP)
+	local g2=Duel.SelectMatchingCard(1-tp,aux.HandFilter(scard.dropfilter),1-tp,LOCATION_HAND,0,2,2,nil,e)
+	if g2:GetCount()==0 then return end
+	Duel.SetTargetCard(g2)
+	Duel.SendtoDrop(g2,REASON_EFFECT)
 end

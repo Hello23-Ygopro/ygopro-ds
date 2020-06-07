@@ -1,58 +1,35 @@
---P-028 Frieza
+--P-035 Bardock, Will of Iron
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_FRIEZA)
-	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
-	aux.AddEra(c,ERA_FRIEZA_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--gain skill
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(sid,0))
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_CUSTOM+EVENT_ACTIVATE_EXTRA_CARD)
-	e1:SetRange(LOCATION_LEADER)
-	e1:SetCondition(scard.con1)
-	e1:SetOperation(scard.op1)
-	c:RegisterEffect(e1)
-	--awaken
-	aux.EnableAwaken(c)
+	aux.AddCharacter(c,CHARACTER_BARDOCK)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
+	aux.AddEra(c,ERA_BARDOCK_SAGA)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--double strike
+	aux.EnableDoubleStrike(c)
+	--blocker
+	aux.EnableBlocker(c)
+	--evolve
+	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.back_side_code=sid+1
---gain skill
-function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	local p=e:GetHandlerPlayer()
-	return Duel.GetTurnPlayer()~=p and rp==p and e:GetHandler():GetFlagEffect(sid)==0
-end
-function scard.thfilter(c,e)
-	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
+scard.specified_cost={COLOR_YELLOW,2}
+scard.combo_cost=1
+--evolve
+scard.con1=aux.TurnPlayerCondition(PLAYER_SELF)
+function scard.evofilter(c,e)
+	return c:IsCanEvolve() and c:IsCharacter(CHARACTER_BARDOCK) and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.LifeAreaFilter(scard.thfilter),tp,LOCATION_LIFE,0,nil,e)
-	if g:GetCount()==0 or not Duel.SelectYesNo(tp,aux.Stringid(sid,1)) then return end
-	Duel.Hint(HINT_CARD,0,sid)
-	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=g:Select(tp,1,1,nil)
-	Duel.SetTargetCard(sg)
-	if Duel.SendtoHand(sg,PLAYER_OWNER,REASON_EFFECT)==0 then return end
 	local c=e:GetHandler()
-	local rc=re:GetHandler()
-	--reduce energy cost
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_UPDATE_TOTAL_ENERGY_COST)
-	e1:SetValue(-1)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-	rc:RegisterEffect(e1)
-	if rc:GetEnergy()<1 then
-		--no specified cost
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_SINGLE)
-		e2:SetCode(EFFECT_NO_SPECIFIED_COST)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
-		rc:RegisterEffect(e2)
-	end
-	--negate skill
-	c:RegisterFlagEffect(sid,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(sid,2))
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EVOLVE)
+	local tc=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.evofilter),tp,LOCATION_BATTLE,0,0,1,nil,e):GetFirst()
+	if not tc then return end
+	Duel.SetTargetCard(tc)
+	local pos=tc:GetPosition()
+	if Duel.GetAttacker()==tc then pos=POS_FACEUP_REST end --fix battle card not being tapped when attacking
+	tc:SetStatus(STATUS_EVOLVING,true)
+	c:SetMaterial(Group.FromCards(tc))
+	Duel.PlaceOnTop(c,tc)
+	Duel.Play(c,SUMMON_TYPE_EVOLVE,tp,tp,false,false,pos)
 end

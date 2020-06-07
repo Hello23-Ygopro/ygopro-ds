@@ -1,22 +1,16 @@
---P-033_PR02 Endless Evolution Broly (Alias)
+--P-044 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_BROLY)
+	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
-	aux.AddEra(c,ERA_BROLY_SAGA)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--reduce skill cost
-	aux.AddPermanentUpdateSkillCost(c,-2,COLOR_GREEN,LOCATION_HAND,0,scard.tg1,aux.SelfEvolvingCondition)
-	--ko
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg2,scard.op1,EFFECT_FLAG_CARD_TARGET)
+	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
+	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	--leader card
+	aux.EnableLeaderAttribute(c)
+	--draw
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT),nil,aux.SelfAttackTargetCondition(Card.IsLeader))
+	--awaken
+	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
---reduce skill cost
-function scard.tg1(e,c)
-	return c:IsCharacter(CHARACTER_BROLY) and c:IsHasEffect(EFFECT_EVOLVE)
-end
---ko
-scard.tg2=aux.TargetCardFunction(PLAYER_OPPO,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,1,1,HINTMSG_KO)
-scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)
+scard.card_code=CARD_SON_GOKU
+scard.back_side_code=sid+1

@@ -1,26 +1,23 @@
---P-056 Supreme Kai of Time, Light's Guide
+--P-072 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_SUPREME_KAI_OF_TIME)
-	aux.AddSpecialTrait(c,TRAIT_GOD)
-	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
-	aux.AddCategory(c,NAME_CATEGORY_SUPREME_KAI)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--over realm
-	aux.EnableOverRealm(c,3)
-	--gain skill, draw
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
+	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_SPECIAL)
+	aux.AddCategory(c,CHAR_CATEGORY_GT,CHAR_CATEGORY_SON_GOKU)
+	--leader card
+	aux.EnableLeaderAttribute(c)
+	--to hand, draw
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfAttackTargetCondition(Card.IsLeader))
+	--awaken
+	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
 end
-scard.combo_cost=0
---gain skill, draw
-scard.con1=aux.AND(aux.OverRealmPlayCondition,aux.SelfLeaderCondition(Card.IsColor,COLOR_RED+COLOR_BLUE))
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LeaderAreaFilter(nil),LOCATION_LEADER,0,1,1,HINTMSG_TARGET)
+scard.card_code=CARD_SON_GOKU
+scard.back_side_code=sid+1
+--to hand, draw
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,1,HINTMSG_ATOHAND)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) then return end
-	--gain power
-	aux.AddTempSkillUpdatePower(e:GetHandler(),tc,1,5000)
-	Duel.BreakEffect()
+	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoHand(tc,PLAYER_OWNER,REASON_EFFECT)==0 then return end
 	Duel.Draw(tp,1,REASON_EFFECT)
 end

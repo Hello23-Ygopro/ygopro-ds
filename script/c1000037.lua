@@ -1,21 +1,22 @@
---P-027 Gotenks
+--P-033 Endless Evolution Broly
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_GOTENKS)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
-	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--drop
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
-	--awaken
-	aux.EnableAwaken(c)
+	aux.AddCharacter(c,CHARACTER_BROLY)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_BROLY_SAGA)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--reduce skill cost
+	aux.AddPermanentUpdateSkillCost(c,-2,COLOR_GREEN,LOCATION_HAND,0,scard.tg1,aux.SelfEvolvingCondition)
+	--ko
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg2,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.back_side_code=sid+1
---drop
-function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetAttackTarget()
-	return tc and tc:IsFaceup() and tc:IsLeader() and tc:IsControler(1-tp) and Duel.GetHandCount(tp)<Duel.GetHandCount(1-tp)
+scard.specified_cost={COLOR_GREEN,2}
+scard.combo_cost=0
+--reduce skill cost
+function scard.tg1(e,c)
+	return c:IsCharacter(CHARACTER_BROLY) and c:IsHasEffect(EFFECT_EVOLVE)
 end
-scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToDrop),LOCATION_HAND,0,1,1,HINTMSG_DROP)
-scard.op1=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)
+--ko
+scard.tg2=aux.TargetCardFunction(PLAYER_OPPO,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,1,1,HINTMSG_KO)
+scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

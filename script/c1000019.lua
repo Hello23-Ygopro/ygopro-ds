@@ -1,28 +1,33 @@
---P-015 Joyful Strike Goku Black Rosé
+--P-019 Ginyu, The Reliable Captain
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_GOKU_BLACK)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GOD)
-	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
+	aux.AddCharacter(c,CHARACTER_GINYU)
+	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
+	aux.AddEra(c,ERA_FRIEZA_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--double strike
-	aux.EnableDoubleStrike(c)
-	--damage, untap
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
+	--gain skill (evolve)
+	aux.AddGrantPermanentSkillEvolve(c,scard.evofilter,aux.PaySkillCost(COLOR_YELLOW,3,2),LOCATION_HAND,0,scard.tg1)
+	--play
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg2,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
---damage, untap
-scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_ZAMASU,CHARACTER_GOKU_BLACK)
-function scard.untfilter(c,e)
-	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)
+scard.specified_cost={COLOR_YELLOW,2}
+scard.combo_cost=0
+--gain skill (evolve)
+scard.evofilter=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_GINYU)
+scard.tg1=aux.TargetBoolFunction(Card.IsCharacter,CHARACTER_GINYU)
+--play
+function scard.playfilter(c,e,tp)
+	return c:IsSpecialTrait(TRAIT_GINYU_FORCE)
+		and not c:IsCharacter(CHARACTER_GINYU) and c:IsCanBePlayed(e,0,tp,false,false)
 end
-function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.SelectYesNo(tp,YESNOMSG_DAMAGESELF) or Duel.Damage(tp,2,REASON_EFFECT)==0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOACTIVE)
-	local g=Duel.SelectMatchingCard(tp,aux.EnergyAreaFilter(scard.untfilter),tp,LOCATION_ENERGY,0,0,6,nil,e)
-	if g:GetCount()==0 then return end
-	Duel.SetTargetCard(g)
-	Duel.SwitchtoActive(g,REASON_EFFECT)
+function scard.tg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	local f=aux.HandFilter(scard.playfilter)
+	if chkc then return chkc:IsLocation(LOCATION_HAND) and chkc:IsControler(tp) and f(chkc,e,tp) end
+	if chk==0 then return true end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	local ct=Duel.GetMatchingGroupCount(f,tp,LOCATION_HAND,0,nil,e,tp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_PLAY)
+	Duel.SelectTarget(tp,f,tp,LOCATION_HAND,0,0,ct,nil,e,tp)
 end
+scard.op1=aux.TargetPlayOperation(POS_FACEUP_ACTIVE)

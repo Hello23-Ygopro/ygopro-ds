@@ -1,14 +1,14 @@
---P-030 Vegeta, Powerful as Ever
+--P-038 Absolute Attack Mira
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_VEGETA_GT)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
-	aux.AddEra(c,ERA_BABY_SAGA)
-	aux.AddCategory(c,CHAR_CATEGORY_GT)
+	aux.AddCharacter(c,CHARACTER_MIRA)
+	aux.AddSpecialTrait(c,TRAIT_ANDROID)
+	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--damage
-	aux.AddSingleAutoSkill(c,0,EVENT_BATTLE_KOING,nil,aux.DuelOperation(Duel.Damage,PLAYER_OPPO,1,REASON_EFFECT),nil,aux.bdocon)
+	--over realm
+	aux.EnableOverRealm(c,4)
+	--cannot activate
+	aux.AddPermanentPlayerCannotActivate(c,aux.CannotActivateKeySkillValue(CATEGORY_BLOCKER),aux.SelfAttackerCondition,0,1)
 end
-scard.specified_cost={COLOR_RED,2}
 scard.combo_cost=0

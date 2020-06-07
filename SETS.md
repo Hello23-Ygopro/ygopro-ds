@@ -58,7 +58,7 @@
 - ~**September 15, 2018** : Promotional Cards | _P-068 Broly, Legend's Dawning_ (P-068) : `1000076-1000077`~
 - ~**September 21, 2018** : Themed Booster Pack | World Martial Arts Tournament (DBS-TB02) : `10004193-10004274`~
 - ~**October 12, 2018** : Promotional Cards | Draft Box 03 (P-070～P-073) : `1000080-1000087`~
-- ~**November 1, 2018** : Promotional Cards | _P-074 Crisis Crusher Son Goku_ (P-074) : `1000111`~
+- ~**November 1, 2018** : Promotional Cards | _P-074 Crisis Crusher Son Goku_ (P-074) : `1000088`~
 </details>
 
 ### Series 5
@@ -69,13 +69,15 @@
 - ~**November 2, 2018** : Series 5 Starter Deck | Shenron's Advent (DBS-SD07) : `10005148-10005153`~
 - ~**November 3, 2018** : Promotional Cards | _P-069 Son Goku & Vegeta_ (P-069) : `1000078-1000079`~
 - ~**November 9, 2018** : Series 5 Booster Pack | Miraculous Revival (DBS-B05) : `10005000-10005141`~
-- ~**November 9, 2018** : Promotional Cards | _P-075 Black Masked Saiyan, Splintering Mind_ (P-075) : `1000112`~
-- ~**November 9, 2018** : Promotional Cards | _P-076 Reality Bender Janemba_ (P-076) : `1000113`~
-- ~**November 9, 2018** : Promotional Cards | Shop Tournament 05 (P-077～P-084) : `1000114-1000121`~
-- ~**November 9, 2018** : Promotional Cards | Series 5 Super Dash Pack (P-085～P-089) : `1000122-1000127`~
+- ~**November 9, 2018** : Promotional Cards | _P-075 Black Masked Saiyan, Splintering Mind_ (P-075) : `1000089`~
+- ~**November 9, 2018** : Promotional Cards | _P-076 Reality Bender Janemba_ (P-076) : `1000090`~
+- ~**November 9, 2018** : Promotional Cards | Shop Tournament 05 (P-077～P-084) : `1000091-1000098`~
+- ~**November 9, 2018** : Promotional Cards | Series 5 Super Dash Pack (P-085～P-089) : `1000099-1000104`~
 - ~**November 23, 2018** : Other | Gift Box (BT5-053_PR) : `10005062`~
 </details>
+
 -----
+
 ### Not yet scripted
 <details>
 <summary></summary>
@@ -84,13 +86,13 @@
 <details>
 <summary></summary>
 
-- **January 11, 2019** : Promotional Cards | DBS: Broly Pack Vol. 1 (P-091～P-092) : `1000129-1000132`
+- **January 11, 2019** : Promotional Cards | DBS: Broly Pack Vol. 1 (P-091～P-092) : `-`
 - **January 18, 2019** : Themed Booster Pack | Clash of Fates (DBS-TB03) : `10005154-10005235`
-- **February 1, 2019** : Promotional Cards | _P-090 Surprise Attack Frieza_ (P-090) : `1000128`
-- **February 1, 2019** : Promotional Cards | Power Booster: Colossal Warfare (P-112～P-116) : `1000152-1000156`
-- **March 2, 2019** : Promotional Cards | DBS: Broly Pack Vol. 3 (P-108～P-111) : `1000148-1000151`
-- **March 8, 2019** : Promotional Cards | _P-093 SSB Gogeta, Fusion's Pinnacle_ (P-093) : `1000133`
-- **March 8, 2019** : Promotional Cards | DBS: Broly Pack Vol. 2 (P-103～P-107) : `1000143-1000147`
+- **February 1, 2019** : Promotional Cards | _P-090 Surprise Attack Frieza_ (P-090) : `-`
+- **February 1, 2019** : Promotional Cards | Power Booster: Colossal Warfare (P-112～P-116) : `-`
+- **March 2, 2019** : Promotional Cards | DBS: Broly Pack Vol. 3 (P-108～P-111) : `-`
+- **March 8, 2019** : Promotional Cards | _P-093 SSB Gogeta, Fusion's Pinnacle_ (P-093) : `-`
+- **March 8, 2019** : Promotional Cards | DBS: Broly Pack Vol. 2 (P-103～P-107) : `-`
 </details>
 
 ### Series 6
@@ -99,17 +101,17 @@
 
 - **March 15, 2019** : Series 6 Booster Pack | Destroyer Kings (DBS-B06) : `10006000-10006207`
 - **March 15, 2019** : Series 6 Starter Deck | Rising Broly (DBS-SD08) : `10006208-10006218`
-- **March 15, 2019** : Promotional Cards | _P-094 SSG Son Goku, Energy of the Gods_ (P-094) : `1000134`
-- **March 15, 2019** : Promotional Cards | Shop Tournament 06 (P-095～P-102) : `1000135-1000142`
-- **April 1, 2019** : Promotional Cards | Power Booster: Miraculous Revival (P-119～P-123) : `1000160-1000164`
-- **April 5, 2019** : Promotional Cards | Super Dragon Ball Heroes World Mission (P-117～P-118) : `1000157-1000159`
+- **March 15, 2019** : Promotional Cards | _P-094 SSG Son Goku, Energy of the Gods_ (P-094) : `-`
+- **March 15, 2019** : Promotional Cards | Shop Tournament 06 (P-095～P-102) : `-`
+- **April 1, 2019** : Promotional Cards | Power Booster: Miraculous Revival (P-119～P-123) : `-`
+- **April 5, 2019** : Promotional Cards | Super Dragon Ball Heroes World Mission (P-117～P-118) : `-`
 - **May 17, 2019** : Expansion Set 04 | Unity of Saiyans (DBS-BE04) : `10006219-10006222`
 - **May 17, 2019** : Expansion Set 05 | Unity of Destruction (DBS-BE05) : `10006223-10006226`
-- **May 17, 2019** : Promotional Cards | Expansion Set 04 / 05 Sealed Tournament (P-124～P-125) : `1000165-1000166`
-- **June 1, 2019** : Promotional Cards | Championship Pack 2019 (P-138～P-142) : `1000194-1000198`~
+- **May 17, 2019** : Promotional Cards | Expansion Set 04 / 05 Sealed Tournament (P-124～P-125) : `-`
+- **June 1, 2019** : Promotional Cards | Championship Pack 2019 (P-138～P-142) : `-`~
 - **June 21, 2019** : Expansion Set 06 | Special Anniversary Box (DBS-BE06) : `10006227-10006263`
-- ~**June 21, 2019** : Promotional Cards | Special Anniversary Box (P-008_PR～P-089_PR) : `1000167-1000177`~ (Reprint)
-- **June 21, 2019** : Promotional Cards | Power Booster: World Martial Arts Tournament (P-143～P-162) : `1000199-1000218`
+- ~**June 21, 2019** : Promotional Cards | Special Anniversary Box (P-008_PR～P-089_PR) : `-`~ (Reprint)
+- **June 21, 2019** : Promotional Cards | Power Booster: World Martial Arts Tournament (P-143～P-162) : `-`
 </details>
 
 ### Series 7
@@ -119,8 +121,8 @@
 - **August 2, 2019** : Series 7 Booster Pack | Assault of the Saiyans (DBS-B07) : `10007000-`
 - **August 2, 2019** : Series 7 Starter Deck | Saiyan Legacy (DBS-SD09) : `-`
 - **August 2, 2019** : Expert Deck | Universe 6 Assailants (DBS-XD01) : `-`
-- **August 2, 2019** : Promotional Cards | Shop Tournament 07 (P-126～P-133) : `1000178-1000185`
-- **August 2, 2019** : Promotional Cards | Series 7 Super Dash Pack (P-134～P-137) : `1000186-1000193`
+- **August 2, 2019** : Promotional Cards | Shop Tournament 07 (P-126～P-133) : `-`
+- **August 2, 2019** : Promotional Cards | Series 7 Super Dash Pack (P-134～P-137) : `-`
 - **September 20, 2019** : Promotional Cards | _P-163 Vegeta, Furious Awakening_ (P-163) : `-`
 - **September 20, 2019** : Draft Box 04 | Dragon Brawl : `-`
 - **October 25, 2019** : Expansion Set 07 | Magnificent Collection Fusion Hero (DBS-BE07) : `-`

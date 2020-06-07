@@ -1,41 +1,56 @@
---P-024 Powerful Bond Ginyu Force
+--P-028 Bionic Strike Mecha Frieza
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_GINYU_FORCE)
-	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
+	aux.AddCharacter(c,CHARACTER_FRIEZA)
+	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--add character
-	aux.AddPermanentAddCharacter(c,CHARACTER_GINYU,CHARACTER_JEICE,CHARACTER_BURTER,CHARACTER_RECOOME,CHARACTER_GULDO)
+	--leader card
+	aux.EnableLeaderAttribute(c)
 	--gain skill
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
-	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con2)
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(sid,0))
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_CUSTOM+EVENT_ACTIVATE_EXTRA_CARD)
+	e1:SetRange(LOCATION_LEADER)
+	e1:SetCondition(scard.con1)
+	e1:SetOperation(scard.op1)
+	c:RegisterEffect(e1)
+	--draw
+	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
+scard.front_side_code=sid-1
 --gain skill
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFlagEffect(tp,sid)==0
+	local p=e:GetHandlerPlayer()
+	return Duel.GetTurnPlayer()~=p and rp==p
 end
-function scard.powfilter(c,e)
-	return c:IsSpecialTrait(TRAIT_GINYU_FORCE) and c:IsCanBeEffectTarget(e)
-end
-function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return false end
-	if chk==0 then return true end
-	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	local g=Duel.GetMatchingGroup(aux.BattleAreaFilter(scard.powfilter),tp,LOCATION_BATTLE,0,nil,e)
-	Duel.SetTargetCard(g)
+function scard.thfilter(c,e)
+	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	if g then
-		local sg=g:Filter(Card.IsRelateToEffect,nil,e)
-		for tc in aux.Next(sg) do
-			--gain power
-			aux.AddTempSkillUpdatePower(e:GetHandler(),tc,1,5000)
-		end
+	local g=Duel.GetMatchingGroup(aux.LifeAreaFilter(scard.thfilter),tp,LOCATION_LIFE,0,nil,e)
+	if g:GetCount()==0 or not Duel.SelectYesNo(tp,aux.Stringid(sid,2)) then return end
+	Duel.Hint(HINT_CARD,0,sid)
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+	local sg=g:Select(tp,1,1,nil)
+	Duel.SetTargetCard(sg)
+	if Duel.SendtoHand(sg,PLAYER_OWNER,REASON_EFFECT)==0 then return end
+	local c=e:GetHandler()
+	local rc=re:GetHandler()
+	--reduce energy cost
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_UPDATE_TOTAL_ENERGY_COST)
+	e1:SetValue(-2)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+	rc:RegisterEffect(e1)
+	if rc:GetEnergy()<1 then
+		--no specified cost
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_NO_SPECIFIED_COST)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		rc:RegisterEffect(e2)
 	end
-	Duel.RegisterFlagEffect(tp,sid,RESET_PHASE+PHASE_END,0,1)
 end

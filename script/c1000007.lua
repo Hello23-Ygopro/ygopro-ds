@@ -1,18 +1,26 @@
---P-005 Light of Hope Trunks
+--P-007 Forceful Strike Cell
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
-	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
+	aux.AddCharacter(c,CHARACTER_CELL)
+	aux.AddSpecialTrait(c,TRAIT_ANDROID)
+	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--gain power
-	aux.AddPermanentUpdatePower(c,5000,scard.con1,LOCATION_BATTLE,0,scard.tg1)
+	--double strike
+	aux.EnableDoubleStrike(c)
+	--revenge
+	aux.EnableRevenge(c)
+	--drop
+	local e1=aux.AddAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
+	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
---gain power
-scard.con1=aux.AND(aux.TurnPlayerCondition(PLAYER_SELF),aux.EnergyEqualAboveCondition(PLAYER_SELF,5))
-function scard.tg1(e,c)
-	return c:IsLeader() or c==e:GetHandler()
+scard.specified_cost={COLOR_GREEN,3}
+scard.combo_cost=1
+--drop
+function scard.con1(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	return (Duel.GetAttacker()==c or Duel.GetAttackTarget()==c) and ep~=tp
 end
+scard.con2=aux.TurnPlayerCondition(PLAYER_SELF)
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.ComboAreaFilter(Card.IsAbleToDrop),0,LOCATION_COMBO,1,1,HINTMSG_DROP,scard.con2)
+scard.op1=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)

@@ -1,27 +1,29 @@
---P-059 Ultimate Form Son Goku
+--P-074 Crisis Crusher Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_SON_GOKU)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7,TRAIT_GOKUS_LINEAGE)
-	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
-	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU,TRAIT_CATEGORY_UNIVERSE)
+	aux.AddCharacter(c,CHARACTER_SON_GOKU_XENO)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
+	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--double strike
-	aux.EnableDoubleStrike(c)
 	--reduce energy cost
-	aux.AddPermanentUpdateEnergyCost(c,-1,nil,aux.LifeEqualBelowCondition(PLAYER_SELF,3))
-	--ko, draw
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
+	aux.AddPermanentUpdateEnergyCost(c,-2,nil,scard.con1)
+	--cannot attack
+	aux.AddPermanentSkill(c,EFFECT_CANNOT_ATTACK,nil,LOCATION_BATTLE,LOCATION_BATTLE,scard.tg1)
+	--ko
+	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg2,EFFECT_FLAG_CARD_TARGET)
+	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,3}
 scard.combo_cost=0
---ko, draw
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
-function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or Duel.KO(tc,REASON_EFFECT)==0 then return end
-	if tc:GetPreviousPosition()==POS_FACEUP_REST then
-		Duel.Draw(tp,1,REASON_EFFECT)
-	end
+--reduce energy cost
+function scard.con1(e)
+	return not Duel.IsExistingMatchingCard(aux.BattleAreaFilter(nil),e:GetHandlerPlayer(),LOCATION_BATTLE,0,1,nil)
 end
+--cannot attack
+function scard.tg1(e,c)
+	return c:IsBattle() and c:IsEnergy(1)
+end
+--ko
+scard.tg2=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsEnergy,1),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
+scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

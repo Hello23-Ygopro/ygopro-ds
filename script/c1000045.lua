@@ -1,53 +1,34 @@
---P-032 Kaio-Ken Son Goku
+--P-041 Saiyan Teamwork Cabba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_SON_GOKU)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddCharacter(c,CHARACTER_CABBA)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
-	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--ex-evolve
-	aux.EnableEXEvolve(c,scard.evofilter,aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1))
-	--double strike
-	aux.EnableDoubleStrike(c)
-	--gain skill
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.EvolvePlayCondition)
-	--untap
-	aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfRestCondition)
+	--reduce energy cost
+	aux.AddPermanentUpdateEnergyCost(c,-1,nil,nil,LOCATION_BATTLE,LOCATION_HAND,0,aux.TargetBoolFunction(Card.IsCharacter,CHARACTER_CAULIFLA,CHARACTER_KALE))
+	aux.AddPermanentUpdateEnergyCost(c,-1,COLOR_GREEN,nil,LOCATION_BATTLE,LOCATION_HAND,0,aux.TargetBoolFunction(Card.IsCharacter,CHARACTER_CAULIFLA,CHARACTER_KALE))
+	--to hand or play
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,4}
-scard.combo_cost=1
---ex-evolve
-function scard.evofilter(c)
-	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_SON_GOKU) and c:IsEnergyAbove(7)
+scard.specified_cost={COLOR_GREEN,2}
+scard.combo_cost=0
+--to hand or play
+function scard.thfilter(c)
+	return c:IsCharacter(CHARACTER_CAULIFLA,CHARACTER_KALE) and c:IsAbleToHand()
 end
---gain skill
+scard.tg1=aux.TargetDecktopTarget(scard.thfilter,10,0,1,HINTMSG_ATOHAND)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	--cannot lose
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetDescription(aux.Stringid(sid,2))
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CANNOT_LOSE)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
-	e1:SetTargetRange(1,0)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e1,tp)
-	local e2=e1:Clone()
-	e2:SetCode(EFFECT_CANNOT_LOSE_LIFE)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	Duel.RegisterEffect(e2,tp)
-	local e3=e1:Clone()
-	e3:SetCode(EFFECT_CANNOT_LOSE_DECK)
-	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	Duel.RegisterEffect(e3,tp)
-	--cannot win
-	local e4=e1:Clone()
-	e4:SetDescription(aux.Stringid(sid,3))
-	e4:SetCode(EFFECT_CANNOT_WIN)
-	e4:SetTargetRange(0,1)
-	Duel.RegisterEffect(e4,tp)
+	local tc=Duel.GetFirstTarget()
+	if tc and tc:IsRelateToEffect(e) then
+		if tc:IsCharacter(CHARACTER_CAULIFLA) and tc:IsCanBePlayed(e,0,tp,false,false)
+			and Duel.SelectYesNo(tp,YESNOMSG_PLAY) then
+			Duel.Play(tc,0,tp,tp,false,false,POS_FACEUP_ACTIVE)
+		else
+			Duel.SendtoHand(tc,PLAYER_OWNER,REASON_EFFECT)
+			Duel.ConfirmCards(1-tp,tc)
+		end
+	end
+	Duel.ShuffleDeck(tp)
 end
---untap
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,2,2,true)
-scard.op2=aux.SelfSwitchtoActiveOperation

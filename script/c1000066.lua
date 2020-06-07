@@ -1,21 +1,16 @@
---P-045 Hercule
+--P-058 Piccolo Jr., Driven to Fight
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_HERCULE)
-	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
-	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--combo
-	local e1=aux.AddActivateBattleSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.TurnPlayerCondition(PLAYER_SELF))
-	e1:SetCountLimit(1)
-	--awaken
-	aux.EnableAwaken(c)
+	aux.AddCharacter(c,CHARACTER_PICCOLO_JR)
+	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
+	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--barrier
+	aux.EnableBarrier(c)
+	--bond (draw)
+	aux.EnableBond(c)
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT),nil,aux.BondCondition(2,Card.IsSpecialTrait,TRAIT_NAMEKIAN))
 end
-scard.back_side_code=sid+1
---combo
-function scard.tcfilter(c,tp)
-	return c:IsBattle() and c:IsCanCombo(tp)
-end
-scard.tg1=aux.TargetDecktopTarget(scard.tcfilter,2,0,2,HINTMSG_COMBO)
-scard.op1=aux.TargetDecktopSendtoComboOperation(2,LOCATION_DROP)
+scard.specified_cost={COLOR_GREEN,1}
+scard.combo_cost=0

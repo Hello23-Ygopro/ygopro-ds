@@ -1,32 +1,27 @@
---P-045 Saiyan Delusion Hercule
+--P-059 Ultimate Form Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_HERCULE)
-	aux.AddSpecialTrait(c,TRAIT_DELUSION_WARRIOR)
-	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--gain skill
-	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1)
-	e1:SetCountLimit(1)
-	--draw
-	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
+	aux.AddCharacter(c,CHARACTER_SON_GOKU)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7,TRAIT_GOKUS_LINEAGE)
+	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
+	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU,TRAIT_CATEGORY_UNIVERSE)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--double strike
+	aux.EnableDoubleStrike(c)
+	--reduce energy cost
+	aux.AddPermanentUpdateEnergyCost(c,-1,nil,aux.LifeEqualBelowCondition(PLAYER_SELF,3))
+	--ko, draw
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.front_side_code=sid-1
---gain skill
-function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
-	local f=aux.HandFilter(Card.IsAbleToDrop)
-	if chk==0 then return Duel.IsExistingMatchingCard(f,tp,LOCATION_HAND,0,1,nil) end
-	local g=Duel.GetMatchingGroup(f,tp,LOCATION_HAND,0,nil)
-	local ct=Duel.SendtoDrop(g,REASON_COST)
-	e:SetLabel(ct)
-end
+scard.specified_cost={COLOR_YELLOW,3}
+scard.combo_cost=0
+--ko, draw
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
-	--gain power
-	aux.AddTempSkillUpdatePower(c,c,2,50000)
-	if e:GetLabel()<5 then return end
-	--triple strike
-	aux.AddTempSkillCustom(c,c,3,EFFECT_TRIPLE_STRIKE)
+	local tc=Duel.GetFirstTarget()
+	if not tc or not tc:IsRelateToEffect(e) or Duel.KO(tc,REASON_EFFECT)==0 then return end
+	if tc:GetPreviousPosition()==POS_FACEUP_REST then
+		Duel.Draw(tp,1,REASON_EFFECT)
+	end
 end

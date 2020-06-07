@@ -1,18 +1,25 @@
---P-046 Saiyan Power Great Ape Bardock
+--P-061 Pure Hearted Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_BARDOCK)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
-	aux.AddEra(c,ERA_BARDOCK_SAGA)
-	--leader card
-	aux.EnableLeaderAttribute(c)
-	--tap
-	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
-	e1:SetCountLimit(1)
-	--draw
-	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT))
+	aux.AddCharacter(c,CHARACTER_SON_GOKU)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_SPECIAL)
+	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	--battle card
+	aux.EnableBattleAttribute(c)
+	--super combo
+	aux.EnableSuperCombo(c)
+	--draw, gain skill
+	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
 end
-scard.front_side_code=sid-1
---tap
-scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),0,LOCATION_BATTLE,1,1,HINTMSG_TOREST)
-scard.op1=aux.TargetCardsOperation(Duel.SwitchtoRest,REASON_EFFECT)
+scard.specified_cost={COLOR_YELLOW,2}
+scard.combo_cost=0
+--draw, gain skill
+scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
+function scard.op1(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Draw(tp,1,REASON_EFFECT)
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
+	--combo gain power
+	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
+end

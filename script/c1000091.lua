@@ -1,25 +1,19 @@
---P-061 Pure Hearted Son Goku
+--P-077 Everybody's Pal Yamcha
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_SON_GOKU)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
-	aux.AddEra(c,ERA_SPECIAL)
-	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	aux.AddCharacter(c,CHARACTER_YAMCHA)
+	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
+	aux.AddEra(c,ERA_PILAF_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--super combo
-	aux.EnableSuperCombo(c)
-	--draw, gain skill
-	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
+	--to hand
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
+scard.specified_cost={COLOR_RED,2}
 scard.combo_cost=0
---draw, gain skill
-scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
-function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Draw(tp,1,REASON_EFFECT)
-	local c=e:GetHandler()
-	if not c:IsRelateToEffect(e) then return end
-	--combo gain power
-	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
+--to hand
+function scard.thfilter(c)
+	return c:IsSpecialTrait(TRAIT_EARTHLING) and c:IsAbleToHand()
 end
+scard.tg1=aux.TargetDecktopTarget(scard.thfilter,3,0,1,HINTMSG_ATOHAND)
+scard.op1=aux.TargetDecktopSendtoHandOperation(3,SEQ_DECK_SHUFFLE,true)

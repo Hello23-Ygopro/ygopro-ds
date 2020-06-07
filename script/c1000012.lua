@@ -1,17 +1,25 @@
---P-009 Clan of Terror Cooler
+--P-012 Leap to Victory Dark Prince Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_COOLER)
-	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
-	aux.AddEra(c,ERA_COOLER_SAGA)
+	aux.AddCharacter(c,CHARACTER_VEGETA)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--critical
-	aux.EnableCritical(c)
-	--gain power
-	aux.AddPermanentUpdatePower(c,5000,aux.ExistingCardCondition(aux.DropAreaFilter(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN),LOCATION_DROP,0,7))
 	--double strike
-	aux.EnableDoubleStrike(c,aux.ExistingCardCondition(aux.DropAreaFilter(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN),LOCATION_DROP,0,7))
+	aux.EnableDoubleStrike(c,aux.HandEqualBelowCondition(PLAYER_SELF,4))
+	--drop
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
+scard.specified_cost={COLOR_RED,2}
+scard.combo_cost=0
+--drop
+function scard.op1(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
+	local g=Duel.SelectMatchingCard(tp,aux.HandFilter(Card.IsAbleToDrop),tp,LOCATION_HAND,0,0,1,nil)
+	if g:GetCount()==0 or Duel.SendtoDrop(g,REASON_EFFECT)==0 then return end
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
+	--gain power
+	aux.AddTempSkillUpdatePower(c,c,1,5000)
+end

@@ -1,16 +1,13 @@
---P-049 Burst Attack Son Gohan
+--P-066 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
-	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING,TRAIT_UNIVERSE_7)
-	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
-	aux.AddCategory(c,CHAR_CATEGORY_SON_GOHAN,TRAIT_CATEGORY_UNIVERSE)
+	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_SPECIAL)
+	aux.AddCategory(c,CHAR_CATEGORY_GT,CHAR_CATEGORY_SON_GOKU)
 	--battle card
 	aux.EnableBattleAttribute(c)
-	--critical
-	aux.EnableCritical(c)
-	--draw
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,2,REASON_EFFECT),nil,aux.HandEqualBelowCondition(PLAYER_SELF,4))
 end
-scard.specified_cost={COLOR_RED,2}
+scard.specified_cost={COLOR_YELLOW,2}
 scard.combo_cost=0
+scard.card_code=CARD_SON_GOKU

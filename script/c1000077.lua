@@ -1,36 +1,40 @@
---P-051 King Piccolo, Demon Lord
+--P-068 Broly, Legend's Dawning
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
-	aux.AddCharacter(c,CHARACTER_KING_PICCOLO)
-	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
-	aux.AddEra(c,ERA_KING_PICCOLO_SAGA)
-	--battle card
-	aux.EnableBattleAttribute(c)
-	--bond (gain skill)
-	aux.EnableBond(c)
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.BondCondition(2))
+	aux.AddCharacter(c,CHARACTER_BROLY)
+	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
+	aux.AddEra(c,ERA_BROLY_SAGA)
+	--leader card
+	aux.EnableLeaderAttribute(c)
+	--draw, drop
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
+	--ko
+	local e1=aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
+	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
---bond (gain skill)
-function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local c=e:GetHandler()
-	local f=aux.BattleAreaFilter(nil)
-	if chkc then return chkc:IsLocation(LOCATION_BATTLE) and chkc:IsControler(tp) and f(chkc) and chkc~=c end
-	if chk==0 then return true end
-	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,f,tp,LOCATION_BATTLE,0,1,1,c)
+scard.front_side_code=sid-1
+--draw, drop
+function scard.dropfilter1(c,e)
+	return not c:IsToken() and not c:IsColor(COLOR_BLACK) and c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)
+end
+function scard.dropfilter2(c,e)
+	return c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local tc=Duel.GetFirstTarget()
-	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
-		--gain power
-		aux.AddTempSkillUpdatePower(c,tc,1,5000)
-	end
-	if c:IsRelateToEffect(e) and c:IsFaceup() then
-		--gain power
-		aux.AddTempSkillUpdatePower(c,c,1,5000)
-	end
+	Duel.Draw(tp,1,REASON_EFFECT)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
+	local g1=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.dropfilter1),tp,LOCATION_BATTLE,0,0,1,nil,e)
+	if g1:GetCount()==0 then return end
+	Duel.BreakEffect()
+	Duel.SetTargetCard(g1)
+	if Duel.SendtoDrop(g1,REASON_EFFECT)==0 then return end
+	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DROP)
+	local g2=Duel.SelectMatchingCard(1-tp,aux.HandFilter(scard.dropfilter2),1-tp,LOCATION_HAND,0,1,1,nil,e)
+	if g2:GetCount()==0 then return end
+	Duel.SetTargetCard(g2)
+	Duel.SendtoDrop(g2,REASON_EFFECT)
 end
+--ko
+scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true)
+scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
+scard.op2=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)
