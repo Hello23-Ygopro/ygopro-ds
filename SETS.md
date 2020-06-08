@@ -124,7 +124,7 @@
 - **August 2, 2019** : Promotional Cards | Shop Tournament 07 (P-126～P-133) : `-`
 - **August 2, 2019** : Promotional Cards | Series 7 Super Dash Pack (P-134～P-137) : `-`
 - **September 20, 2019** : Promotional Cards | _P-163 Vegeta, Furious Awakening_ (P-163) : `-`
-- **September 20, 2019** : Draft Box 04 | Dragon Brawl : `-`
+- **September 20, 2019** : Draft Box 04 | Dragon Brawl (DBS-DB1) : `-`
 - **October 25, 2019** : Expansion Set 07 | Magnificent Collection Fusion Hero (DBS-BE07) : `-`
 - **October 25, 2019** : Expansion Set 08 | Magnificent Collection Forsaken Warrior (DBS-BE08) : `-`
 </details>
@@ -157,7 +157,18 @@
 - **February 14, 2020** : Series 9 Starter Deck | Instinct Surpassed (DBS-SD11) : `-`
 - **February 14, 2020** : Expert Deck | The Ultimate Life Form (DBS-XD03) : `-`
 - **February 14, 2020** : Promotional Cards | Shop Tournament 09 (P-188~P-195) : `-`
-- **March 27, 2020** : Draft Box 05 | Divine Multiverse : `-`
+- **March 27, 2020** : Draft Box 05 | Divine Multiverse (DBS-DB2) : `-`
 - **March 27, 2020** : Promotional Cards | _P-200 Zen-Oh_ (P-200) : `-`
+- **May 29, 2020** : Expansion Set 11 | Universe 7 Unison (DBS-BE11) : `-`
+- **May 29, 2020** : Expansion Set 12 | Universe 11 Unison (DBS-BE12) : `-`
 </details>
+
+### Series 10
+<details>
+<summary></summary>
+
+- **June 5, 2020** : UW01 Starter Deck | Spirit of Potara (DBS-SD12) : `-`
+- **June 5, 2020** : UW01 Starter Deck | Clan Collusion (DBS-SD13) : `-`
+- **June 5, 2020** : UW01 Starter Deck | Saiyan Wonder (DBS-SD14) : `-`
+- **July 17, 2020** : UW01 Booster Pack | Rise of the Unison Warrior (DBS-B10) : `10010000-`
 </details>

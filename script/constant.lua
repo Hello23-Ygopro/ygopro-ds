@@ -570,6 +570,7 @@ CHARACTER_KAMPARI					=0x1e2	--Introduced by "DB2-172 Mosco & Kampari, Universe 
 CHARACTER_RUMSSHI					=0x1e3	--Introduced by "DB2-173 Rumsshi & Kusu, Universe 10 Destroyer & Angel"
 CHARACTER_KUSU						=0x1e4	--Introduced by "DB2-173 Rumsshi & Kusu, Universe 10 Destroyer & Angel"
 CHARACTER_SAWAR						=0x1e5	--Introduced by "DB2-176 Heles & Sawar, Universe 2 Destroyer & Angel"
+CHARACTER_VEGEKS_XENO				=0x1e6	--Introduced by "SD14-01 Vegeks, the Unsung Fusion Hero"
 --<<Special Trait>>
 TRAIT_GOD							=0x2	--Introduced by "BT1-001 Champa"
 TRAIT_ALIEN							=0x6	--Introduced by "BT1-003 Hit"
@@ -674,6 +675,7 @@ ERA_MYSTICAL_ADVENTURE_SAGA			=0x17e	--Introduced by "BT6-108 Quickshift Krillin
 ERA_DR_UIRO_SAGA					=0x197	--Introduced by "BT8-025 Kaio-Ken Son Goku, Strenuous Onslaught"
 ERA_HATCHHYACK_SAGA					=0x1a2	--Introduced by "BT8-089 Dr.Lychee & Hatchhyack"
 ERA_SHADOW_DRAGON_SAGA				=0x1aa	--Introduced by "BT8-136 SS4 Vegeta, Peak of Primitive Power"
+ERA_DARK_EMPIRE_SAGA				=0x1e7	--Introduced by "SD14-01 Vegeks, the Unsung Fusion Hero"
 --Name that is part of the character, special trait, or card name of a card
 CHAR_CATEGORY_SON_GOHAN				=0xfff	--Supported by "BT2-071 Inherited Will Super Saiyan Son Goku"
 NAME_CATEGORY_ANDROID				=0xffe	--Supported by "BT2-093 Terrible Creator Android 20"
