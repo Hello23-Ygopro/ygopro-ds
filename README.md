@@ -98,6 +98,7 @@ If you do not build your deck according to the following rules, you will lose th
 - `0x20	Banished` = Drop Area (text color = black)
 - `0x20	Banished` = Life Area (face-down cards) (text color = blue)
 - `0x40	Extra Deck` = The Warp (face-up cards) (text color = black)
+- `0x80	Xyz Material` = Absorbed cards
 </details>
 <details>
 <summary>Phase</summary>

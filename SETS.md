@@ -1,6 +1,12 @@
-# Dragon Ball Super Card Game [Sets](https://www.dbs-cardgame.com/event/availabe-cards.php)
+# Dragon Ball Super Card Game [Sets](www.dbs-cardgame.com/us-en/cardlist/)
 
-### Series 1
+## ID Map
+- `10000XXX` : System
+- `10000999` : LIFE (Unofficial card)
+- `10XXXYYY` : Booster Packs, Starter Decks, Expansion Sets (XXX = Series #)
+- `10XXXXX` : Promotional Cards
+
+## Series 1
 <details>
 <summary></summary>
 
@@ -13,7 +19,7 @@
 - ~**November 1, 2017** : Promotional Cards | _P-020 Ability Unleashed Ultimate Gohan_ (P-020) : `1000020`~
 </details>
 
-### Series 2
+## Series 2
 <details>
 <summary></summary>
 
@@ -26,7 +32,7 @@
 - ~**February 1, 2018** : Promotional Cards | _P-038 Absolute Attack Mira_ (P-038) : `1000042`~
 </details>
 
-### Series 3
+## Series 3
 <details>
 <summary></summary>
 
@@ -41,7 +47,7 @@
 - ~**May 25, 2018** : Themed Booster Pack | The Tournament Of Power (DBS-TB01) : `10003151-10003259`~
 </details>
 
-### Series 4
+## Series 4
 <details>
 <summary></summary>
 
@@ -61,7 +67,7 @@
 - ~**November 1, 2018** : Promotional Cards | _P-074 Crisis Crusher Son Goku_ (P-074) : `1000088`~
 </details>
 
-### Series 5
+## Series 5
 <details>
 <summary></summary>
 
@@ -78,7 +84,7 @@
 
 -----
 
-### Not yet scripted
+## Not yet scripted
 <details>
 <summary></summary>
 

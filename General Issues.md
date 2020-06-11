@@ -33,7 +33,7 @@ For example: _[Ultimate] (You can only include 1 copy of a card with [Ultimate] 
 - [ ] **You can't return a card from the Combo Area to its owner's hand**
 - If you select a card in the Combo Area, the game will first banish it face-up before returning it to its owner's hand.
 - [ ] **There are no zones for The Warp**
-- Face-up cards in the [extra deck](https://yugioh.fandom.com/wiki/Extra_Deck) are in The Warp, except _Dragon Ball Super Card Game Rules_.
+- Face-up cards in the [extra deck](https://yugioh.fandom.com/wiki/Extra_Deck) are in The Warp.
 - [ ] **You can't play a Battle Card directly from The Warp**
 - If you select a card in The Warp, the game will first put it into its owner's hand before playing it in a [main monster zone](https://yugioh.fandom.com/wiki/Main_Monster_Zone).
 - [ ] **If a card is removed from the game, it simply [disappears](https://yugioh.fandom.com/wiki/Monster_Token#Mechanics) and neither player can view it**
