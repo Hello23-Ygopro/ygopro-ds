@@ -376,7 +376,7 @@ function Rule.DamageStepOperation(e,tp,eg,ep,ev,re,r,rp)
 		local a=Duel.GetAttacker()
 		if not a:IsControler(tc:GetControler()) then a=Duel.GetAttackTarget() end
 		--add combo power
-		local e1=Effect.CreateEffect(e:GetHandler())
+		local e1=Effect.CreateEffect(a)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_POWER)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE)
