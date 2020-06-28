@@ -1165,7 +1165,7 @@ function Auxiliary.DuelOperation(f,p,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp)
 				local player=(p==PLAYER_SELF and tp) or (p==PLAYER_OPPO and 1-tp)
-				return f(p,table.unpack(ext_params))
+				return f(player,table.unpack(ext_params))
 			end
 end
 --target function for skills that choose cards from the top of your deck
