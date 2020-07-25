@@ -31,7 +31,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SwitchtoActive(g,REASON_EFFECT)
 end
 --gain skill, ko
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,2,2,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,2)
 function scard.op2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end

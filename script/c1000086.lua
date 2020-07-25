@@ -15,7 +15,7 @@ function scard.initial_effect(c)
 end
 scard.back_side_code=sid+1
 --search (to hand)
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(sid)==0
 end

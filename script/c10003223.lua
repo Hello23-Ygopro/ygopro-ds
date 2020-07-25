@@ -16,7 +16,7 @@ end
 scard.specified_cost={COLOR_GREEN,2}
 scard.combo_cost=1
 --ko
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_UNIVERSE_2)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,1,1,HINTMSG_KO,scard.con1)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

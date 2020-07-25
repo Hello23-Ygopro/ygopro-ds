@@ -13,5 +13,5 @@ end
 scard.specified_cost={COLOR_YELLOW,1}
 scard.combo_cost=0
 --draw
-scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true)
+scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1)
 scard.op1=aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT)

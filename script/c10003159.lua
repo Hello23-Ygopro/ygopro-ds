@@ -23,7 +23,7 @@ function scard.evofilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_MAJIN_BUU)
 end
 --gain skill
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end

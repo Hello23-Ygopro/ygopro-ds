@@ -23,6 +23,6 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)
 end
 --drop
-scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(Card.IsAbleToWarp),LOCATION_DROP,0,10,10,true)
+scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(Card.IsAbleToWarp),LOCATION_DROP,0,10)
 scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToDrop),0,LOCATION_HAND,2,2,HINTMSG_DROP)
 scard.op2=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)

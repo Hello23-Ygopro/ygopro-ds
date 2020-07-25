@@ -13,7 +13,7 @@ end
 scard.specified_cost={COLOR_YELLOW,2}
 scard.combo_cost=0
 --ko
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,2,2,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,2)
 function scard.kofilter(c,e)
 	return c:IsRest() and c:IsPowerBelow(15000) and c:IsCanBeEffectTarget(e)
 end

@@ -24,7 +24,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	aux.AddTempSkillCritical(c,c,4)
 end
 --gain skill
-scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true)
+scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1)
 function scard.op2(e,tp,eg,ep,ev,re,r,rp)
 	--drop
 	local e1=Effect.CreateEffect(e:GetHandler())

@@ -30,7 +30,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --gain skill
-scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true)
+scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1)
 function scard.op2(e,tp,eg,ep,ev,re,r,rp)
 	--cannot activate
 	local e1=Effect.CreateEffect(e:GetHandler())

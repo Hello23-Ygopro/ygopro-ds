@@ -13,4 +13,4 @@ end
 scard.specified_cost={COLOR_YELLOW,1}
 scard.combo_cost=0
 --swap
-scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_YELLOW,1,0),aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true))
+scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_YELLOW,1,0),aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1))

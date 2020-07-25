@@ -13,7 +13,7 @@ end
 scard.specified_cost={COLOR_BLUE,2}
 scard.combo_cost=0
 --ko
-scard.cost1=aux.SendtoDeckCost(aux.BattleAreaFilter(Card.IsCode,CARD_AWKWARD_SITUATION_OTOKOSUKI),LOCATION_BATTLE,0,1,1,true,SEQ_DECK_BOTTOM)
+scard.cost1=aux.SendtoDeckCost(aux.BattleAreaFilter(Card.IsCode,CARD_AWKWARD_SITUATION_OTOKOSUKI),LOCATION_BATTLE,0,1,1,SEQ_DECK_BOTTOM)
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_WORLD_TOURNAMENT)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO,scard.con1)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

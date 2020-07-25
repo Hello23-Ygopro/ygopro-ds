@@ -21,7 +21,7 @@ scard.combo_cost=1
 function scard.costfilter(c)
 	return c:IsCode(CARD_KING_PICCOLO_TERROR_UNLEASHED,CARD_A_KINGS_RETURN_TO_YOUTH) and c:IsAbleToWarp()
 end
-scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(scard.costfilter),LOCATION_DROP,0,1,1,true)
+scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(scard.costfilter),LOCATION_DROP,0,1)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsSpecialTrait(TRAIT_SHENRON)
 end

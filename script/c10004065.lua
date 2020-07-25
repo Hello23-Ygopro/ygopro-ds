@@ -14,7 +14,7 @@ end
 scard.specified_cost={COLOR_GREEN,1}
 scard.combo_cost=0
 --draw, gain skill
-scard.cost1=aux.AbsorbCost(aux.HandFilter(Card.IsSpecialTrait,TRAIT_NAMEKIAN),LOCATION_HAND,0,1,1,true)
+scard.cost1=aux.AbsorbCost(aux.HandFilter(Card.IsSpecialTrait,TRAIT_NAMEKIAN),LOCATION_HAND,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)
 	local c=e:GetHandler()

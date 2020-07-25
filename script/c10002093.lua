@@ -19,7 +19,7 @@ function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 		and not e:GetHandler():IsPreviousLocation(LOCATION_BATTLE)
 end
 --to hand, ko
-scard.cost1=aux.DropCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.DropCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,1,1,HINTMSG_ATOHAND)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

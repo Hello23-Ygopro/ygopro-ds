@@ -17,7 +17,7 @@ scard.front_side_code=sid-1
 function scard.costfilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_11) and c:IsAbleToWarp()
 end
-scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(scard.costfilter),LOCATION_DROP,0,9,9,true)
+scard.cost1=aux.SendtoWarpCost(aux.DropAreaFilter(scard.costfilter),LOCATION_DROP,0,9)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end

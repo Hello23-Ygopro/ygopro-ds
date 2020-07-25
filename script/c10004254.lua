@@ -19,7 +19,7 @@ scard.combo_cost=0
 function scard.lfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_WORLD_TOURNAMENT)
 end
-scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_UNYIELDING_VICTORY_JACKIE_CHUN),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_UNYIELDING_VICTORY_JACKIE_CHUN),LOCATION_BATTLE,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() or not aux.SelfLeaderCondition(scard.lfilter)(e,tp,eg,ep,ev,re,r,rp) then return end

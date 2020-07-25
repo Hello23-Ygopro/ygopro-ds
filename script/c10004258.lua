@@ -17,7 +17,7 @@ end
 scard.specified_cost={COLOR_YELLOW,2}
 scard.combo_cost=0
 --draw, ko
-scard.cost1=aux.KOCost(aux.BattleAreaFilter(Card.IsCode,CARD_UNENDING_MOVES_YAMCHA),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.KOCost(aux.BattleAreaFilter(Card.IsCode,CARD_UNENDING_MOVES_YAMCHA),LOCATION_BATTLE,0,1)
 function scard.kofilter(c,e)
 	return c:IsRest() and c:IsCanBeEffectTarget(e)
 end

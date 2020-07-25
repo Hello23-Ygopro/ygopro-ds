@@ -15,7 +15,7 @@ end
 scard.specified_cost={COLOR_GREEN,2}
 scard.combo_cost=0
 --untap, gain skill
-scard.cost1=aux.KOCost(aux.BattleAreaFilter(Card.IsCode,CARD_MERCENARY_TAO_TRADING_MOVES),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.KOCost(aux.BattleAreaFilter(Card.IsCode,CARD_MERCENARY_TAO_TRADING_MOVES),LOCATION_BATTLE,0,1)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_WORLD_TOURNAMENT)
 end

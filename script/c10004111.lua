@@ -14,7 +14,7 @@ function scard.initial_effect(c)
 end
 scard.front_side_code=sid-1
 --gain skill
-scard.cost1=aux.DropCost(nil,LOCATION_WARP,0,3,3,true)
+scard.cost1=aux.DropCost(nil,LOCATION_WARP,0,3)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end

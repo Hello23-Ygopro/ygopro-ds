@@ -14,7 +14,7 @@ end
 scard.specified_cost={COLOR_YELLOW,1}
 scard.combo_cost=0
 --tap
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 function scard.tapfilter(c)
 	return c:IsEnergyBelow(4) and c:IsAbleToSwitchToRest()
 end

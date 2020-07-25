@@ -10,7 +10,7 @@ function scard.initial_effect(c)
 	local e1=aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1)
 	e1:SetCountLimit(1)
 	--untap, gain skill
-	aux.AddActivateMainSkill(c,1,scard.op2,aux.SelfDropAbsorbedCost(nil,5,5,true))
+	aux.AddActivateMainSkill(c,1,scard.op2,aux.SelfDropAbsorbedCost(nil,5))
 end
 scard.front_side_code=sid-1
 --absorb, draw

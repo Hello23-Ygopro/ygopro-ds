@@ -15,7 +15,7 @@ function scard.initial_effect(c)
 end
 scard.front_side_code=sid-1
 --tap, gain skill
-scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),LOCATION_BATTLE,0,1)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),0,LOCATION_BATTLE,0,1,HINTMSG_TOREST)
 function scard.skfilter(c,e)
 	return c:IsRest() and c:IsCanBeEffectTarget(e)

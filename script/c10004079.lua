@@ -14,6 +14,6 @@ function scard.initial_effect(c)
 end
 scard.front_side_code=sid-1
 --ko
-scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1,1,true)
+scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsRest),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

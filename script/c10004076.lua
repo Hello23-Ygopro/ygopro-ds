@@ -11,7 +11,7 @@ function scard.initial_effect(c)
 end
 scard.specified_cost={COLOR_GREEN,1}
 --play
-scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_GREEN,1,0),aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1,1,true))
+scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_GREEN,1,0),aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1))
 function scard.playfilter(c,e,tp)
 	return c:IsSpecialTrait(TRAIT_NAMEKIAN) and c:IsEnergyBelow(2) and c:IsCanBePlayed(e,0,tp,false,false)
 end

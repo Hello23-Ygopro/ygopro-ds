@@ -14,7 +14,7 @@ function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_SHENRON)
 end
 scard.con1=aux.SelfLeaderCondition(scard.lfilter)
-scard.cost1=aux.DropCost(aux.BattleAreaFilter(nil),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.DropCost(aux.BattleAreaFilter(nil),LOCATION_BATTLE,0,1)
 function scard.playfilter(c,e,tp)
 	return c:IsColor(COLOR_GREEN) and c:IsCharacter(CHARACTER_SON_GOKU_GT)
 		and c:IsEnergyBelow(2) and c:IsCanBePlayed(e,0,tp,false,false)

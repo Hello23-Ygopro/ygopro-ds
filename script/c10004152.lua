@@ -15,7 +15,7 @@ function scard.initial_effect(c)
 end
 scard.front_side_code=sid-1
 --gain skill
-scard.cost1=aux.DropCost(aux.HandFilter(Card.IsSpecialTrait,TRAIT_UNIVERSE_6),LOCATION_HAND,0,1,1,true)
+scard.cost1=aux.DropCost(aux.HandFilter(Card.IsSpecialTrait,TRAIT_UNIVERSE_6),LOCATION_HAND,0,1)
 function scard.skfilter(c,e)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_6) and c:IsCanBeEffectTarget(e)
 end

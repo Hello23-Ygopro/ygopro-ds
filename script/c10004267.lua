@@ -15,5 +15,5 @@ end
 scard.specified_cost={COLOR_YELLOW,1}
 scard.combo_cost=0
 --draw
-scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_MASTER_ROSHI_MARTIAL_MEISTER),LOCATION_BATTLE,0,1,1,true)
+scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_MASTER_ROSHI_MARTIAL_MEISTER),LOCATION_BATTLE,0,1)
 scard.op1=aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT)

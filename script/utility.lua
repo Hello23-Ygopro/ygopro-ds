@@ -1651,7 +1651,6 @@ function Auxiliary.EnergyExclusiveCondition(f,...)
 					and not g:IsExists(aux.NOT(f),1,nil,table.unpack(ext_params))
 			end
 end
---choose: true for costs that choose cards
 --cost function for playing battle cards and activating the skills of extra cards in your hand
 function Auxiliary.PayColorEnergyFilter(c,color)
 	return c:IsColor(color) and c:IsAbleToPayForEnergy()
@@ -1788,7 +1787,7 @@ function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 end
 --cost function for sending a card to the drop area
 --e.g. "BT1-001 God of Destruction Champa", "BT4-099 Mira, One with Darkness", "BT1-065 Furious Yell Vegeta"
-function Auxiliary.DropCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.DropCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1799,7 +1798,7 @@ function Auxiliary.DropCost(f,s,o,min,max,choose,ex,...)
 					return c:IsAbleToDrop() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -1807,13 +1806,13 @@ function Auxiliary.DropCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.SendtoDrop(g,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for sending a card from the top of your deck to the drop area
@@ -1826,7 +1825,7 @@ function Auxiliary.DropDecktopCost(ct)
 end
 --cost function for sending a card to your hand
 --e.g. "BT1-028 Vegeta", "BT1-085 Ginyu, The Malicious Transformation"
-function Auxiliary.SendtoHandCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.SendtoHandCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1837,7 +1836,7 @@ function Auxiliary.SendtoHandCost(f,s,o,min,max,choose,ex,...)
 					return c:IsAbleToHand() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -1845,18 +1844,18 @@ function Auxiliary.SendtoHandCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.SendtoHand(g,PLAYER_OWNER,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for placing a card under another card
 --e.g. "BT2-027 Awakening Evil Majin Buu"
-function Auxiliary.AbsorbCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.AbsorbCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1864,7 +1863,7 @@ function Auxiliary.AbsorbCost(f,s,o,min,max,choose,ex,...)
 				if type(ex)=="Card" then exg:AddCard(ex)
 				elseif type(ex)=="Group" then exg:Merge(ex) end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(f,tp,s,o,min,exg,table.unpack(ext_params))
 					else
 						return Duel.IsExistingMatchingCard(f,tp,s,o,min,exg,table.unpack(ext_params))
@@ -1872,18 +1871,18 @@ function Auxiliary.AbsorbCost(f,s,o,min,max,choose,ex,...)
 				end
 				local tc=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ABSORB)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					tc=Duel.SelectTarget(tp,f,tp,s,o,min,max,exg,table.unpack(ext_params)):GetFirst()
 				else
 					tc=Duel.SelectMatchingCard(tp,f,tp,s,o,min,max,exg,table.unpack(ext_params)):GetFirst()
 				end
 				Duel.PlaceUnder(e:GetHandler(),tc)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for removing a card from the game
 --e.g. "BT2-110 Cooler, Blood of the Tyrant Clan"
-function Auxiliary.RemoveFromGameCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.RemoveFromGameCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1894,7 +1893,7 @@ function Auxiliary.RemoveFromGameCost(f,s,o,min,max,choose,ex,...)
 					return c:DSIsAbleToRemove() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -1902,18 +1901,18 @@ function Auxiliary.RemoveFromGameCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.RemoveFromGame(g,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for switching a card to rest mode
 --e.g. "BT2-112 Chilled, Army General"
-function Auxiliary.SwitchtoRestCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.SwitchtoRestCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1924,7 +1923,7 @@ function Auxiliary.SwitchtoRestCost(f,s,o,min,max,choose,ex,...)
 					return c:IsAbleToSwitchToRest() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -1932,13 +1931,13 @@ function Auxiliary.SwitchtoRestCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOREST)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.SwitchtoRest(g,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for you to draw cards
@@ -1951,7 +1950,7 @@ function Auxiliary.DrawCost(ct)
 end
 --cost function for sending a card to the warp
 --e.g. "EX03-19 Explosive Power Jiren"
-function Auxiliary.SendtoWarpCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.SendtoWarpCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1962,7 +1961,7 @@ function Auxiliary.SendtoWarpCost(f,s,o,min,max,choose,ex,...)
 					return c:IsAbleToWarp() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -1970,18 +1969,18 @@ function Auxiliary.SendtoWarpCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_WARP)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.SendtoWarp(g,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for sending a card to its owner's deck
 --e.g. "TB2-026 Awkward Situation Trunks"
-function Auxiliary.SendtoDeckCost(f,s,o,min,max,choose,seq,ex,...)
+function Auxiliary.SendtoDeckCost(f,s,o,min,max,seq,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -1993,7 +1992,7 @@ function Auxiliary.SendtoDeckCost(f,s,o,min,max,choose,seq,ex,...)
 					return c:IsAbleToDeck() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -2001,18 +2000,18 @@ function Auxiliary.SendtoDeckCost(f,s,o,min,max,choose,seq,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.SendtoDeck(g,PLAYER_OWNER,seq,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for you to ko your battle cards
 --e.g. "BT5-003 Oblivious Rampage Son Goku"
-function Auxiliary.KOCost(f,s,o,min,max,choose,ex,...)
+function Auxiliary.KOCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
@@ -2023,7 +2022,7 @@ function Auxiliary.KOCost(f,s,o,min,max,choose,ex,...)
 					return c:IsCanBeKOed() and (not f or f(c,table.unpack(ext_params)))
 				end
 				if chk==0 then
-					if choose then
+					if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 						return Duel.IsExistingTarget(filt_func,tp,s,o,min,exg,f,ext_params)
 					else
 						return Duel.IsExistingMatchingCard(filt_func,tp,s,o,min,exg,f,ext_params)
@@ -2031,13 +2030,13 @@ function Auxiliary.KOCost(f,s,o,min,max,choose,ex,...)
 				end
 				local g=nil
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_KO)
-				if choose then
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 					g=Duel.SelectTarget(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				else
 					g=Duel.SelectMatchingCard(tp,filt_func,tp,s,o,min,max,exg,f,ext_params)
 				end
 				Duel.KO(g,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --cost function for a card switching itself to rest mode
@@ -2074,19 +2073,19 @@ function Auxiliary.SelfSendtoWarpCost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 --cost function for a card sending a card under itself to the drop area
 --e.g. "BT2-068 Ultimate Lifeform Cell"
-function Auxiliary.SelfDropAbsorbedCost(f,min,max,choose,ex,...)
+function Auxiliary.SelfDropAbsorbedCost(f,min,max,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				max=max or min
 				local g=e:GetHandler():GetAbsorbedGroup()
 				local tg=g:Filter(Card.IsCanBeEffectTarget,ex,e)
-				if choose then g:Merge(tg) end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then g:Merge(tg) end
 				if chk==0 then return g:IsExists(Card.IsAbleToDrop,min,ex,f,table.unpack(ext_params)) end
 				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DROP)
 				local sg=g:Select(tp,min,max,ex)
-				if choose then Duel.SetTargetCard(sg) end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.SetTargetCard(sg) end
 				Duel.SendtoDrop(sg,REASON_COST)
-				if choose then Duel.ClearTargetCard() end
+				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
 --target function for Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
@@ -2135,7 +2134,7 @@ function Auxiliary.CannotActivateKeySkillValue(cate)
 				return re:IsHasCategory(cate)
 			end
 end
---filter for a face-up leader card in the leader area (LOCATION_LEADER + filter function)
+--filter for a face-up leader card in the leader area
 function Auxiliary.LeaderAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2147,7 +2146,7 @@ function Auxiliary.LeaderAreaFilter(f,...)
 				return true
 			end
 end
---filter for a face-up battle card in the battle area (LOCATION_BATTLE + filter function)
+--filter for a face-up battle card in the battle area
 function Auxiliary.BattleAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2159,14 +2158,14 @@ function Auxiliary.BattleAreaFilter(f,...)
 				return true
 			end
 end
---filter for a face-up card in the leader area or battle area (LOCATION_INPLAY + filter function)
+--filter for a face-up card in the leader area or battle area
 function Auxiliary.FaceupFilter(f,...)
 	local ext_params={...}
 	return	function(target)
 				return target:IsFaceup() and f(target,table.unpack(ext_params))
 			end
 end
---filter for a card in the life area (LOCATION_LIFE + filter function)
+--filter for a card in the life area
 function Auxiliary.LifeAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2178,7 +2177,7 @@ function Auxiliary.LifeAreaFilter(f,...)
 				return true
 			end
 end
---filter for a card in the hand (LOCATION_HAND + filter function)
+--filter for a card in the hand
 function Auxiliary.HandFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2190,7 +2189,7 @@ function Auxiliary.HandFilter(f,...)
 				return true
 			end
 end
---filter for a card in the combo area (LOCATION_COMBO + filter function)
+--filter for a card in the combo area
 function Auxiliary.ComboAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2202,7 +2201,7 @@ function Auxiliary.ComboAreaFilter(f,...)
 				return true
 			end
 end
---filter for a card in the energy area (LOCATION_ENERGY + filter function)
+--filter for a card in the energy area
 function Auxiliary.EnergyAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
@@ -2214,7 +2213,7 @@ function Auxiliary.EnergyAreaFilter(f,...)
 				return true
 			end
 end
---filter for a card in the drop area (LOCATION_DROP + filter function)
+--filter for a card in the drop area
 function Auxiliary.DropAreaFilter(f,...)
 	local ext_params={...}
 	return	function(target,...)
