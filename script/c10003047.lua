@@ -21,7 +21,7 @@ end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	--combo gain power
+	--gain combo power
 	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
 	local g=Duel.SelectMatchingCard(tp,aux.ComboAreaFilter(scard.retfilter),tp,0,LOCATION_COMBO,0,1,nil,e)

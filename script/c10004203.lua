@@ -25,7 +25,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoDrop(tc,REASON_EFFECT)==0 then return end
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	--combo gain power
+	--gain combo power
 	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
 	Duel.BreakEffect()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)

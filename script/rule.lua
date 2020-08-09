@@ -1,6 +1,6 @@
+Rule={}
 --register rules
 --Not fully implemented: Tap a card to have it attack
-Rule={}
 function Rule.RegisterRules(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_NO_TURN_RESET)

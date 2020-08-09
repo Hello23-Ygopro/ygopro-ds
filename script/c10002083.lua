@@ -48,6 +48,6 @@ end
 scard.op1=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)
 --[[
 	References
-		1. Raidraptor - Tribute Lanius
-		https://github.com/Fluorohydride/ygopro-scripts/blob/2c4f0ca/c83236601.lua#L31
+	* Raidraptor - Tribute Lanius
+	https://github.com/Fluorohydride/ygopro-scripts/blob/2c4f0ca/c83236601.lua#L31
 ]]

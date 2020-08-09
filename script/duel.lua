@@ -217,7 +217,7 @@ function Duel.SelectMatchingCard(sel_player,f,player,s,o,min,max,ex,...)
 	end
 	return duel_select_matching_card(sel_player,f,player,s,o,min,max,ex,...)
 end
---choose a card
+--target a card
 --Note: Overwritten to notify a player if there are no cards to select
 local duel_select_target=Duel.SelectTarget
 function Duel.SelectTarget(sel_player,f,player,s,o,min,max,ex,...)

@@ -19,6 +19,6 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
-	--combo gain power
+	--gain combo power
 	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
 end

@@ -55,6 +55,6 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 end
 --[[
 	References
-		1. Tyrant's Tantrum
-		https://github.com/Fluorohydride/ygopro-scripts/blob/6324c1c/c38318146.lua#L9
+	* Tyrant's Tantrum
+	https://github.com/Fluorohydride/ygopro-scripts/blob/6324c1c/c38318146.lua#L9
 ]]

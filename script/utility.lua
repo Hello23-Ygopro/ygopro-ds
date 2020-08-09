@@ -140,7 +140,7 @@ function Auxiliary.AddSetcode(c,setname)
 		Duel.RegisterEffect(e2,0)
 	end
 end
---add to a card the character(s) that is written on it
+--register a card's character(s)
 --required for Card.IsCharacter, Card.GetCharacter
 function Auxiliary.AddCharacter(c,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
@@ -156,7 +156,7 @@ function Auxiliary.AddCharacter(c,...)
 		end
 	end
 end
---add to a card the special trait(s) that is written on it
+--register a card's special trait(s)
 --required for Card.IsSpecialTrait, Card.GetSpecialTrait
 function Auxiliary.AddSpecialTrait(c,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
@@ -172,7 +172,7 @@ function Auxiliary.AddSpecialTrait(c,...)
 		end
 	end
 end
---add to a card the era(s) that is written on it
+--register a card's era
 --reserved (Card.IsEra, Card.GetEra)
 function Auxiliary.AddEra(c,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
@@ -188,7 +188,7 @@ function Auxiliary.AddEra(c,...)
 		end
 	end
 end
---add to a card the name(s) that is part of the character, special trait, or card name written on it
+--register the name(s) that is part of a card's character, special trait, or card name
 --required for Card.IsSetCard, Card.IsCharacterSetCard, Card.IsSpecialTraitSetCard
 function Auxiliary.AddCategory(c,...)
 	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
@@ -237,7 +237,7 @@ function Auxiliary.SortDeck(sort_player,target_player,count,seq)
 	else Duel.MoveSequence(g:GetFirst(),seq) end
 end
 --check if a card has a particular name (not to be confused with Card.IsCode)
---required for skills that check if a non-aliased card has a particular name (e.g. "BT5-003 Oblivious Rampage Son Goku")
+--required for effects that check if a non-aliased card has a particular name (e.g. "BT5-003 Oblivious Rampage Son Goku")
 function Auxiliary.IsCode(c,code)
 	--c: the card to check
 	--code: the id of the card's name to check
@@ -245,7 +245,7 @@ function Auxiliary.IsCode(c,code)
 	return m and m.card_code==code
 end
 
---leader card rules
+--leader card
 function Auxiliary.EnableLeaderAttribute(c)
 	c:SetStatus(STATUS_NO_ENERGY_COST,true)
 	--register card info
@@ -315,7 +315,7 @@ function Auxiliary.CannotBeBattleTargetValue(e,c)
 	return not c:IsCanAttackActive()
 end
 
---battle card rules
+--battle card
 function Auxiliary.EnableBattleAttribute(c)
 	if c:GetOriginalEnergy()==0 then
 		c:SetStatus(STATUS_NO_ENERGY_COST,true)
@@ -357,7 +357,7 @@ function Auxiliary.PlayBattleOperation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Play(c,0,tp,tp,false,false,POS_FACEUP_ACTIVE)
 end
 
---extra card rules
+--extra card
 function Auxiliary.EnableExtraAttribute(c)
 	if c:GetOriginalEnergy()==0 then
 		c:SetStatus(STATUS_NO_ENERGY_COST,true)
@@ -366,8 +366,8 @@ function Auxiliary.EnableExtraAttribute(c)
 	Auxiliary.RegisterCardInfo(c)
 end
 
---functions for [Permanent] skills
---EFFECT_TYPE_SINGLE [Permanent] skills that affect cards
+--functions for [Permanent] effects
+--EFFECT_TYPE_SINGLE [Permanent] effects that affect cards
 --code: EFFECT_ATTACK_ACTIVE_MODE for "This card can attack Battle Cards in Active Mode." (e.g. "BT1-002 Vados")
 --code: EFFECT_CANNOT_NEGATE_ATTACK for "This card's attack cannot be negated." (e.g. "BT1-043 Whis, Judge of the Gods")
 --code: EFFECT_CANNOT_DISEFFECT for "This card's skill cannot be negated." (e.g. "BT1-043 Whis, Judge of the Gods")
@@ -377,9 +377,9 @@ end
 --code: EFFECT_PLAY_CONDITION for "You can't play this card from any area." (e.g. "P-021 Vegito, Here to Save the Day")
 --code: EFFECT_COMBO_REST_MODE for "You can combo with this card even when it is in Rest Mode." (e.g. "TB2-010 Secret Treaty Hercule")
 function Auxiliary.AddSinglePermanentSkill(c,code,con_func,range)
-	--c: the card that has the [Permanent] skill
+	--c: the card that has the [Permanent] effect
 	--con_func: condition function
-	--range: location if the [Permanent] skill is only active while in a particular area
+	--range: location if the [Permanent] effect is only active while in a particular area
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(code)
@@ -389,7 +389,7 @@ function Auxiliary.AddSinglePermanentSkill(c,code,con_func,range)
 	c:RegisterEffect(e1)
 	return e1
 end
---EFFECT_TYPE_FIELD [Permanent] skills that affect cards
+--EFFECT_TYPE_FIELD [Permanent] effects that affect cards
 --code: EFFECT_COMBO_REST_MODE for "All of your Battle Cards can combo even in Rest Mode." (e.g. "BT2-112 Chilled, Army General")
 --code: EFFECT_CANNOT_ATTACK for "Players can't attack with cards" (e.g. "P-074 Crisis Crusher Son Goku")
 --code: EFFECT_CANNOT_TO_ENERGY for "Your opponent cannot place cards in their Energy Area." (e.g. "TB1-036 Brothers of Terror Bergamo")
@@ -409,7 +409,7 @@ function Auxiliary.AddPermanentSkill(c,code,con_func,s_range,o_range,targ_func)
 	c:RegisterEffect(e1)
 	return e1
 end
---[Permanent] skills that affect players
+--[Permanent] effects that affect players
 --code: EFFECT_CANNOT_DRAW for "The opponent cannot draw cards" (e.g. "P-017 Chilling Terror Android 17")
 --code: EFFECT_CANNOT_COMBO for "Your opponent can't combo" (e.g. "BT3-033 Ultra Instinct -Sign- Son Goku")
 --code: EFFECT_CANNOT_DECK_X for "You cannot include [...] cards in your deck." (e.g. "TB1-050 Son Goku")
@@ -425,7 +425,7 @@ function Auxiliary.AddPermanentPlayerSkill(c,code,range,con_func,s_range,o_range
 	c:RegisterEffect(e1)
 	return e1
 end
---add a temporary skill to a card
+--add a temporary effect to a card
 --code: EFFECT_DOUBLE_STRIKE for "[Double Strike]" (e.g. "BT1-001 God of Destruction Champa")
 --code: EFFECT_TRIPLE_STRIKE for "[Triple Strike]" (e.g. "BT2-069 Father-Son Kamehameha　Goku&Gohan")
 --code: EFFECT_QUADRUPLE_STRIKE for "[Quadruple Strike]" (e.g. "P-072 Full-Size Power Son Goku")
@@ -437,9 +437,9 @@ end
 --code: EFFECT_NEGATE_ACTIVATE_EFFECT for "negate [Activate] skill" (e.g. "BT2-040 Restless Spirit SSB Vegeta")
 --code: EFFECT_CANNOT_NEGATE_ATTACK for "attacks can't be negated" (e.g. "EX03-14 Last One Standing Son Goku")
 function Auxiliary.AddTempSkillCustom(c,tc,desc_id,code,reset_flag,reset_count,con_func)
-	--c: the card that gives the skill
-	--tc: the card that gains the skill
-	--desc_id: the id of the skill's text (0-15)
+	--c: the card that gives the effect
+	--tc: the card that gains the effect
+	--desc_id: the id of the effect's text (0-15)
 	reset_flag=reset_flag or RESET_PHASE+PHASE_END
 	if tc==c then reset_flag=reset_flag+RESET_DISABLE end
 	reset_count=reset_count or 1
@@ -452,12 +452,12 @@ function Auxiliary.AddTempSkillCustom(c,tc,desc_id,code,reset_flag,reset_count,c
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+reset_flag,reset_count)
 	tc:RegisterEffect(e1)
 end
---"[Activate: Main]" skills
+--"[Activate: Main]" effects
 --e.g. "BT1-001 God of Destruction Champa"
 function Auxiliary.AddActivateMainSkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	--op_func: operation function
 	--cost_func: cost function
-	--prop: include EFFECT_FLAG_CARD_TARGET for a targeting skill
+	--prop: include EFFECT_FLAG_CARD_TARGET for a targeting effect
 	cost_func=cost_func or aux.TRUE
 	targ_func=targ_func or Auxiliary.HintTarget
 	prop=prop or 0
@@ -477,7 +477,7 @@ function Auxiliary.AddActivateMainSkill(c,desc_id,op_func,cost_func,targ_func,pr
 	else
 		e1:SetRange(LOCATION_HAND)
 	end
-	e1:SetCountLimit(MAX_NUMBER) --fix skill not being able to activate during your next turn
+	e1:SetCountLimit(MAX_NUMBER) --fix effect not being able to activate during your next turn
 	e1:SetHintTiming(TIMING_MAIN_PHASE,0)
 	e1:SetCondition(aux.AND(Auxiliary.ActivateMainCondition,con_func))
 	if c:IsExtra() then
@@ -488,7 +488,7 @@ function Auxiliary.AddActivateMainSkill(c,desc_id,op_func,cost_func,targ_func,pr
 	e1:SetTarget(targ_func)
 	e1:SetOperation(op_func)
 	c:RegisterEffect(e1)
-	--[Activate: Main] activated by a card's skill
+	--[Activate: Main] activated by a card's effect
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(c:GetOriginalCode(),desc_id))
 	e2:SetCategory(CATEGORY_ACTIVATE)
@@ -504,7 +504,7 @@ function Auxiliary.AddActivateMainSkill(c,desc_id,op_func,cost_func,targ_func,pr
 	m.activate_main_skill=e1
 	return e1
 end
---"[Activate: Battle]" skills
+--"[Activate: Battle]" effects
 --e.g. "BT1-027 Cabba's Awakening"
 function Auxiliary.AddActivateBattleSkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	cost_func=cost_func or aux.TRUE
@@ -526,7 +526,7 @@ function Auxiliary.AddActivateBattleSkill(c,desc_id,op_func,cost_func,targ_func,
 	else
 		e1:SetRange(LOCATION_HAND)
 	end
-	e1:SetCountLimit(MAX_NUMBER) --fix skill not being able to activate during your next turn
+	e1:SetCountLimit(MAX_NUMBER) --fix effect not being able to activate during your next turn
 	e1:SetCondition(aux.AND(Auxiliary.ActivateBattleCondition,con_func))
 	if c:IsExtra() then
 		e1:SetCost(Auxiliary.MergeCost(Auxiliary.PayEnergyCost,cost_func))
@@ -538,7 +538,7 @@ function Auxiliary.AddActivateBattleSkill(c,desc_id,op_func,cost_func,targ_func,
 	c:RegisterEffect(e1)
 	return e1
 end
---"[Counter: Attack]" skills
+--"[Counter: Attack]" effects
 --e.g. "BT1-025 Vados's Assistance"
 function Auxiliary.AddCounterAttackSkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	cost_func=cost_func or aux.TRUE
@@ -559,7 +559,7 @@ function Auxiliary.AddCounterAttackSkill(c,desc_id,op_func,cost_func,targ_func,p
 	c:RegisterEffect(e1)
 	return e1
 end
---"[Counter: Battle Attack]" skills
+--"[Counter: Battle Attack]" effects
 --e.g. "BT1-091 King Cold, Father of the Emperor"
 function Auxiliary.AddCounterBattleCardAttackSkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	cost_func=cost_func or aux.TRUE
@@ -580,7 +580,7 @@ function Auxiliary.AddCounterBattleCardAttackSkill(c,desc_id,op_func,cost_func,t
 	c:RegisterEffect(e1)
 	return e1
 end
---"[Counter: Play]" skills
+--"[Counter: Play]" effects
 --e.g. "BT1-107 Cold Bloodlust"
 function Auxiliary.AddCounterPlaySkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	cost_func=cost_func or aux.TRUE
@@ -600,7 +600,7 @@ function Auxiliary.AddCounterPlaySkill(c,desc_id,op_func,cost_func,targ_func,pro
 	c:RegisterEffect(e1)
 	return e1
 end
---"[Counter: Counter]" skills
+--"[Counter: Counter]" effects
 --e.g. "BT1-108 Bad Ring Laser"
 function Auxiliary.AddCounterCounterSkill(c,desc_id,op_func,cost_func,targ_func,prop,con_func)
 	cost_func=cost_func or aux.TRUE
@@ -620,7 +620,7 @@ function Auxiliary.AddCounterCounterSkill(c,desc_id,op_func,cost_func,targ_func,
 	c:RegisterEffect(e1)
 	return e1
 end
---EFFECT_TYPE_FIELD [Auto] skills
+--EFFECT_TYPE_FIELD [Auto] effects
 --code: EVENT_ATTACK_ANNOUNCE for "[Auto] When a Battle Card attacks" (e.g. "BT1-001 Champa")
 --code: EVENT_CHAINING for "[Auto] When your opponent activates" (e.g. "BT1-003 Assassin Hit")
 --code: EVENT_PLAY for "[Auto] When you play a card" (e.g. "BT1-006 Scheming Champa")
@@ -660,7 +660,7 @@ function Auxiliary.AddAutoSkill(c,desc_id,code,targ_func,op_func,prop,con_func,c
 	c:RegisterEffect(e1)
 	return e1
 end
---EFFECT_TYPE_SINGLE [Auto] skills
+--EFFECT_TYPE_SINGLE [Auto] effects
 --code: EVENT_ATTACK_ANNOUNCE for "[Auto] When this card attacks" (e.g. "BT1-001 God of Destruction Champa")
 --code: EVENT_PLAY for "[Auto] When you play this card" (e.g. "BT1-004 Destructive Terror Champa")
 --code: EVENT_CUSTOM+EVENT_COMBO for "[Auto] When you combo with this card" (e.g. "BT1-005 Furthering Destruction Champa")
@@ -847,7 +847,7 @@ function Auxiliary.AddTempSkillUpdateComboPower(c,tc,desc_id,val,reset_flag,rese
 	e1:SetReset(RESET_EVENT+RESETS_STANDARD+reset_flag,reset_count)
 	tc:RegisterEffect(e1)
 end
---skill that negates a card's non-[keyword] skill
+--effect that negates a card's non-[keyword] effect
 --e.g. "BT1-107 Cold Bloodlust"
 function Auxiliary.AddTempSkillNegateSkill(c,tc,desc_id,reset_flag,reset_count)
 	reset_flag=reset_flag or RESET_PHASE+PHASE_END
@@ -1138,7 +1138,7 @@ function Auxiliary.AddPermanentOneCopyBattleArea(c,code)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsCode,code))
 	c:RegisterEffect(e2)
 end
---operation function for skills that choose cards
+--operation for effects that target cards
 --f: Duel.KO to ko cards
 --f: Duel.SendtoDeck to send cards to their owners' deck
 --f: Duel.SendtoDrop to send cards to the drop area
@@ -1155,7 +1155,7 @@ function Auxiliary.TargetCardsOperation(f,...)
 				f(sg,table.unpack(ext_params))
 			end
 end
---operation function for skills that let a player (PLAYER_SELF or PLAYER_OPPO) do something
+--operation for effects that let a player (PLAYER_SELF or PLAYER_OPPO) do something
 --f: Duel.Damage to inflict damage to a player
 --f: Duel.Draw to let a player draw cards
 --f: Duel.GetControl to gain control of cards
@@ -1168,7 +1168,7 @@ function Auxiliary.DuelOperation(f,p,...)
 				return f(player,table.unpack(ext_params))
 			end
 end
---target function for skills that choose cards from the top of your deck
+--target for effects that target cards from the top of your deck
 --e.g. "BT1-007 Manipulating God Champa"
 function Auxiliary.TargetDecktopTarget(f,ct,min,max,desc,ex,...)
 	--ct: the number of cards to look at
@@ -1188,7 +1188,7 @@ function Auxiliary.TargetDecktopTarget(f,ct,min,max,desc,ex,...)
 				Duel.SetTargetCard(sg)
 			end
 end
---operation function for skills that choose cards from the top of your deck to send to your hand
+--operation for effects that target cards from the top of your deck to send to your hand
 --e.g. "BT1-007 Manipulating God Champa"
 function Auxiliary.TargetDecktopSendtoHandOperation(ct,seq_or_loc,conf)
 	--ct: the number of cards to send
@@ -1214,7 +1214,7 @@ function Auxiliary.TargetDecktopSendtoHandOperation(ct,seq_or_loc,conf)
 				end
 			end
 end
---operation function for skills that choose battle cards from the top of your deck to play
+--operation for effects that target battle cards from the top of your deck to play
 --e.g. "BT1-008 Bewitching God Vados"
 function Auxiliary.TargetDecktopPlayOperation(ct,seq_or_loc,pos,pay_energy)
 	--ct: the number of cards to play
@@ -1237,7 +1237,7 @@ function Auxiliary.TargetDecktopPlayOperation(ct,seq_or_loc,pos,pay_energy)
 				end
 			end
 end
---target function for skills that choose any number of battle cards which the total power adds up to N or less
+--target for effects that target any number of battle cards which the total power adds up to N or less
 --e.g. "BT1-024 Assassination Plot"
 function Auxiliary.TargetTotalPowerBelowFilter(c,e,pwr,f,...)
 	return c:IsFaceup() and c:IsBattle() and c:IsPowerAbove(0) and c:IsPowerBelow(pwr)
@@ -1265,7 +1265,7 @@ function Auxiliary.TargetTotalPowerBelowTarget(p,f,s,o,pwr,desc,ex,...)
 				until pwr<=0 or g:GetCount()==0
 			end
 end
---target function for skills that choose any number of cards which the total cost adds up to N or less
+--target for effects that target any number of cards which the total cost adds up to N or less
 --e.g. "BT1-059 Awakening Rage Son Goku"
 function Auxiliary.TargetTotalCostBelowFilter(c,e,cost,f,...)
 	return c:IsFaceup() and c:IsBattle() and c:IsEnergyAbove(0) and c:IsEnergyBelow(cost)
@@ -1293,7 +1293,7 @@ function Auxiliary.TargetTotalCostBelowTarget(p,f,s,o,cost,desc,ex,...)
 				until cost<=0 or g:GetCount()==0
 			end
 end
---operation function for skills that choose cards to send to their owners' hand
+--operation for effects that target cards to send to their owners' hand
 --e.g. "SD1-02 God Rush Son Goku"
 function Auxiliary.TargetSendtoHandOperation(conf)
 	--conf: true to reveal the sent cards
@@ -1308,7 +1308,7 @@ function Auxiliary.TargetSendtoHandOperation(conf)
 				if og2:GetCount()>0 then Duel.ConfirmCards(tp,og2) end
 			end
 end
---operation function for skills that choose battle cards to play
+--operation for effects that target battle cards to play
 --e.g. "P-019 Ginyu, The Reliable Captain"
 function Auxiliary.TargetPlayOperation(pos)
 	--pos: POS_FACEUP_ACTIVE to play in active mode or POS_FACEUP_REST to play in rest mode
@@ -1319,7 +1319,7 @@ function Auxiliary.TargetPlayOperation(pos)
 				Duel.Play(sg,0,tp,tp,false,false,pos)
 			end
 end
---operation function for skills that choose battle cards to change control
+--operation for effects that target battle cards to change control
 --e.g. "EX02-04 Time Ruler Towa"
 function Auxiliary.TargetGainControlOperation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
@@ -1327,7 +1327,7 @@ function Auxiliary.TargetGainControlOperation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
 	Duel.GetControl(sg,tp)
 end
---operation function for skills that choose battle cards to send to the combo area
+--operation for effects that target battle cards to send to the combo area
 --e.g. "BT3-034 Ultimate Spirit Bomb Son Goku"
 function Auxiliary.TargetSendtoComboOperation(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
@@ -1335,7 +1335,7 @@ function Auxiliary.TargetSendtoComboOperation(e,tp,eg,ep,ev,re,r,rp)
 	local sg=g:Filter(Card.IsRelateToEffect,nil,e)
 	Duel.SendtoCombo(e:GetHandler(),sg,tp,REASON_EFFECT)
 end
---operation function for skills that choose battle cards from the top of your deck to send to the combo area
+--operation for effects that target battle cards from the top of your deck to send to the combo area
 --e.g. "BT1-092 Sorbet, The Loyal Commander"
 function Auxiliary.TargetDecktopSendtoComboOperation(ct,seq_or_loc)
 	--ct: the number of cards to send
@@ -1356,19 +1356,19 @@ function Auxiliary.TargetDecktopSendtoComboOperation(ct,seq_or_loc)
 				end
 			end
 end
---operation function for skills that switch the card itself to active mode
+--operation for effects that switch the card itself to active mode
 function Auxiliary.SelfSwitchtoActiveOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
 	Duel.SwitchtoActive(c,REASON_EFFECT)
 end
---target function for [Activate] skills that play the card itself
+--target for [Activate] effects that play the card itself
 --e.g. "BT1-064 Raging Attacker Vegeta"
 function Auxiliary.SelfPlayTarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBePlayed(e,0,tp,false,false) end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
---operation function for skills that play the card itself
+--operation for effects that play the card itself
 function Auxiliary.SelfPlayOperation(pos)
 	--pos: POS_FACEUP_ACTIVE to play in active mode or POS_FACEUP_REST to play in rest mode
 	return	function(e,tp,eg,ep,ev,re,r,rp)
@@ -1377,26 +1377,26 @@ function Auxiliary.SelfPlayOperation(pos)
 				Duel.Play(c,0,tp,tp,false,false,pos)
 			end
 end
---target function for [Activate] skills that send the card itself to its owner's hand
+--target for [Activate] effects that send the card itself to its owner's hand
 --e.g. "P-003 Super Saiyan 3 Son Goku"
 function Auxiliary.SelfSendtoHandTarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToHand() end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
---operation function for skills that send the card itself to its owner's hand
+--operation for effects that send the card itself to its owner's hand
 function Auxiliary.SelfSendtoHandOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() or Duel.SendtoHand(c,PLAYER_OWNER,REASON_EFFECT)==0 then return end
 	if not c:IsPreviousLocation(LOCATION_BATTLECARD) then Duel.ConfirmCards(1-tp,c) end
 end
---operation function for skills that send the card itself to the drop area
+--operation for effects that send the card itself to the drop area
 --e.g. "BT2-099 Cell's Birth"
 function Auxiliary.SelfDropOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end
 	Duel.SendtoDrop(c,REASON_EFFECT)
 end
---operation function for skills that send the card itself to its owner's deck
+--operation for effects that send the card itself to its owner's deck
 --e.g. "BT3-091 Kakarot, the Child Who Got Away"
 function Auxiliary.SelfSendtoDeckOperation(seq)
 	--seq: where to send the card (SEQ_DECK)
@@ -1407,7 +1407,7 @@ function Auxiliary.SelfSendtoDeckOperation(seq)
 			end
 end
 
---condition to check if neither player is attacking or resolving a card's skill
+--condition to check if neither player is attacking or resolving a card's effect
 function Auxiliary.NoActionCondition()
 	return not Duel.CheckEvent(EVENT_ATTACK_ANNOUNCE) and Duel.GetCurrentChain()==0
 end
@@ -1651,7 +1651,7 @@ function Auxiliary.EnergyExclusiveCondition(f,...)
 					and not g:IsExists(aux.NOT(f),1,nil,table.unpack(ext_params))
 			end
 end
---cost function for playing battle cards and activating the skills of extra cards in your hand
+--cost for playing battle cards and activating the effects of extra cards in your hand
 function Auxiliary.PayColorEnergyFilter(c,color)
 	return c:IsColor(color) and c:IsAbleToPayForEnergy()
 end
@@ -1665,7 +1665,7 @@ function Auxiliary.PayEnergyCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local colorless_cost=c:GetEnergy()-color_cost
 	--check for free play or activation
 	if c:IsCanFreePlay() or c:IsCanFreeActivate() then return true end
-	--check for specified cost changing skills
+	--check for specified cost changing effects
 	local t1={c:IsHasEffect(EFFECT_UPDATE_RED_PLAY_COST)}
 	local t2={c:IsHasEffect(EFFECT_UPDATE_BLUE_PLAY_COST)}
 	local t3={c:IsHasEffect(EFFECT_UPDATE_GREEN_PLAY_COST)}
@@ -1682,7 +1682,7 @@ function Auxiliary.PayEnergyCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if #t4>0 and color==COLOR_YELLOW then
 		for _,te4 in pairs(t4) do color_cost=color_cost+te4:GetValue() end
 	end
-	--check for no specified cost skill before "When you activate an Extra Card"
+	--check for no specified cost effect before "When you activate an Extra Card"
 	if c:IsHasEffect(EFFECT_NO_SPECIFIED_COST) then
 		color=COLOR_COLORLESS
 		color_cost=0
@@ -1700,7 +1700,7 @@ function Auxiliary.PayEnergyCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	--check for total energy cost after "When you activate an Extra Card"
 	colorless_cost=c:GetEnergy()-color_cost
-	--check for no specified cost skill after "When you activate an Extra Card"
+	--check for no specified cost effect after "When you activate an Extra Card"
 	if c:IsHasEffect(EFFECT_NO_SPECIFIED_COST) then
 		color=COLOR_COLORLESS
 		color_cost=0
@@ -1726,7 +1726,7 @@ function Auxiliary.PayEnergyCost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.SendtoDrop(c,REASON_RULE)
 	end
 end
---cost function for activating skills
+--cost for activating effects
 function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
 				local color=color or COLOR_COLORLESS
@@ -1735,12 +1735,12 @@ function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 				local min_colorless_cost=colorless_cost or 0
 				local max_colorless_cost=colorless_cost or 0
 				local c=e:GetHandler()
-				--check for specified cost changing skill
+				--check for specified cost changing effect
 				local t1={c:IsHasEffect(EFFECT_UPDATE_RED_SKILL_COST)}
 				local t2={c:IsHasEffect(EFFECT_UPDATE_BLUE_SKILL_COST)}
 				local t3={c:IsHasEffect(EFFECT_UPDATE_GREEN_SKILL_COST)}
 				local t4={c:IsHasEffect(EFFECT_UPDATE_YELLOW_SKILL_COST)}
-				--check for unspecified cost changing skill
+				--check for unspecified cost changing effect
 				local t5={c:IsHasEffect(EFFECT_UPDATE_COLORLESS_SKILL_COST)}
 				if #t1>0 and color==COLOR_RED then
 					for _,te1 in pairs(t1) do min_color_cost=min_color_cost+te1:GetValue() end
@@ -1757,7 +1757,7 @@ function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 				if #t5>0 then
 					for _,te5 in pairs(t5) do min_colorless_cost=min_colorless_cost+te5:GetValue() end
 				end
-				--check for no specified cost skill
+				--check for no specified cost effect
 				if c:IsHasEffect(EFFECT_NO_SPECIFIED_COST) then
 					color=COLOR_COLORLESS
 					min_color_cost=0
@@ -1785,7 +1785,7 @@ function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 				Duel.PayEnergy(sg1)
 			end
 end
---cost function for sending a card to the drop area
+--cost for sending a card to the drop area
 --e.g. "BT1-001 God of Destruction Champa", "BT4-099 Mira, One with Darkness", "BT1-065 Furious Yell Vegeta"
 function Auxiliary.DropCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1815,7 +1815,7 @@ function Auxiliary.DropCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for sending a card from the top of your deck to the drop area
+--cost for sending a card from the top of your deck to the drop area
 --e.g. "EX03-30 Toppo Unleashed"
 function Auxiliary.DropDecktopCost(ct)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -1823,7 +1823,7 @@ function Auxiliary.DropDecktopCost(ct)
 				Duel.SendDecktoptoDrop(tp,ct,REASON_COST)
 			end
 end
---cost function for sending a card to your hand
+--cost for sending a card to your hand
 --e.g. "BT1-028 Vegeta", "BT1-085 Ginyu, The Malicious Transformation"
 function Auxiliary.SendtoHandCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1853,7 +1853,7 @@ function Auxiliary.SendtoHandCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for placing a card under another card
+--cost for placing a card under another card
 --e.g. "BT2-027 Awakening Evil Majin Buu"
 function Auxiliary.AbsorbCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1880,7 +1880,7 @@ function Auxiliary.AbsorbCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for removing a card from the game
+--cost for removing a card from the game
 --e.g. "BT2-110 Cooler, Blood of the Tyrant Clan"
 function Auxiliary.RemoveFromGameCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1910,7 +1910,7 @@ function Auxiliary.RemoveFromGameCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for switching a card to rest mode
+--cost for switching a card to rest mode
 --e.g. "BT2-112 Chilled, Army General"
 function Auxiliary.SwitchtoRestCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1940,7 +1940,7 @@ function Auxiliary.SwitchtoRestCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for you to draw cards
+--cost for you to draw cards
 --e.g. "P-065 Vegito, Super Warrior Reborn"
 function Auxiliary.DrawCost(ct)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -1948,7 +1948,7 @@ function Auxiliary.DrawCost(ct)
 				Duel.Draw(tp,ct,REASON_COST)
 			end
 end
---cost function for sending a card to the warp
+--cost for sending a card to the warp
 --e.g. "EX03-19 Explosive Power Jiren"
 function Auxiliary.SendtoWarpCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -1978,7 +1978,7 @@ function Auxiliary.SendtoWarpCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for sending a card to its owner's deck
+--cost for sending a card to its owner's deck
 --e.g. "TB2-026 Awkward Situation Trunks"
 function Auxiliary.SendtoDeckCost(f,s,o,min,max,seq,ex,...)
 	local ext_params={...}
@@ -2009,7 +2009,7 @@ function Auxiliary.SendtoDeckCost(f,s,o,min,max,seq,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for you to ko your battle cards
+--cost for you to ko your battle cards
 --e.g. "BT5-003 Oblivious Rampage Son Goku"
 function Auxiliary.KOCost(f,s,o,min,max,ex,...)
 	local ext_params={...}
@@ -2039,19 +2039,19 @@ function Auxiliary.KOCost(f,s,o,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---cost function for a card switching itself to rest mode
+--cost for a card switching itself to rest mode
 --e.g. "BT1-029 Beerus, God of Destruction", "BT3-030 Planet M-2"
 function Auxiliary.SelfSwitchtoRestCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToSwitchToRest() end
 	Duel.SwitchtoRest(e:GetHandler(),REASON_COST)
 end
---cost function for a card sending itself to the drop area
+--cost for a card sending itself to the drop area
 --e.g. "BT2-016 Mighty Mask, The Mysterious Warrior"
 function Auxiliary.SelfDropCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToDrop() end
 	Duel.SendtoDrop(e:GetHandler(),REASON_COST)
 end
---cost function for a card returning itself to its owner's deck
+--cost for a card returning itself to its owner's deck
 --e.g. "BT2-043 Trunks, Creator of the Future"
 function Auxiliary.SelfSendtoDeckCost(seq)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -2059,19 +2059,19 @@ function Auxiliary.SelfSendtoDeckCost(seq)
 				Duel.SendtoDeck(e:GetHandler(),PLAYER_OWNER,seq,REASON_COST)
 			end
 end
---cost function for a card removing itself from the game
+--cost for a card removing itself from the game
 --e.g. "BT2-115 Cooler's Armored Squadron Leader Salza"
 function Auxiliary.SelfRemoveFromGameCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():DSIsAbleToRemove() end
 	Duel.RemoveFromGame(e:GetHandler(),REASON_COST)
 end
---cost function for a card sending itself to the warp
+--cost for a card sending itself to the warp
 --e.g. "TB1-009 Dimension Leaper Hit"
 function Auxiliary.SelfSendtoWarpCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToWarp() end
 	Duel.SendtoWarp(e:GetHandler(),REASON_COST)
 end
---cost function for a card sending a card under itself to the drop area
+--cost for a card sending a card under itself to the drop area
 --e.g. "BT2-068 Ultimate Lifeform Cell"
 function Auxiliary.SelfDropAbsorbedCost(f,min,max,ex,...)
 	local ext_params={...}
@@ -2088,7 +2088,7 @@ function Auxiliary.SelfDropAbsorbedCost(f,min,max,ex,...)
 				if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then Duel.ClearTargetCard() end
 			end
 end
---target function for Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+--target for Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 function Auxiliary.HintTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if e:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then
 		if chkc then return false end
@@ -2096,7 +2096,7 @@ function Auxiliary.HintTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
---target function for skills that choose cards
+--target for effects that target cards
 function Auxiliary.TargetCardFunction(p,f,s,o,min,max,desc,con_func,ex,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -2248,7 +2248,7 @@ function Auxiliary.sumreg(e,tp,eg,ep,ev,re,r,rp)
 	local code=e:GetLabel()
 	while tc do
 		if tc:GetOriginalCode()==code then
-			tc:RegisterFlagEffect(code,RESET_EVENT+0x1ec0000+RESET_PHASE+PHASE_END,0,1)
+			tc:RegisterFlagEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET-RESET_TEMP_REMOVE+RESET_PHASE+PHASE_END,0,1)
 		end
 		tc=eg:GetNext()
 	end

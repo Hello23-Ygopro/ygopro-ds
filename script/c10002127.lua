@@ -9,7 +9,7 @@ function scard.initial_effect(c)
 	--combo rest
 	aux.AddPermanentSkill(c,EFFECT_COMBO_REST_MODE,nil,LOCATION_BATTLE,0,aux.TargetBoolFunction(Card.IsCode,CARD_BT2102_CHILLEDS_ARMY_TOKEN))
 	aux.AddPermanentSkill(c,EFFECT_GAIN_COMBO_COST,nil,LOCATION_BATTLE,0,aux.TargetBoolFunction(Card.IsCode,CARD_BT2102_CHILLEDS_ARMY_TOKEN))
-	--combo gain power
+	--gain combo power
 	aux.AddPermanentUpdateComboPower(c,5000,nil,LOCATION_BATTLE,0,aux.TargetBoolFunction(Card.IsCode,CARD_BT2102_CHILLEDS_ARMY_TOKEN))
 	--gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1)

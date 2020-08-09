@@ -98,8 +98,8 @@ function scard.op2(e,tp,eg,ep,ev,re,r,rp)
 end
 --[[
 	References
-		1. Thunder Dragon Thunderstormech
-		https://github.com/Fluorohydride/ygopro-scripts/blob/a652ee7/c12081875.lua#L34
-		2. Bait Doll
-		https://github.com/Fluorohydride/ygopro-scripts/blob/master/c7165085.lua
+	* Bait Doll
+	https://github.com/Fluorohydride/ygopro-scripts/blob/master/c7165085.lua
+	* Thunder Dragon Thunderstormech
+	https://github.com/Fluorohydride/ygopro-scripts/blob/a652ee7/c12081875.lua#L34
 ]]
