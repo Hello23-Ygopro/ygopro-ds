@@ -1,6 +1,8 @@
 --BT2-115 Cooler's Armored Squadron Leader Salza
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SALZA)
 	aux.AddSpecialTrait(c,TRAIT_COOLERS_ARMORED_SQUADRON)
 	aux.AddEra(c,ERA_COOLER_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfRemoveFromGameCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --play, gain skill
 function scard.playfilter(c,e,tp)
 	return c:IsSpecialTrait(TRAIT_COOLERS_ARMORED_SQUADRON)

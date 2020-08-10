@@ -1,6 +1,8 @@
 --BT5-049 Childish Heart Janemba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_JANEMBA)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_INCARNATE)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=0
 --play
 function scard.costfilter(c)
 	return c:IsCharacter(CHARACTER_JANEMBA) and c:IsAbleToWarp()

@@ -1,6 +1,8 @@
 --BT4-059 Titanic Ambition Lord Slug
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_LORD_SLUG)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_SLUGS_ARMY)
 	aux.AddEra(c,ERA_LORD_SLUG_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	aux.EnableBond(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.BondCondition(3,Card.IsSpecialTrait,TRAIT_SLUGS_ARMY))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_LORD_SLUG) and c:IsEnergyAbove(4)

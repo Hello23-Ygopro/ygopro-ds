@@ -1,6 +1,8 @@
 --TB2-012 Hidden Power, East Supreme Kai
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_EAST_SUPREME_KAI)
 	aux.AddSpecialTrait(c,TRAIT_GOD,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --gain skill
 function scard.skfilter(c)
 	return Duel.GetAttacker()==c

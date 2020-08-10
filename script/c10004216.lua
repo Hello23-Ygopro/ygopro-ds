@@ -1,6 +1,8 @@
 --TB2-020 Test of Strength Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--play, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --play, gain skill
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_WORLD_TOURNAMENT)
 function scard.playfilter(c,e,tp)

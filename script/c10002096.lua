@@ -1,6 +1,8 @@
 --BT2-085 Evolving Evil Lifeform Cell
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CELL)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--draw, ko
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.UnionPlayCondition)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --union-absorb
 scard.cost1=aux.AbsorbCost(aux.HandFilter(Card.IsCharacter,CHARACTER_ANDROID_18),LOCATION_HAND,0,0,1)
 --draw, ko

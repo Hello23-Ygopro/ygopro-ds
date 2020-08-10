@@ -1,12 +1,12 @@
 --BT5-104 Death Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, ko
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_FRIEZA))
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --gain skill, ko
 function scard.kofilter(c,e)
 	return c:IsRest() and c:IsCanBeEffectTarget(e)

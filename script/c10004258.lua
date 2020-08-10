@@ -1,6 +1,8 @@
 --TB2-055 Unending Moves Tien Shinhan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TIEN_SHINHAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --draw, ko
 scard.cost1=aux.KOCost(aux.BattleAreaFilter(Card.IsCode,CARD_UNENDING_MOVES_YAMCHA),LOCATION_BATTLE,0,1)
 function scard.kofilter(c,e)

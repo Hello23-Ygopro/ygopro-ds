@@ -1,6 +1,8 @@
 --P-051 King Piccolo, Demon Lord
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_KING_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
 	aux.AddEra(c,ERA_KING_PICCOLO_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	aux.EnableBond(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.BondCondition(2))
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --bond (gain skill)
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()

@@ -1,6 +1,8 @@
 --BT1-077 Paragus, Controller of Monsters
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PARAGUS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BROLY_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (drop, activate)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --search (drop, activate)
 function scard.actfilter(c,tp)
 	return c:IsCode(CARD_BROLYS_RING) and c:GetActivateEffect():IsActivatable(tp,true,true)

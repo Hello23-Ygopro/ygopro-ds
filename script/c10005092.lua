@@ -1,12 +1,12 @@
 --BT5-078 Infernal Messenger
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--to hand
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_GREEN,1}
 --to hand
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_ANDROID)

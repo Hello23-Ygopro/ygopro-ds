@@ -1,6 +1,7 @@
 --P-082 Revived Ravager Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,4 +14,3 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,3,REASON_EFFECT),nil,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0

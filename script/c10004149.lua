@@ -1,6 +1,8 @@
 --SD5-04 Reborn Might SS4 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --untap, gain skill
 scard.cost1=aux.SendtoHandCost(aux.LifeAreaFilter(nil),LOCATION_LIFE,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

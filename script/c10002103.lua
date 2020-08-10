@@ -1,6 +1,8 @@
 --BT2-092 Encroaching Terror Android 19
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ANDROID_19)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --draw, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)

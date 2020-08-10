@@ -1,6 +1,8 @@
 --BT1-078 Overflowing Bio Warrior Army
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BIO_WARRIOR)
 	aux.AddSpecialTrait(c,TRAIT_BIO_WARRIOR)
 	aux.AddEra(c,ERA_BROLY_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--drop, play
 	aux.AddSingleAutoSkill(c,0,EVENT_DROP,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --drop, play
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_BROLY),aux.SelfPreviousLocationCondition(LOCATION_BATTLE))
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

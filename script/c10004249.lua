@@ -1,6 +1,8 @@
 --TB2-048 Mercenary Tao, Trading Moves
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MERCENARY_TAO)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --drop
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_WORLD_TOURNAMENT)

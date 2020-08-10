@@ -1,6 +1,8 @@
 --BT1-011_SPR Lightning-fast Hit (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_HIT)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -13,5 +15,3 @@ function scard.initial_effect(c)
 	--damage
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.Damage,PLAYER_OPPO,2,REASON_EFFECT),nil,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1

@@ -1,6 +1,7 @@
 --BT2-031 Majin Buu's Sealed Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -17,7 +18,6 @@ function scard.initial_effect(c)
 	e2:SetRange(LOCATION_FIELD)
 	e2:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,1}
 --search (drop, play)
 function scard.regop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

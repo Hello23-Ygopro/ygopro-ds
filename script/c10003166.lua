@@ -1,6 +1,8 @@
 --TB1-012 Sister Attack Saiyan Caulifla
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CAULIFLA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--to hand, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --to hand, gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsSpecialTrait(TRAIT_SAIYAN)

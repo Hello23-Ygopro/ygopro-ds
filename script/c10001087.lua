@@ -1,6 +1,8 @@
 --BT1-076 Broly, Dawn of the Rampage
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BROLY)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BROLY_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsCharacter(CHARACTER_BROLY)

@@ -1,6 +1,8 @@
 --BT5-013 Puar, Best Pal
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PUAR)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to hand, play
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --to hand, play
 scard.con1=aux.SelfPreviousLocationCondition(LOCATION_BATTLE)
 function scard.playfilter(c,e,tp)

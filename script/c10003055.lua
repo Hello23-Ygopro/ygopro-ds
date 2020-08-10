@@ -1,6 +1,8 @@
 --BT3-051 God Absorber Majin Buu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--leave replace
 	aux.AddPermanentReplaceLeave(c,0,scard.op1,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --leave replace
 function scard.con1(e)
 	local c=e:GetHandler()

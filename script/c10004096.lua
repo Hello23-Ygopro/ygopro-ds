@@ -1,6 +1,8 @@
 --BT4-086 Plucky Dynasty Pan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --draw, gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_GOKUS_LINEAGE)

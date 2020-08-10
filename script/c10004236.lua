@@ -1,6 +1,8 @@
 --TB2-037 Fateful Reunion Chi-Chi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CHI_CHI)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--gain skill, draw
 	aux.AddAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --gain skill, draw
 function scard.cfilter(c,tp)
 	return c:IsCode(CARD_FATEFUL_REUNION_SON_GOKU) and c:IsControler(tp)

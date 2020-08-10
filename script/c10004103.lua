@@ -1,6 +1,8 @@
 --BT4-093 Explorer Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA)
 	aux.AddSpecialTrait(c,TRAIT_SPECIAL_MODEL_KIT)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--drop, untap, draw
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --drop, untap, draw
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

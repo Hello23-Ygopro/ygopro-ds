@@ -1,6 +1,8 @@
 --BT2-071 Inherited Will Super Saiyan Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--drop, play
 	aux.AddSingleAutoSkill(c,0,EVENT_DAMAGE_STEP_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfAttackerCondition)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --drop, play
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsCharacterSetCard(CHAR_CATEGORY_SON_GOHAN)

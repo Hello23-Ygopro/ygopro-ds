@@ -1,6 +1,8 @@
 --EX03-02 Ghost Combo Gotenks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GOTENKS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--token
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=1
 --token
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_RED),aux.HandEqualBelowCondition(PLAYER_SELF,4))
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

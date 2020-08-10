@@ -1,6 +1,8 @@
 --BT1-017 Evolution Premonition Frost
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FROST)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--evolve
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --evolve
 scard.cost1=aux.PaySkillCost(COLOR_COLORLESS,0,2)
 function scard.evofilter1(c)

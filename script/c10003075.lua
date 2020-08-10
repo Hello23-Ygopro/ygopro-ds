@@ -1,6 +1,8 @@
 --BT3-068 Stouthearted Android 16
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ANDROID_16)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--drop, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --drop, gain skill
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
 scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToDrop),0,LOCATION_HAND,1,1,HINTMSG_DROP)

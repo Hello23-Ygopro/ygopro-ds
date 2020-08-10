@@ -1,6 +1,7 @@
 --BT4-108 Mira, Creator Absorbed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MIRA)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -15,7 +16,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,scard.op2)
 end
-scard.combo_cost=1
 --warp, gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToWarp),0,LOCATION_HAND,3,3,HINTMSG_WARP)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

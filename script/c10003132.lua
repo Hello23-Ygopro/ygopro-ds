@@ -1,6 +1,7 @@
 --BT3-119 Shun Shun, Protector Majin
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SHUN_SHUN)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,1,EVENT_BE_BATTLE_TARGET,nil,scard.op1,nil,aux.OppoLeaderCondition(Card.IsColor,COLOR_RED+COLOR_BLUE))
 end
-scard.combo_cost=0
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

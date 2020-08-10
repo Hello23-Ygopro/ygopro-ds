@@ -1,6 +1,8 @@
 --EX03-05 Rampant Evil Majin Buu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--draw, untap, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_MAJIN))
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --draw, untap, gain skill
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

@@ -2,6 +2,8 @@
 --Not fully implemented: Cards do not switch to Rest Mode when attacking
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -28,8 +30,6 @@ function scard.initial_effect(c)
 	e2:SetOperation(scard.op2)
 	c:RegisterEffect(e2)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=0
 --burst (untap)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SwitchtoActive(e:GetHandler(),REASON_EFFECT)

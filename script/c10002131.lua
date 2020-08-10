@@ -1,6 +1,8 @@
 --BT2-116 Cooler's Armored Squadron Dore
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_DORE)
 	aux.AddSpecialTrait(c,TRAIT_COOLERS_ARMORED_SQUADRON)
 	aux.AddEra(c,ERA_COOLER_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_KOED,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsSpecialTrait(TRAIT_COOLERS_ARMORED_SQUADRON)

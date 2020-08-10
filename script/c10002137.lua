@@ -1,6 +1,7 @@
 --BT2-122 Big Gete Star
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --play
 scard.cost1=aux.MergeCost(aux.SelfSwitchtoRestCost,aux.DropDecktopCost(1),aux.PaySkillCost(COLOR_COLORLESS,0,1))
 function scard.playfilter(c,e,tp)

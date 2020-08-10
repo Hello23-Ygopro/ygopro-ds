@@ -1,6 +1,8 @@
 --BT3-043 Powers Combined, Kibito Kai
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_KIBITO_KAI)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--return, gain skill, draw
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --return, gain skill, draw
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_BLUE),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
 function scard.retfilter(c,e)

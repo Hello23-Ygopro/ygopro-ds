@@ -1,6 +1,8 @@
 --BT2-059 God of the Gods Great Priest
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GREAT_PRIEST)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--charge
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --charge
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_GOD)
 function scard.tefilter1(c)

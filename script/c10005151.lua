@@ -1,6 +1,7 @@
 --SD7-03 Vegeta, Returned from Darkness
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	aux.EnableBurst(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,nil,aux.BurstCost(5))
 end
-scard.combo_cost=0
 --burst (warp)
 function scard.warpfilter(c,e)
 	return c:IsAbleToWarp() and c:IsCanBeEffectTarget(e)

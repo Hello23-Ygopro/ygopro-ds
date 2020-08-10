@@ -1,12 +1,12 @@
 --BT2-065 Time Ring
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--to hand
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --to hand
 function scard.thfilter1(c)
 	return c:IsCharacter(CHARACTER_GOKU_BLACK,CHARACTER_ZAMASU) and c:IsAbleToHand()

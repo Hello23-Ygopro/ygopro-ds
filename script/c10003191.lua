@@ -1,6 +1,8 @@
 --TB1-035 Trio De Dangers Bergamo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BERGAMO)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_TRIO_DE_DANGERS,TRAIT_UNIVERSE_9)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_BE_BATTLE_TARGET,nil,scard.op1)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --attack limit
 function scard.val1(e,c)
 	return c~=e:GetHandler()

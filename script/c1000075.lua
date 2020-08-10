@@ -1,6 +1,7 @@
 --P-067 Bardock, Fully Unleashed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BARDOCK_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--warp
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --warp
 function scard.warpfilter(c,e)
 	return c:IsEnergyAbove(6) and c:IsAbleToWarp() and c:IsCanBeEffectTarget(e)

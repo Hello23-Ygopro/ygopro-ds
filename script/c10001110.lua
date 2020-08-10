@@ -1,6 +1,8 @@
 --BT1-095 Elite Force Captain Ginyu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GINYU)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=1
 --gain skill
 function scard.skfilter(c,e)
 	return c:IsSpecialTrait(TRAIT_GINYU_FORCE) and c:IsCanBeEffectTarget(e)

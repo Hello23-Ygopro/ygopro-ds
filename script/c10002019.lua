@@ -1,6 +1,8 @@
 --BT2-016 Mighty Mask, The Mysterious Warrior
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MIGHTY_MASK)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c,charname)
 	return c:IsCharacter(charname) and c:IsPowerBelow(15000) and c:IsAbleToHand()

@@ -1,6 +1,8 @@
 --BT5-066 Hell Fighter 17, Evil Revived
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_HELL_FIGHTER_17)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--union-absorb
 	aux.EnableUnionAbsorb(c,scard.uniafilter1,scard.cost1,scard.tg1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --union-absorb
 function scard.uniafilter1(c)
 	return c:IsCharacter(CHARACTER_SUPER_17) and c:IsEnergy(4)

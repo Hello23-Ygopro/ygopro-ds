@@ -1,6 +1,7 @@
 --BT5-075 Shocking Death Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, ko
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--sparking
 	aux.EnableSparking(c)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --negate attack, ko
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN)
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)

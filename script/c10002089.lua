@@ -1,6 +1,8 @@
 --BT2-079 Aura of Rage Super Saiyan Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--ko
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ko
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp and not e:GetHandler():IsPreviousLocation(LOCATION_BATTLE)

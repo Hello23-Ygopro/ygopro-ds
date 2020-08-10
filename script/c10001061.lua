@@ -1,12 +1,12 @@
 --BT1-054 Encouraging Presence Monaka
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, draw
 	aux.AddActivateMainSkill(c,0,scard.op1)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --gain skill, draw
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetLeaderCard(tp)

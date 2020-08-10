@@ -1,6 +1,8 @@
 --TB1-081 Absolute Justice Jiren
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,5)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_JIREN)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_PRIDE_TROOPERS,TRAIT_UNIVERSE_11)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,5}
-scard.combo_cost=1
 --reduce energy cost
 function scard.val1(e,c)
 	return Duel.GetMatchingGroupCount(aux.BattleAreaFilter(Card.IsSpecialTrait,TRAIT_UNIVERSE_11),c:GetControler(),LOCATION_BATTLE,0,nil)*-1

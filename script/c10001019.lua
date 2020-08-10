@@ -1,6 +1,8 @@
 --BT1-016 Unceasing Evolution Frost
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FROST)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -11,5 +13,3 @@ function scard.initial_effect(c)
 	--double strike
 	aux.EnableDoubleStrike(c)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0

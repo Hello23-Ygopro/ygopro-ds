@@ -1,6 +1,8 @@
 --BT5-067 Super 17, Cell Absorbed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SUPER_17)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,4}
-scard.combo_cost=1
 --sparking (drop)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_ANDROID)

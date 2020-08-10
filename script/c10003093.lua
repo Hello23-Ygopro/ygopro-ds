@@ -1,6 +1,8 @@
 --BT3-084 Desperate Warrior Super Saiyan Bardock
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BARDOCK)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BARDOCK_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsCharacter(CHARACTER_BARDOCK) and c:IsEnergyAbove(5)

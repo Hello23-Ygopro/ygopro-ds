@@ -1,6 +1,8 @@
 --TB2-014 Dark Duo Dabura
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_DABURA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -19,8 +21,6 @@ function scard.initial_effect(c)
 	e2:SetLabelObject(g)
 	e3:SetLabelObject(g)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --warp
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.HandFilter(Card.IsAbleToWarp),0,LOCATION_HAND,0,2,HINTMSG_WARP)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

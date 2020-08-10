@@ -1,6 +1,7 @@
 --P-055 Dark Temptation Towa
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOWA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--gain skill, drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=0
 --gain skill, drop
 scard.con1=aux.AND(aux.OverRealmPlayCondition,aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN+COLOR_YELLOW))
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LeaderAreaFilter(nil),LOCATION_LEADER,0,1,1,HINTMSG_TARGET)

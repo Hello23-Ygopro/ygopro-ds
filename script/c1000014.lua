@@ -1,6 +1,8 @@
 --P-014 Bursting Energy Super Saiyan Vegito
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_VEGITO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --union-potara
 scard.unipfilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_SON_GOKU)
 scard.unipfilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_VEGETA)

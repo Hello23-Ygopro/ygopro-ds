@@ -1,6 +1,8 @@
 --TB1-056 Maiden Squadron Leader Ribrianne
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_RIBRIANNE)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_MAIDEN_SQUADRON,TRAIT_UNIVERSE_2)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ko
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

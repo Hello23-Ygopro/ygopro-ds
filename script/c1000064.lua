@@ -1,6 +1,7 @@
 --P-056 Supreme Kai of Time, Light's Guide
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SUPREME_KAI_OF_TIME)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	--gain skill, draw
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=0
 --gain skill, draw
 scard.con1=aux.AND(aux.OverRealmPlayCondition,aux.SelfLeaderCondition(Card.IsColor,COLOR_RED+COLOR_BLUE))
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LeaderAreaFilter(nil),LOCATION_LEADER,0,1,1,HINTMSG_TARGET)

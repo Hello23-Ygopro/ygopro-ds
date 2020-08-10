@@ -1,6 +1,8 @@
 --BT3-020 Hidden Ability, General Rilldo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GENERAL_RILLDO)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--union-absorb
 	aux.EnableUnionAbsorb(c,scard.uniafilter,scard.cost1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --union-absorb
 function scard.uniafilter(c)
 	return c:IsCharacter(CHARACTER_GENERAL_RILLDO) and c:IsPower(25000)

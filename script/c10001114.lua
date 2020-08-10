@@ -1,6 +1,8 @@
 --BT1-099 Ginyu Force Guldo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GULDO)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --tap
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_GINYU_FORCE)
 function scard.tapfilter(c)

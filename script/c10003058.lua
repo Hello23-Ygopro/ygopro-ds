@@ -1,12 +1,12 @@
 --BT3-054 Buu Make You Cookie
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, absorb
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --negate attack, absorb
 function scard.abfilter1(c,e)
 	return c:IsCharacter(CHARACTER_MAJIN_BUU) and c:IsCanBeEffectTarget(e)

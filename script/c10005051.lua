@@ -1,6 +1,8 @@
 --BT5-044 East Kai, Keeping Watch
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_EAST_KAI)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--to deck
 	aux.AddAutoSkill(c,1,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --to deck
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp

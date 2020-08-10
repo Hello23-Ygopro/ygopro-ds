@@ -1,6 +1,8 @@
 --BT4-033 Heroic Encounter Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_YOUTH)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c)
 	return c:IsCharacter(CHARACTER_TAPION) and c:IsAbleToHand()

@@ -140,10 +140,31 @@ function Auxiliary.AddSetcode(c,setname)
 		Duel.RegisterEffect(e2,0)
 	end
 end
+--register a card's color cost
+function Auxiliary.AddColorCost(c,...)
+	if c.specified_cost==nil then
+		local mt=getmetatable(c)
+		mt.specified_cost={}
+		for _,cost in ipairs{...} do
+			table.insert(mt.specified_cost,cost)
+		end
+	else
+		for _,cost in ipairs{...} do
+			table.insert(c.specified_cost,cost)
+		end
+	end
+end
+--register a card's combo cost
+--required for Card.IsComboCost, Card.GetComboCost
+function Auxiliary.AddComboCost(c,cost)
+	if c.combo_cost==nil then
+		local mt=getmetatable(c)
+		mt.combo_cost=cost
+	end
+end
 --register a card's character(s)
 --required for Card.IsCharacter, Card.GetCharacter
 function Auxiliary.AddCharacter(c,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	if c.character==nil then
 		local mt=getmetatable(c)
 		mt.character={}
@@ -159,7 +180,6 @@ end
 --register a card's special trait(s)
 --required for Card.IsSpecialTrait, Card.GetSpecialTrait
 function Auxiliary.AddSpecialTrait(c,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	if c.special_trait==nil then
 		local mt=getmetatable(c)
 		mt.special_trait={}
@@ -175,7 +195,6 @@ end
 --register a card's era
 --reserved (Card.IsEra, Card.GetEra)
 function Auxiliary.AddEra(c,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	if c.era==nil then
 		local mt=getmetatable(c)
 		mt.era={}
@@ -191,7 +210,6 @@ end
 --register the name(s) that is part of a card's character, special trait, or card name
 --required for Card.IsSetCard, Card.IsCharacterSetCard, Card.IsSpecialTraitSetCard
 function Auxiliary.AddCategory(c,...)
-	if c:IsStatus(STATUS_COPYING_EFFECT) then return end
 	if c.category==nil then
 		local mt=getmetatable(c)
 		mt.category={}

@@ -1,6 +1,8 @@
 --BT5-093 Frieza, Biding His Time
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --tap
 function scard.tapfilter(c)
 	return c:IsEnergyBelow(2) and c:IsAbleToSwitchToRest()

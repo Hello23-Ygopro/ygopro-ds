@@ -1,6 +1,7 @@
 --EX02-02 Masked Saiyan, the Mysterious Warrior
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MASKED_SAIYAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -14,7 +15,6 @@ function scard.initial_effect(c)
 	--warp
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=1
 --warp
 function scard.warpfilter(c)
 	return not c:IsHasEffect(EFFECT_BLOCKER) and c:IsAbleToWarp()

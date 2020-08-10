@@ -1,6 +1,7 @@
 --EX02-01 Time Patrol Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --to hand
 scard.tg1=aux.TargetDecktopTarget(Card.IsAbleToHand,2,0,1,HINTMSG_ATOHAND)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

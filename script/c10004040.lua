@@ -1,6 +1,8 @@
 --BT4-036 Colossal Malice Hirudegarn
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,6)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_HIRUDEGARN)
 	aux.AddSpecialTrait(c,TRAIT_PHANTOM_DEMON)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--warp, negate attack, gain skill
 	aux.AddAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,scard.op2,nil,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,6}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_HIRUDEGARN) and c:IsEnergyAbove(7)

@@ -1,6 +1,8 @@
 --BT3-077 Evil Psyche, Zamasu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ZAMASU)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -17,5 +19,3 @@ function scard.initial_effect(c)
 	--1 copy in battle area
 	aux.AddPermanentOneCopyBattleArea(c)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0

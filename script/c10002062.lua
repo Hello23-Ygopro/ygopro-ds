@@ -1,6 +1,8 @@
 --BT2-056 Zamasu, The Alert God
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_ZAMASU)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--negate attack
 	aux.AddAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --negate attack
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()

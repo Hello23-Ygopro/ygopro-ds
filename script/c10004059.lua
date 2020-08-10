@@ -1,6 +1,8 @@
 --BT4-052 Gift of Power Guru
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GURU)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),LOCATION_BATTLE,0,1,1,HINTMSG_TARGET)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

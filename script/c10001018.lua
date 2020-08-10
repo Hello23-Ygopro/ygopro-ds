@@ -1,6 +1,8 @@
 --BT1-015 Terror Assault Frost
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FROST)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--ko, damage
 	aux.AddSingleAutoSkill(c,0,EVENT_DAMAGE_STEP_END,scard.tg1,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --ko, damage
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttackTarget()

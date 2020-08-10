@@ -1,6 +1,8 @@
 --BT4-051 Reign of Terror King Piccolo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_KING_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
 	aux.AddEra(c,ERA_KING_PICCOLO_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--untap, play
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --untap, play
 function scard.playfilter(c,e,tp)
 	return c:IsCharacter(CHARACTER_PICCOLO,CHARACTER_PICCOLO_JR) and c:IsEnergyBelow(4)

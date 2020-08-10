@@ -1,6 +1,8 @@
 --TB1-011 Bold Super Saiyan 2 Caulifla
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CAULIFLA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsSpecialTrait(TRAIT_UNIVERSE_6)

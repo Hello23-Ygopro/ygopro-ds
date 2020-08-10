@@ -1,6 +1,8 @@
 --SD4-05 Namekian Bond Saonel
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SAONEL)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	aux.EnableBond(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.BondCondition(3,Card.IsSpecialTrait,TRAIT_NAMEKIAN))
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --bond (draw, to hand, ko)
 function scard.thfilter(c,e)
 	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)

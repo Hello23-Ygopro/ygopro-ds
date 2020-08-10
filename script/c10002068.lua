@@ -1,6 +1,8 @@
 --BT2-061 Universe 10 Supreme Kai Gowasu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GOWASU)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsSpecialTrait(TRAIT_GOD) and c:IsAbleToHand()

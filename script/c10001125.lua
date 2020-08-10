@@ -1,12 +1,12 @@
 --BT1-110 Crusher Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--tap
 	aux.AddCounterPlaySkill(c,0,scard.op1,nil,scard.tg1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --tap
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(aux.BattleAreaFilter(Card.IsActive),nil)

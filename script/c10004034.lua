@@ -1,6 +1,8 @@
 --BT4-030 At All Costs Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --draw, untap
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

@@ -1,6 +1,7 @@
 --BT3-105 Planet Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddSingleAutoSkill(c,1,EVENT_CUSTOM+EVENT_MOVE_EXTRA_CARD,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_FIELD)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --untap
 function scard.untfilter(c)
 	return c:IsSpecialTrait(TRAIT_GREAT_APE) and c:IsAbleToSwitchToActive()

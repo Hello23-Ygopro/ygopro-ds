@@ -1,6 +1,7 @@
 --BT4-101 Absolute Space SS3 Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--draw, untap, warp
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.combo_cost=1
 --draw, untap, warp
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

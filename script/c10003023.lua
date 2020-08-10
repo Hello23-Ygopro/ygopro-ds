@@ -1,6 +1,8 @@
 --BT3-022 Commander Nezi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_NEZI)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --union-absorb
 function scard.costfilter(c,charname)
 	return c:IsCharacter(charname) and (aux.HandFilter(nil) or aux.BattleAreaFilter(nil))

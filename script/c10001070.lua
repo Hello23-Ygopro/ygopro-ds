@@ -1,6 +1,8 @@
 --BT1-060 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
@@ -8,6 +10,4 @@ function scard.initial_effect(c)
 	--battle card
 	aux.EnableBattleAttribute(c)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 scard.card_code=CARD_SON_GOKU

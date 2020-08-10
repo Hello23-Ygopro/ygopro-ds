@@ -1,6 +1,7 @@
 --BT5-077 Hidden Feelings
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--add special trait
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
 --untap
 function scard.untfilter(c)
 	return c:IsSpecialTrait(TRAIT_ANDROID) and c:IsEnergyBelow(3) and c:IsAbleToSwitchToActive()

@@ -1,12 +1,12 @@
 --BT2-032 Piccolo's Help
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
 --play
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroupCount(aux.HandFilter(nil),tp,LOCATION_HAND,0,e:GetHandler())<=3

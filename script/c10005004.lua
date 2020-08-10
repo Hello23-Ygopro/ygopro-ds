@@ -1,6 +1,8 @@
 --BT5-003 Oblivious Rampage Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,aux.SelfSwitchtoActiveOperation,aux.MergeCost(aux.BurstCost(3),scard.cost1),nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --evolve
 function scard.evofilter(c)
 	return aux.IsCode(c,CARD_SON_GOKU) and c:IsColor(COLOR_RED) and c:IsEnergy(1)

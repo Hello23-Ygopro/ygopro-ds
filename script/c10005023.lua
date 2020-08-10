@@ -1,6 +1,8 @@
 --BT5-021 Baba, Champions' Leader
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FORTUNETELLER_BABA)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FORTUNETELLER_BABA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (drop), play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --search (drop), play
 function scard.dropfilter(c)
 	return c:IsCharacter(CHARACTER_BANDAGES,CHARACTER_SPIKE,CHARACTER_SON_GOHAN) and c:IsAbleToDrop()

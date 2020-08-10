@@ -1,6 +1,7 @@
 --P-083 Dangerous Journey Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -9,7 +10,6 @@ function scard.initial_effect(c)
 	--to deck, draw
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=0
 --to deck, draw
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_SHENRON)
 function scard.tdfilter(c)

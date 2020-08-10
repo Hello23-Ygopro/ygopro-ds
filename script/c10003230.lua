@@ -1,12 +1,12 @@
 --TB1-071 Maiden Transformation
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsSpecialTrait(TRAIT_MAIDEN_SQUADRON) and c:IsEnergyBelow(4) and c:IsCanBePlayed(e,0,tp,false,false)

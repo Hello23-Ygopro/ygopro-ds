@@ -1,6 +1,8 @@
 --BT2-046 Beerus, Essence of Destruction
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BEERUS)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--to deck, return
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --to deck, return
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local f=aux.HandFilter(Card.IsAbleToDeck)

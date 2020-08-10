@@ -1,6 +1,8 @@
 --P-079 Hypertraining SS Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --search (play)
 scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_GREEN,1,0),aux.SelfDropCost)
 function scard.playfilter1(c,e,tp)

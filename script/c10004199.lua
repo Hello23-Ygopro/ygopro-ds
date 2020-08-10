@@ -1,6 +1,8 @@
 --TB2-005 Supreme Showdown Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --drop, gain skill
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_WORLD_TOURNAMENT)
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

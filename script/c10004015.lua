@@ -1,6 +1,8 @@
 --BT4-013 Dependable Mom Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA_GT)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfSwitchtoRestCost,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --draw, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)

@@ -1,6 +1,8 @@
 --TB2-061 Stenchful Bacterian
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BACTERIAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to hand, tap, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --to hand, tap, gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,1,HINTMSG_ATOHAND)
 function scard.tapfilter(c,e)

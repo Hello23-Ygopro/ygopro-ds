@@ -1,6 +1,7 @@
 --BT5-076 Unthinkable Fate
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--add special trait
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --play
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_SHENRON)

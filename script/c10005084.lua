@@ -1,6 +1,8 @@
 --BT5-070 Android 20, Vile Creator
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_ANDROID_20)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.TurnPlayerCondition(PLAYER_SELF))
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=1
 --gain skill
 function scard.skfilter(c)
 	return Duel.GetAttacker()==c and c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_ANDROID)

@@ -1,6 +1,8 @@
 --BT1-086 Golden Frieza, Resurrected Terror
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop, tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=1
 --drop, tap
 function scard.dropfilter(c)
 	return c:IsRest() and c:IsAbleToDrop()

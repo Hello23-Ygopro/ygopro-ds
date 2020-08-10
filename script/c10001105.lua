@@ -1,6 +1,8 @@
 --BT1-090 Mecha-Frieza, The Returning Terror
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--drop, ko, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --drop, ko, gain skill
 function scard.kofilter(c,e)
 	return c:IsRest() and c:IsCanBeEffectTarget(e)

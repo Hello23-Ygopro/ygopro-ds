@@ -1,6 +1,8 @@
 --P-024 Powerful Bond Ginyu Force
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GINYU_FORCE)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con2)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --gain skill
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,sid)==0

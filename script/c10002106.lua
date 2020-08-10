@@ -1,6 +1,8 @@
 --BT2-095 Hidden Awakening Kale
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_KALE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--draw
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT),nil,aux.HandEqualBelowCondition(PLAYER_SELF,5))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --ko
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),LOCATION_BATTLE,0,1,1,HINTMSG_KO)
 function scard.kofilter(c,e,cost)

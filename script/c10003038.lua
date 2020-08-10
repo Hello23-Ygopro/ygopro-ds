@@ -1,6 +1,8 @@
 --BT3-034 Ultimate Spirit Bomb Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--combo
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_SON_GOKU) and c:IsEnergyAbove(5)

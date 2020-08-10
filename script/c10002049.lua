@@ -1,6 +1,8 @@
 --BT2-043 Trunks, Creator of the Future
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfSendtoDeckCost(SEQ_DECK_BOTTOM),scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_SON_GOKU,CHARACTER_VEGETA)

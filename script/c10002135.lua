@@ -1,12 +1,12 @@
 --BT2-120 Darkness Eye Beam
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--tap
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
 --tap
 function scard.tapfilter(c,e)
 	return c:IsAbleToSwitchToRest() and c:IsCanBeEffectTarget(e)

@@ -1,6 +1,7 @@
 --SD7-04 Shenron, Figure of Majesty
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SHENRON)
 	aux.AddSpecialTrait(c,TRAIT_SHENRON)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET,aux.SparkingCondition(5))
 	e1:SetCountLimit(1)
 end
-scard.combo_cost=0
 --sparking (draw, choose one - untap or play or gain skill)
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

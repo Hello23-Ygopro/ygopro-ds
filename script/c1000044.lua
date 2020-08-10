@@ -1,6 +1,8 @@
 --P-040 Piccolo, The Strategist
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_GOD)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--ko
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=0
 --ko
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(sid)==0

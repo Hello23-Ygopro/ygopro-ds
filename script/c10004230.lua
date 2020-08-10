@@ -1,6 +1,8 @@
 --TB2-032 Awkward Situation Otokosuki
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_OTOKOSUKI)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--free play
 	aux.AddPermanentFreePlay(c,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --free play
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

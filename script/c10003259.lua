@@ -1,6 +1,8 @@
 --TB1-097 Son Goku, The Awakened Power
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -18,8 +20,6 @@ function scard.initial_effect(c)
 	--cannot negate skill
 	aux.AddSinglePermanentSkill(c,EFFECT_CANNOT_DISEFFECT)
 end
-scard.specified_cost={COLOR_GREEN,4}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_7) and c:IsCharacter(CHARACTER_SON_GOKU) and c:IsEnergyAbove(6)

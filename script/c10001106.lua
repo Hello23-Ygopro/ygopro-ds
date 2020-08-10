@@ -1,6 +1,8 @@
 --BT1-091 King Cold, Father of the Emperor
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_KING_COLD)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=1
 --play, change attack target
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

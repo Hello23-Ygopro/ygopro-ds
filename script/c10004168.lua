@@ -1,6 +1,8 @@
 --EX03-15 Vile Replication Cell
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CELL)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--draw, token
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_ANDROID))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --draw, token
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,2,REASON_EFFECT)

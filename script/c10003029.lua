@@ -1,12 +1,12 @@
 --BT3-028 Grand Tour Spaceship
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsCharacter(CHARACTER_SON_GOKU_GT,CHARACTER_TRUNKS_GT,CHARACTER_PAN,CHARACTER_GIRU)

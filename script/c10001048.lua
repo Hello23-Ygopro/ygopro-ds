@@ -1,6 +1,8 @@
 --BT1-041 Beerus, General of Demolition
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BEERUS)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfAttackTargetCondition(Card.IsLeader))
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --drop
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.HandFilter(Card.IsAbleToDrop),tp,0,LOCATION_HAND,nil)

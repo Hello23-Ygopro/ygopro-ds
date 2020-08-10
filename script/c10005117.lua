@@ -1,6 +1,8 @@
 --BT5-099 Vicious Lackey Tagoma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TAGOMA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfPreviousLocationCondition(LOCATION_HAND))
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c,e)
 	return c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_DESIRE)

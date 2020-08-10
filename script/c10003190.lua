@@ -1,6 +1,8 @@
 --TB1-034 Universe 9 Supreme Kai Roh
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ROH)
 	aux.AddSpecialTrait(c,TRAIT_GOD,TRAIT_UNIVERSE_9)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--charge
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --charge
 function scard.tefilter(c,e)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_9) and c:IsAbleToEnergy() and c:IsCanBeEffectTarget(e)

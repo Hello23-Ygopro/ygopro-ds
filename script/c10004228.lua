@@ -1,6 +1,8 @@
 --TB2-030 Test of Strength Uub
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_UUB)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --to deck
 scard.con1=aux.ExistingCardCondition(aux.BattleAreaFilter(Card.IsCode,CARD_TEST_OF_STRENGTH_SON_GOKU),LOCATION_BATTLE)
 function scard.tdfilter(c)

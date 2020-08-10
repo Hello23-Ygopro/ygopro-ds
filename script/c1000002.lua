@@ -1,6 +1,8 @@
 --P-002 Proud Spark Vados
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_VADOS)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --gain skill
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local a=Duel.GetAttacker()

@@ -1,6 +1,8 @@
 --TB1-039 Iron Skin Battler Chappil
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CHAPPIL)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_9)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--to hand, to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --to hand, to deck
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_UNIVERSE_9)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,1,HINTMSG_ATOHAND)

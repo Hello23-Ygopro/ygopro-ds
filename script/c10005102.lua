@@ -1,6 +1,8 @@
 --BT5-085 Krillin, Raring to Fight
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_KRILLIN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --tap
 scard.con1=aux.SelfPreviousLocationCondition(LOCATION_BATTLE)
 function scard.tapfilter(c)

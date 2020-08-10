@@ -1,6 +1,8 @@
 --BT2-014 Ghost Attack Super Saiyan 3 Gotenks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GOTENKS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--token
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=1
 --gain skill
 function scard.tg1(e,c)
 	return c==e:GetHandler() or c:IsCode(CARD_BT2014_GHOST_TOKEN)

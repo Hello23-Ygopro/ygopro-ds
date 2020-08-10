@@ -1,6 +1,8 @@
 --TB1-019 Frost, The Tactician
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FROST)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c)
 	return c:IsCharacter(CHARACTER_FROST) and c:IsPowerBelow(20000) and c:IsAbleToHand()

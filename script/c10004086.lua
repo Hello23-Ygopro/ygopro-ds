@@ -1,6 +1,8 @@
 --BT4-076 Abrupt Breakthrough Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -19,8 +21,6 @@ function scard.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetRange(LOCATION_HAND)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --play
 function scard.cfilter1(c,tp)
 	return c:IsPreviousPosition(POS_FACEUP) and c:IsSpecialTrait(TRAIT_GOKUS_LINEAGE) and c:GetPreviousEnergyInPlay()>=5

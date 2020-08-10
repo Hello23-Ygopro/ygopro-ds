@@ -1,6 +1,7 @@
 --BT5-106 Adventurous Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -10,7 +11,6 @@ function scard.initial_effect(c)
 	--search (drop), gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.combo_cost=0
 --search (drop), gain skill
 function scard.dropfilter(c)
 	return c:IsHasEffect(EFFECT_DRAGON_BALL) and c:IsAbleToDrop()

@@ -1,6 +1,8 @@
 --BT4-003_SPR Triple Flash SS4 Son Goku (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -18,8 +20,6 @@ function scard.initial_effect(c)
 	--cannot activate (counter)
 	aux.AddPermanentPlayerCannotActivate(c,aux.CannotActivateKeySkillValue(CATEGORY_COUNTER),scard.con1,0,1)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_SON_GOKU_GT) and c:IsEnergyAbove(5)

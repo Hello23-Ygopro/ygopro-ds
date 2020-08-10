@@ -1,6 +1,7 @@
 --BT3-109 SS3 Bardock, Power Unleashed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BARDOCK_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--drop, warp
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=1
 --drop, warp
 scard.con1=aux.AND(aux.EvolvePlayCondition,aux.SelfLeaderCondition(Card.IsColor,COLOR_BLACK))
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

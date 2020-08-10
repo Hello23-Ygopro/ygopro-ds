@@ -1,6 +1,7 @@
 --BT5-051 Call of Justice
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--add special trait
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_BLUE,1}
 --untap
 function scard.lfilter(c)
 	return c:IsColor(COLOR_BLUE) and c:IsSpecialTrait(TRAIT_SHENRON)

@@ -1,6 +1,8 @@
 --BT3-019 General Evolved, Hyper Meta-Rilldo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GENERAL_RILLDO)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--ko
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=1
 --gain skill
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

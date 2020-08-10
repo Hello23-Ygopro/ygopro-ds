@@ -1,6 +1,7 @@
 --BT5-023 Afterimage Technique
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--sparking
 	aux.EnableSparking(c)
 end
-scard.specified_cost={COLOR_RED,1}
 --gain skill
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_RED)
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)

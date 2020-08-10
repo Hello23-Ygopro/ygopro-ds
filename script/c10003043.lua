@@ -1,6 +1,8 @@
 --BT3-039 Majin Defier, West Supreme Kai
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_WEST_SUPREME_KAI)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -16,5 +18,3 @@ function scard.initial_effect(c)
 	e1:SetRange(LOCATION_BATTLE)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0

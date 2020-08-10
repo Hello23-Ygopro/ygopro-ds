@@ -1,6 +1,7 @@
 --EX03-30 Toppo Unleashed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOPPO)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_PRIDE_TROOPERS,TRAIT_UNIVERSE_11)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,7 +17,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,scard.con1)
 end
-scard.combo_cost=0
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_TOPPO) and c:IsEnergyAbove(4)

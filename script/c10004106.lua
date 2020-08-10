@@ -1,12 +1,12 @@
 --BT4-096 10x Kamehameha
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,nil,nil,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --gain skill
 function scard.lfilter(c)
 	return c:IsSpecialTrait(TRAIT_GOKUS_LINEAGE) and c:IsCharacterSetCard(CHAR_CATEGORY_SON_GOKU)

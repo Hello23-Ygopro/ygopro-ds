@@ -1,6 +1,8 @@
 --EX03-23 Frieza, Obsession of The Clan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--drop, negate attack
 	aux.AddAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --drop, negate attack
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()

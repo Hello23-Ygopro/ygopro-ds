@@ -1,6 +1,8 @@
 --BT5-060 Spirited Search SS Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--search (drop)
 	aux.AddSingleAutoSkill(c,1,EVENT_PLAY,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET,aux.LifeEqualAboveCondition(PLAYER_SELF,5))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsColor(COLOR_GREEN+COLOR_BLACK) and c:IsSpecialTrait(TRAIT_DESIRE) and c:IsAbleToHand()

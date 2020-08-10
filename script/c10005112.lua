@@ -1,6 +1,8 @@
 --BT5-094 Frieza, Revenge in Motion
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--draw, search (drop)
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --draw, search (drop)
 function scard.dropfilter(c,e)
 	return c:IsCharacter(CHARACTER_FRIEZA) and c:IsEnergyBelow(4) and c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)

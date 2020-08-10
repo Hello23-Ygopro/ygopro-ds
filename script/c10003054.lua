@@ -1,6 +1,8 @@
 --BT3-050 Majin Buu, Dawn of the Rampage
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -17,8 +19,6 @@ function scard.initial_effect(c)
 	e1:SetOperation(scard.op1)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --union-absorb
 scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_COLORLESS,0,2),aux.AbsorbCost(aux.HandFilter(Card.IsBattle),LOCATION_HAND,0,0,1))
 --gain skill

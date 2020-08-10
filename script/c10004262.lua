@@ -1,6 +1,8 @@
 --TB2-058_SPR Unyielding Victory Jackie Chun (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_JACKIE_CHUN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--ko, untap
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --ko, untap
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==tp

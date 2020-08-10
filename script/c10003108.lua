@@ -1,6 +1,8 @@
 --BT3-098 Hidden Power Great Ape Fasha
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FASHA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
 	aux.AddEra(c,ERA_BARDOCK_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,1,EVENT_PLAY,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=1
 --evolve
 scard.con1=aux.TurnPlayerCondition(PLAYER_SELF)
 function scard.evofilter(c,e)

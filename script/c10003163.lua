@@ -1,6 +1,8 @@
 --TB1-010 Impeccable Super Saiyan Cabba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CABBA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsSpecialTrait(TRAIT_SAIYAN)

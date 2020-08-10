@@ -1,12 +1,12 @@
 --TB1-024 Time Kicker
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, warp, gain skill
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
 --negate attack, warp, gain skill
 function scard.warpfilter(c,e)
 	return c:IsAbleToWarp() and c:IsCanBeEffectTarget(e)

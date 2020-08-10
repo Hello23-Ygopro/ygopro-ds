@@ -1,6 +1,8 @@
 --BT3-036 Final Explosion Prince of Destruction Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--to deck, ko
 	aux.AddSingleAutoSkill(c,0,EVENT_DAMAGE_STEP_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfAttackerCondition)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --to deck, ko
 function scard.kofilter(c,e,cost)
 	return c:IsEnergyAbove(0) and c:IsEnergyBelow(cost) and c:IsCanBeEffectTarget(e)

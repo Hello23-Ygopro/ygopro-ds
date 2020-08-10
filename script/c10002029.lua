@@ -1,6 +1,8 @@
 --BT2-026 Prodigy Absorption Majin Buu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--cannot be ko-ed
 	aux.AddPermanentCannotBeKOed(c,EFFECT_CANNOT_BE_KOED,nil,scard.indcon)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --cannot be ko-ed
 function scard.indcon(e)
 	local g=e:GetHandler():GetAbsorbedGroup()

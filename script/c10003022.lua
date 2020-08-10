@@ -1,6 +1,8 @@
 --BT3-021 Triple Union Super Sigma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SUPER_SIGMA)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=0
 --draw, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,2,REASON_EFFECT)

@@ -1,6 +1,8 @@
 --BT4-085 Prodigal Dynasty Son Goten
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOTEN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --gain skill
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttackTarget()

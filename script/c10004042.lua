@@ -1,6 +1,8 @@
 --BT4-038 Hirudegarn, the Wanderer
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_HIRUDEGARN)
 	aux.AddSpecialTrait(c,TRAIT_PHANTOM_DEMON)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,1,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --play
 function scard.costfilter(c)
 	return c:IsCharacter(CHARACTER_TAPION) and c:IsAbleToWarp()

@@ -1,6 +1,8 @@
 --BT4-090 Caring Mother Videl
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VIDEL)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfSwitchtoRestCost,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --draw, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)

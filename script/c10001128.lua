@@ -1,6 +1,8 @@
 --SD1-02 God Rush Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--return
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --return
 function scard.retfilter(c,e)
 	return c:IsHasEffect(EFFECT_BLOCKER) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)

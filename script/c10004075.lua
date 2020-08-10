@@ -1,12 +1,12 @@
 --BT4-068 Special Beam Cannon
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, drop
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_PICCOLO))
 end
-scard.specified_cost={COLOR_GREEN,1}
 --gain skill, drop
 function scard.dropfilter(c,e)
 	return c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)

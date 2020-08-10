@@ -1,6 +1,8 @@
 --TB1-078 Coldhearted Strike Frieza
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--drop, tap, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --drop, tap, gain skill
 function scard.dropfilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_7) and c:IsAbleToDrop()

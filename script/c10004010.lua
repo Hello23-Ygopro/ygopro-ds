@@ -1,6 +1,8 @@
 --BT4-008 Charging Up Son Goten
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOTEN_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--drop, untap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --drop, untap
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.HandFilter(Card.IsAbleToDrop),LOCATION_HAND,0,0,1,HINTMSG_DROP)
 function scard.untfilter(c,e)

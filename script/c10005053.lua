@@ -1,6 +1,8 @@
 --BT5-046 Saike Demon, Rockin' Out
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SAIKE_DEMON)
 	aux.AddSpecialTrait(c,TRAIT_DEMON)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--choose one (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --choose one (to hand)
 function scard.thfilter(c,e)
 	return c:IsCharacter(CHARACTER_JANEMBA) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)

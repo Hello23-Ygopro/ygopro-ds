@@ -1,6 +1,8 @@
 --TB2-039 Destined Conclusion Piccolo Jr.
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_PICCOLO_JR)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--ko, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ko, gain skill
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

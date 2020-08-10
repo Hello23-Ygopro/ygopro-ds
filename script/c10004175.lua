@@ -1,6 +1,8 @@
 --EX03-21 Space Pirate Chilled
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CHILLED)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_CHILLED_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--drop, draw, token
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN))
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --drop, draw, token
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendDecktoptoDropUpTo(tp,3,REASON_EFFECT)

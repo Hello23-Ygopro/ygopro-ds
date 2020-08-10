@@ -1,6 +1,8 @@
 --BT2-006 Miraculous Comeback Ultimate Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--damage
 	aux.AddSingleAutoSkill(c,0,EVENT_BATTLE_KOING,nil,aux.DuelOperation(Duel.Damage,PLAYER_OPPO,2,REASON_EFFECT),nil,aux.bdocon)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --reduce energy cost
 function scard.con1(e)
 	return Duel.GetMatchingGroupCount(aux.HandFilter(nil),e:GetHandlerPlayer(),LOCATION_HAND,0,e:GetHandler())<=3

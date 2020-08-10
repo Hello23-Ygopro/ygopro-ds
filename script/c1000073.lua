@@ -1,6 +1,8 @@
 --P-065 Vegito, Super Warrior Reborn
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGITO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--evolve
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=0
 --union-potara
 scard.unipfilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_SON_GOKU)
 scard.unipfilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_VEGETA)

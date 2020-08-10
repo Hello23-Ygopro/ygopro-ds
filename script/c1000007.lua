@@ -1,6 +1,8 @@
 --P-007 Forceful Strike Cell
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CELL)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=1
 --drop
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

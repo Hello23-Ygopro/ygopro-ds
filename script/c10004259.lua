@@ -1,6 +1,8 @@
 --TB2-056 Toughened Up Chiaotzu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CHIAOTZU)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,scard.con1)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --draw
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local g=eg:Filter(aux.BattleAreaFilter(Card.IsControler),e:GetHandler(),tp)

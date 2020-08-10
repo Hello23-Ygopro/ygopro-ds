@@ -1,6 +1,8 @@
 --TB2-002_SPR Supreme Showdown Son Goku (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e1:SetRange(LOCATION_HAND)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --play
 function scard.cfilter(c,tp)
 	return c:IsBattle() and c:GetPreviousControler()==tp

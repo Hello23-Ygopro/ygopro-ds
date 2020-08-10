@@ -1,6 +1,7 @@
 --BT4-119 Tokitoki, Time Creator
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOKITOKI)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.combo_cost=0
 --to deck
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsColor(COLOR_BLACK) and c:IsPower(3000) and c:IsCanBePlayed(e,0,tp,false,false)

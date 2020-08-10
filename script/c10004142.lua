@@ -1,6 +1,8 @@
 --SD4-03 Indomitable Link Piccolo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_GOD,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c)
 	return c:IsCharacter(CHARACTER_SON_GOHAN_ADOLESCENCE) and c:IsEnergyBelow(3) and c:IsAbleToHand()

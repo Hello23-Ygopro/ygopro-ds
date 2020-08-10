@@ -1,6 +1,8 @@
 --BT3-070 Dawn of Terror, Android 13
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ANDROID_13)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_13_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--ko
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --union-absorb
 function scard.uniafilter(c)
 	return c:IsCharacter(CHARACTER_ANDROID_13) and c:IsEnergy(7)

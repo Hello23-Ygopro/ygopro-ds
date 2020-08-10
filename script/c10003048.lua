@@ -1,6 +1,8 @@
 --BT3-044 Thinks He's the Best Hercule
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_HERCULE)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to deck, charge
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --to deck, charge
 scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_MAJIN_BUU)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.EnergyAreaFilter(Card.IsAbleToDeck),LOCATION_ENERGY,0,2,2,HINTMSG_TODECK)

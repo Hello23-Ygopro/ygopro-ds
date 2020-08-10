@@ -1,6 +1,8 @@
 --P-064 Trunks, Hope at Hand
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg2,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=0
 --reduce skill cost
 function scard.tg1(e,c)
 	return c:IsCharacter(CHARACTER_TRUNKS_FUTURE) and c:IsHasEffect(EFFECT_EVOLVE)

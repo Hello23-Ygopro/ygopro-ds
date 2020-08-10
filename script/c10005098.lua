@@ -1,6 +1,8 @@
 --BT5-082 Fired Up SS Son Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --untap
 function scard.untfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsEnergyAbove(2) and c:IsAbleToSwitchToActive()

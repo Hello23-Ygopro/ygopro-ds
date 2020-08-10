@@ -1,6 +1,8 @@
 --TB1-093 Cyborg Warrior Nigrisshi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_NIGRISSHI)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_3)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --tap
 function scard.tapfilter(c)
 	return c:IsEnergyBelow(4) and c:IsAbleToSwitchToRest()

@@ -1,6 +1,8 @@
 --BT3-075 Terror Scythe Goku Black
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GOKU_BLACK)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--token, search (to hand), drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --token, search (to hand), drop
 function scard.thfilter(c,e)
 	return c:IsCharacter(CHARACTER_ZAMASU) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)

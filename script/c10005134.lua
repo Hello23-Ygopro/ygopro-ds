@@ -1,6 +1,7 @@
 --BT5-113 Deadly Defender Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -14,7 +15,6 @@ function scard.initial_effect(c)
 	--lose power
 	aux.AddPermanentUpdatePower(c,-5000,scard.con1)
 end
-scard.combo_cost=0
 --lose power
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

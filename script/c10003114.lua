@@ -1,12 +1,12 @@
 --BT3-104 Flying Nimbus
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, drop, gain skill
 	aux.AddCounterAttackSkill(c,0,scard.op1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --negate attack, drop, gain skill
 function scard.dropfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsAbleToDrop()

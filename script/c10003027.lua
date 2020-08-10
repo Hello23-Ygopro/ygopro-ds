@@ -1,6 +1,8 @@
 --BT3-026 Pride and Justice Toppo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOPPO)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddSingleAutoSkill(c,1,EVENT_BATTLE_KOING,nil,aux.SelfSwitchtoActiveOperation,nil,aux.bdocon)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --reduce energy cost
 scard.con1=aux.OR(aux.SelfLeaderCondition(Card.IsPowerAbove,15000),aux.OppoLeaderCondition(Card.IsPowerAbove,15000))
 --play, negate attack

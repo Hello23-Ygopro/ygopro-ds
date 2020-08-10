@@ -1,6 +1,7 @@
 --BT5-025 A King's Return to Youth
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--add special trait
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_RED,1}
 --search (to hand)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsSpecialTrait(TRAIT_SHENRON)

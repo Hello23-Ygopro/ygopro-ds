@@ -1,6 +1,8 @@
 --TB2-051_SPR Unyielding Victory Son Goku (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_WORLD_TOURNAMENT)

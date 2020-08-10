@@ -1,6 +1,8 @@
 --BT5-069 Dr. Myuu, Evil Genius
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_DR_MYUU)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (play, gain skill)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EnergyEqualAboveCondition(PLAYER_SELF,4))
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --search (play, gain skill)
 function scard.playfilter(c,e,tp)
 	return aux.IsCode(c,CARD_GENERAL_RILLDO) and c:IsEnergy(3) and c:IsCanBePlayed(e,0,tp,false,false)

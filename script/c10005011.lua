@@ -1,6 +1,8 @@
 --BT5-009_SPR Yamcha, at 100% (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_YAMCHA)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,aux.BurstCost(5),nil,nil,aux.SelfLeaderCondition(scard.lfilter))
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --burst (gain skill)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsSpecialTrait(TRAIT_EARTHLING)

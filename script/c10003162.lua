@@ -1,6 +1,8 @@
 --TB1-009 Dimension Leaper Hit
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_HIT)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfSendtoWarpCost)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

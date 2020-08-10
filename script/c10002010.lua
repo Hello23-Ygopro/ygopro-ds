@@ -1,6 +1,8 @@
 --BT2-008 Leap to The Future Son Goten
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOTEN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_HAND)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -1,6 +1,7 @@
 --BT4-102 Dimension Support Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --search (play)
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsHasNoSkill() and c:IsEnergyBelow(2) and c:IsCanBePlayed(e,0,tp,false,false)

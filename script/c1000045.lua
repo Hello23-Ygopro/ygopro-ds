@@ -1,6 +1,8 @@
 --P-041 Saiyan Teamwork Cabba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CABBA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--to hand or play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --to hand or play
 function scard.thfilter(c)
 	return c:IsCharacter(CHARACTER_CAULIFLA,CHARACTER_KALE) and c:IsAbleToHand()

@@ -1,6 +1,8 @@
 --BT4-019 Saiyan Onslaught Kefla
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_KEFLA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_ALIEN,TRAIT_UNIVERSE_6)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -17,8 +19,6 @@ function scard.initial_effect(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.UnionPotaraPlayCondition)
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --union-potara
 scard.unipfilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_CAULIFLA)
 scard.unipfilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_KALE)

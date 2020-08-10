@@ -1,12 +1,12 @@
 --BT1-051 Result of Training
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, untap
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
 --gain skill, untap
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

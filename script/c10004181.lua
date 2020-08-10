@@ -1,6 +1,7 @@
 --EX03-26 Forced Absorption Demigra
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_DEMIGRA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_GOD)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--combo
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER,scard.con1)
 end
-scard.combo_cost=1
 --combo
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_DEMON_GOD)(e,tp,eg,ep,ev,re,r,rp)

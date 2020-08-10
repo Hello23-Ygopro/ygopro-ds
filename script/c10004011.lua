@@ -1,6 +1,8 @@
 --BT4-009 Power of Friendship Pan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsPowerBelow(15000)

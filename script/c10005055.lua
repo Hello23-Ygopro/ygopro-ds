@@ -1,6 +1,8 @@
 --BT5-047_SPR Infernal Chain Janemba (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,5)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_JANEMBA)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_INCARNATE)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SparkingCondition(10))
 end
-scard.specified_cost={COLOR_BLUE,5}
-scard.combo_cost=1
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	--cannot play

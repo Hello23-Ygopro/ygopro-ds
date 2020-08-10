@@ -1,6 +1,7 @@
 --BT3-111 Trunks, Power Overseeing Time
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsBattle() and c:IsAbleToHand()

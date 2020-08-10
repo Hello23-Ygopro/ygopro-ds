@@ -1,6 +1,7 @@
 --P-075 Black Masked Saiyan, Splintering Mind
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MASKED_SAIYAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=0
 --warp
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToWarp),0,LOCATION_BATTLE,0,1,HINTMSG_WARP)
 scard.op1=aux.TargetCardsOperation(Duel.SendtoWarp,REASON_EFFECT)

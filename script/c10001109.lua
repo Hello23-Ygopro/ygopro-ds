@@ -1,6 +1,8 @@
 --BT1-094 Shisami, The Loyal Warrior
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SHISAMI)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,2,HINTMSG_TARGET)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

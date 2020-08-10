@@ -1,6 +1,8 @@
 --TB1-059 Maiden Squadron Rozie
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ROZIE)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_MAIDEN_SQUADRON,TRAIT_UNIVERSE_2)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,nil,aux.SelfSwitchtoActiveOperation,nil,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --untap
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

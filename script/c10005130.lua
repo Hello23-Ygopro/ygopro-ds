@@ -1,6 +1,7 @@
 --BT5-110_SPR Shenron, the Wishgranter (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SHENRON)
 	aux.AddSpecialTrait(c,TRAIT_SHENRON)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.SparkingCondition(7))
 end
-scard.combo_cost=1
 --sparking (draw, choose one)
 function scard.untfilter(c,e)
 	return c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

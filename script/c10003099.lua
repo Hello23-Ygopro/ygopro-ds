@@ -1,6 +1,8 @@
 --BT3-089 Rampaging Great Ape Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
 	aux.AddEra(c,ERA_YOUNG_SON_GOKU_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=1
 --gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.EnergyAreaFilter(Card.IsRest),0,LOCATION_ENERGY,0,1,HINTMSG_TARGET)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

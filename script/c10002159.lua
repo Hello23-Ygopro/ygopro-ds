@@ -1,6 +1,7 @@
 --EX02-05 Mira, From the Darkness
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MIRA)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

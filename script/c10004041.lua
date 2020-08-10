@@ -1,6 +1,8 @@
 --BT4-037 Impenetrable Defense Hirudegarn
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_HIRUDEGARN)
 	aux.AddSpecialTrait(c,TRAIT_PHANTOM_DEMON)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--warp, gain skill
 	aux.AddAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,4}
-scard.combo_cost=1
 --warp, gain skill
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetAttacker()

@@ -1,6 +1,8 @@
 --BT5-034 Deadly Defender Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--lose power
 	aux.AddPermanentUpdatePower(c,-5000,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --lose power
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

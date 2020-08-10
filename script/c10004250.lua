@@ -1,12 +1,12 @@
 --TB2-049 Feet Kamehameha
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,scard.tg1,nil,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_GREEN,1}
 --gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsCharacter(CHARACTER_SON_GOKU)

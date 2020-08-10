@@ -1,6 +1,8 @@
 --BT2-106 Awakening Core Meta-Cooler
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_META_COOLER)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_META_COOLER_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.EnableDoubleStrike(c,nil,LOCATION_BATTLE,0,scard.tg2)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --ignore awaken condition
 scard.con1=aux.LifeEqualBelowCondition(PLAYER_OPPO,4)
 function scard.tg1(e,c)

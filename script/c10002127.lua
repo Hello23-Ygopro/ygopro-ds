@@ -1,6 +1,8 @@
 --BT2-112 Chilled, Army General
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CHILLED)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_CHILLED_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --gain skill
 scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_BT2102_CHILLEDS_ARMY_TOKEN),LOCATION_BATTLE,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

@@ -1,6 +1,8 @@
 --BT3-046 Magician's Father, Bibidi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_EVIL_WIZARD_BIBIDI)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_WIZARD)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --search (play)
 function scard.playfilter(c,e,tp)
 	return c:IsCode(CARD_OUT_OF_CONTROL_EVIL_MAJIN_BUU) and c:IsCanBePlayed(e,0,tp,false,false)

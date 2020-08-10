@@ -1,6 +1,8 @@
 --BT1-074 Rampaging Lifeform Bio-Broly
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BROLY)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_BIO_WARRIOR)
 	aux.AddEra(c,ERA_BROLY_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --drop
 scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToDrop),0,LOCATION_HAND,2,2,HINTMSG_DROP)
 scard.op1=aux.TargetCardsOperation(Duel.SendtoDrop,REASON_EFFECT)

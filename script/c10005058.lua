@@ -1,6 +1,7 @@
 --BT5-050 Dimension Magic
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, untap
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--sparking
 	aux.EnableSparking(c)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --negate attack, untap
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_BLUE)
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)

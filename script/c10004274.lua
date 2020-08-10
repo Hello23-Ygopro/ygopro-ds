@@ -1,6 +1,8 @@
 --TB2-069 Son Goku & Uub, Seeds of the Future
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU,CHARACTER_UUB)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -18,8 +20,6 @@ function scard.initial_effect(c)
 	--to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --reduce energy cost
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local tp=e:GetHandlerPlayer()

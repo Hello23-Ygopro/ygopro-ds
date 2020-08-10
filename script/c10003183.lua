@@ -1,6 +1,8 @@
 --TB1-028 Results of Training Son Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --evolve
 function scard.evofilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_7) and c:IsCharacter(CHARACTER_SON_GOHAN_ADOLESCENCE)

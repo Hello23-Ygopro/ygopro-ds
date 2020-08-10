@@ -1,6 +1,8 @@
 --EX01-07 Psyched Up Gotenks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GOTENKS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--draw, ko
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --union-fusion
 scard.uniffilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_SON_GOTEN)
 scard.uniffilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_TRUNKS_YOUTH)

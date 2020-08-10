@@ -1,6 +1,8 @@
 --BT3-088_SPR Explosive Spirit Son Goku (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_YOUNG_SON_GOKU_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddAutoSkill(c,1,EVENT_PHASE+PHASE_END,nil,aux.SelfSwitchtoActiveOperation,nil,aux.AND(aux.TurnPlayerCondition(PLAYER_SELF),aux.SelfRestCondition))
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --ko
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsRest),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

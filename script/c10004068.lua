@@ -1,6 +1,8 @@
 --BT4-061 Lord Slug, Returned to Form
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_LORD_SLUG)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_SLUGS_ARMY)
 	aux.AddEra(c,ERA_LORD_SLUG_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (to hand)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --search (to hand)
 function scard.thfilter(c)
 	return c:IsSpecialTrait(TRAIT_SLUGS_ARMY) and c:IsEnergyBelow(4) and c:IsAbleToHand()

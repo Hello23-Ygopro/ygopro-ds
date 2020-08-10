@@ -1,6 +1,7 @@
 --BT3-118 Fu, Shrouded in Mystery
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FU)
 	aux.AddSpecialTrait(c,TRAIT_SCIENTIST)
 	aux.AddEra(c,ERA_UNKNOWN)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=1
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	--cannot activate

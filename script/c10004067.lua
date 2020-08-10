@@ -1,6 +1,8 @@
 --BT4-060 Lord Slug, Young Again
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_LORD_SLUG)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_SLUGS_ARMY)
 	aux.AddEra(c,ERA_LORD_SLUG_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	aux.EnableBond(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --bond (play, untap)
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return aux.BondCondition(2,Card.IsSpecialTrait,TRAIT_SLUGS_ARMY)(e,tp,eg,ep,ev,re,r,rp)

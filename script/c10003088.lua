@@ -1,12 +1,12 @@
 --BT3-081 Speedy Surprise Attack
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, drop, ko
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --negate attack, drop, ko
 function scard.kofilter(c,e)
 	return c:IsEnergyBelow(3) and c:IsCanBeEffectTarget(e)

@@ -1,6 +1,8 @@
 --BT4-077 Indomitable Dynasty SS Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -12,5 +14,3 @@ function scard.initial_effect(c)
 	--barrier
 	aux.EnableBarrier(c)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0

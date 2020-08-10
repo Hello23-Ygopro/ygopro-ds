@@ -1,12 +1,12 @@
 --BT3-052 The Most Evil Absorption in History
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--absorb
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_MAJIN_BUU))
 end
-scard.specified_cost={COLOR_BLUE,2}
 --absorb
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

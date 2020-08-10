@@ -1,6 +1,7 @@
 --BT1-081 Broly's Ring
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -14,7 +15,6 @@ function scard.initial_effect(c)
 	e1:SetValue(scard.skfilter)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --immune
 function scard.skfilter(e,te)
 	local tc=te:GetHandler()

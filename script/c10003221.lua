@@ -1,6 +1,8 @@
 --TB1-062 Teleporting Jimeze
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_JIMEZE)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_2)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--warp, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --warp, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

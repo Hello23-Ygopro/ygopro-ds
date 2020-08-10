@@ -1,6 +1,7 @@
 --TB1-048 Dangers Triangle
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -15,7 +16,6 @@ function scard.initial_effect(c)
 	e1:SetTarget(scard.tg1)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --negate skill
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

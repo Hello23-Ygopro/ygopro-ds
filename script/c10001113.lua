@@ -1,6 +1,8 @@
 --BT1-098 Ginyu Force Jeice
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_JEICE)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --play
 scard.con1=aux.SelfPreviousLocationCondition(LOCATION_HAND)
 function scard.playfilter(c,e,tp)

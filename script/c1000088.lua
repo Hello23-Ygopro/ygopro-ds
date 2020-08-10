@@ -1,6 +1,7 @@
 --P-074 Crisis Crusher Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_XENO)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -15,7 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg2,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.combo_cost=0
 --reduce energy cost
 function scard.con1(e)
 	return not Duel.IsExistingMatchingCard(aux.BattleAreaFilter(nil),e:GetHandlerPlayer(),LOCATION_BATTLE,0,1,nil)

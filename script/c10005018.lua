@@ -1,6 +1,8 @@
 --BT5-016 Pilaf, Leader of the Crew
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PILAF)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FORTUNETELLER_BABA_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,1,scard.op2,scard.cost2,scard.tg2,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --search (play)
 function scard.costfilter1(c,code)
 	return c:IsCode(code) and c:IsAbleToDrop()

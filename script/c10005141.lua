@@ -1,6 +1,8 @@
 --BT5-120 Miraculous Fighter SS3 Gogeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GOGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -20,8 +22,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost2,nil,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,4}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_GOGETA) and c:IsEnergyAbove(7)

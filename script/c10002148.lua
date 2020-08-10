@@ -1,6 +1,8 @@
 --EX01-01 Comrades Combined Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_VEGETA)

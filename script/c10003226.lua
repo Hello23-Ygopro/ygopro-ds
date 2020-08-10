@@ -1,6 +1,8 @@
 --TB1-067 True Form Ganos
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GANOS)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_4)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--ko, drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ko, drop
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,0,1,HINTMSG_KO)
 function scard.dropfilter(c,e)

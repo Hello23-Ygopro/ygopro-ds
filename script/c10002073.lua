@@ -1,12 +1,12 @@
 --BT2-066 Trunks' Time Machine
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--to hand, untap
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --to hand, untap
 scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_TRUNKS_FUTURE)
 function scard.thfilter(c)

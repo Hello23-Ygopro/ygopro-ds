@@ -1,6 +1,8 @@
 --TB1-052_SPR Son Goku, Hope of Universe 7 (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,nil,aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN))
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_7) and c:IsCharacter(CHARACTER_SON_GOKU) and c:IsEnergyAbove(5)

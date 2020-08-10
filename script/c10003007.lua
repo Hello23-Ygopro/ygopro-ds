@@ -1,6 +1,8 @@
 --BT3-006 Pint-sized Warrior Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_SON_GOKU_GT) and c:IsAbleToHand()

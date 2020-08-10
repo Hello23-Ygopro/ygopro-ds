@@ -1,6 +1,8 @@
 --SD2-05 Chain Attack Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsPowerBelow(15000) and c:IsCanBePlayed(e,0,tp,false,false)

@@ -1,12 +1,12 @@
 --BT3-053 Rebirth of Justice
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--play, return
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
 --play, return
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsColor(COLOR_BLUE) and c:IsEnergyBelow(5) and c:IsCanBePlayed(e,0,tp,false,false)

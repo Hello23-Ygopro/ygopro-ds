@@ -1,6 +1,8 @@
 --P-034 Perfect Support Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_YOUNG_SON_GOKU_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --tap
 function scard.tapfilter(c)
 	return c:IsEnergyBelow(3) and c:IsAbleToSwitchToRest()

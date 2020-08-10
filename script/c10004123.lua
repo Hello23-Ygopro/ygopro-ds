@@ -1,6 +1,7 @@
 --BT4-110 Dark Absorption Mira
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MIRA)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--union-absorb
 	aux.EnableUnionAbsorb(c,scard.uniafilter1,scard.cost1,scard.tg1)
 end
-scard.combo_cost=0
 --union-absorb
 function scard.uniafilter1(c)
 	return c:IsCharacter(CHARACTER_MIRA) and c:IsEnergy(7)

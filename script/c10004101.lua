@@ -1,6 +1,8 @@
 --BT4-091 Adoptive Father Son Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_GALACTIC_PATROLMAN_SAGA)
@@ -12,5 +14,3 @@ function scard.initial_effect(c)
 	--blocker
 	aux.EnableBlocker(c)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0

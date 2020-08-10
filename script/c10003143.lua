@@ -1,6 +1,8 @@
 --SD2-04 Rushing Warrior Pan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--draw
 	aux.AddSingleAutoSkill(c,1,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op2,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --gain skill
 function scard.powfilter(c)
 	return (c:IsLeader() or c:IsBattle()) and c:IsColor(COLOR_RED)

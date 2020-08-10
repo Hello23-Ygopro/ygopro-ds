@@ -1,6 +1,8 @@
 --EX03-04 Umbral Blade Dabura
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_DABURA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.ExistingCardCondition(aux.FaceupFilter(Card.IsCharacter,CHARACTER_EVIL_WIZARD_BABIDI)))
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

@@ -1,6 +1,8 @@
 --BT1-067 Implacable Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --to hand
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.DropAreaFilter(Card.IsAbleToHand),LOCATION_DROP,0,0,1,HINTMSG_ATOHAND)
 scard.op1=aux.TargetSendtoHandOperation(nil)

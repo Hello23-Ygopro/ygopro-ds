@@ -1,6 +1,8 @@
 --P-076 Reality Bender Janemba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_JANEMBA)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_INCARNATE)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--to deck, drop
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,nil,scard.op1,nil,aux.TurnPlayerCondition(PLAYER_SELF))
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --reduce energy cost
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

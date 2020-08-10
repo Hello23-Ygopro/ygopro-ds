@@ -1,6 +1,8 @@
 --BT4-039 Oath's Power, Tapion
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TAPION)
 	aux.AddSpecialTrait(c,TRAIT_HERO)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to hand, to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --to hand, to deck
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,2,HINTMSG_ATOHAND)
 function scard.tdfilter(c,e)

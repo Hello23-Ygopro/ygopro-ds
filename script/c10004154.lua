@@ -1,6 +1,8 @@
 --EX03-03 Virtuous Strength Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--damage
 	aux.AddSingleAutoSkill(c,0,EVENT_BATTLE_KOING,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --damage
 scard.con1=aux.AND(aux.bdocon,aux.TurnPlayerCondition(PLAYER_SELF))
 scard.op1=aux.DuelOperation(Duel.Damage,PLAYER_OPPO,1,REASON_EFFECT)

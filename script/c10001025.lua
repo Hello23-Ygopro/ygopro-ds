@@ -1,6 +1,8 @@
 --BT1-022 Universe 6 Supreme Kai
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_UNIVERSE_6_SUPREME_KAI)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --search (play)
 function scard.playfilter(c,e,tp)
 	return c:IsCharacter(CHARACTER_SUPREME_KAIS_ATTENDANT) and c:IsCanBePlayed(e,0,tp,false,false)

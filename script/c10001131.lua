@@ -1,6 +1,8 @@
 --SD1-05 Vegeta, Prince of Speed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
@@ -13,5 +15,3 @@ function scard.initial_effect(c)
 	--draw
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,2,REASON_EFFECT),nil,aux.EnergyEqualAboveCondition(PLAYER_SELF,5))
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1

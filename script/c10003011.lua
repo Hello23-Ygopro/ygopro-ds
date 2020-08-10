@@ -1,6 +1,8 @@
 --BT3-010 Reliable Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --draw, gain skill
 function scard.powfilter(c,e)
 	return (c:IsLeader() or c:IsBattle()) and c:IsColor(COLOR_RED) and c:IsCanBeEffectTarget(e)

@@ -1,6 +1,8 @@
 --BT1-043 Whis, Judge of the Gods
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,6)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_WHIS)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_BEERUS))
 end
-scard.specified_cost={COLOR_BLUE,6}
-scard.combo_cost=1
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local e1=Effect.CreateEffect(e:GetHandler())

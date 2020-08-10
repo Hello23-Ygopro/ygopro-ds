@@ -1,6 +1,8 @@
 --BT3-100 Unwavering Solidarity Shugesh
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SHUGESH)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BARDOCK_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --play, gain skill
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
 function scard.playfilter(c,e,tp)

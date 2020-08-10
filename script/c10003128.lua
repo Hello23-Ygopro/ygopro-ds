@@ -1,6 +1,7 @@
 --BT3-116 Dimension Breaker Mira
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MIRA)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--warp
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=1
 --warp
 scard.con1=aux.AND(aux.EvolvePlayCondition,aux.WarpEqualAboveCondition(PLAYER_SELF,5))
 function scard.warpfilter(c,e)

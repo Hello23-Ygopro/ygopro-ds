@@ -1,6 +1,8 @@
 --BT4-075_SPR Height of Mastery Son Goku (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7,TRAIT_GOKUS_LINEAGE)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--tap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER,aux.SwapPlayCondition)
 end
-scard.specified_cost={COLOR_YELLOW,3}
-scard.combo_cost=1
 --tap
 function scard.tapfilter(c,e)
 	return c:IsAbleToSwitchToRest() and c:IsCanBeEffectTarget(e)

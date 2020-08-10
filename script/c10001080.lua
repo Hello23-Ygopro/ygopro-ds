@@ -1,6 +1,8 @@
 --BT1-070 Super Saiyan Gotenks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GOTENKS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--untap, draw
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --untap, draw
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.EnergyAreaFilter(Card.IsAbleToSwitchToActive),LOCATION_ENERGY,0,0,2,HINTMSG_TOACTIVE)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

@@ -1,6 +1,7 @@
 --BT5-108 Kami, Global Unifier
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_KAMI)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_GOD)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -14,7 +15,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,1,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER,scard.con1)
 	e1:SetCountLimit(1)
 end
-scard.combo_cost=0
 --ko
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetMatchingGroupCount(aux.BattleAreaFilter(nil),tp,0,LOCATION_BATTLE,nil)>=4

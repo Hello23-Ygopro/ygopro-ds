@@ -1,12 +1,12 @@
 --BT4-021 Revenge Death Ball
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_RED,1}
 --gain skill
 function scard.lfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_BABY)

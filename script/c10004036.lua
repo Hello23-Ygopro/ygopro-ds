@@ -1,6 +1,8 @@
 --BT4-032 Oath's Power Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_YOUTH)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,nil,aux.SelfSwitchtoActiveOperation,nil,aux.AND(aux.TurnPlayerCondition(PLAYER_SELF),aux.SelfRestCondition))
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --double strike, barrier
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

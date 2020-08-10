@@ -1,6 +1,8 @@
 --BT4-018 Baby, Vengeance Unleashed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BABY)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--union-absorb
 	aux.EnableUnionAbsorb(c,nil,scard.cost1,scard.tg1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --union-absorb
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

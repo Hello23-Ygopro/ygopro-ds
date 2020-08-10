@@ -1,12 +1,12 @@
 --TB1-072 Maiden Charge
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, drop, ko
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --negate attack, drop, ko
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateAttack()

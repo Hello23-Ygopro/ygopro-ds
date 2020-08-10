@@ -1,6 +1,8 @@
 --TB2-027 Begrudging Respect Piccolo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_GOD,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=0
 --drop
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.CheckCharge(tp) and Duel.GetEnergyCount(tp)<Duel.GetEnergyCount(1-tp)

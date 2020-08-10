@@ -1,12 +1,12 @@
 --BT1-053 Senzu Bean
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, untap
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --gain skill, untap
 function scard.powfilter(c)
 	return c:IsLeader() or c:IsBattle()

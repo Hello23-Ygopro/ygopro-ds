@@ -1,6 +1,8 @@
 --BT1-007 Manipulating God Champa
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CHAMPA)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --to hand
 function scard.thfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_CHAMPA) and c:IsAbleToHand()

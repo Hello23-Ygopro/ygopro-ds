@@ -1,6 +1,8 @@
 --P-080 Super 17, the Infernal Machine
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SUPER_17)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=0
 --drop
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end

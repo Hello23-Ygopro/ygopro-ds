@@ -1,6 +1,8 @@
 --BT3-047 The Ultimate Evil, Majin Buu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--untap, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,aux.EvolvePlayCondition)
 end
-scard.specified_cost={COLOR_BLUE,3}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_MAJIN_BUU) and c:IsEnergyAbove(5)

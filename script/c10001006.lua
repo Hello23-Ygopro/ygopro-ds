@@ -1,6 +1,8 @@
 --BT1-004 Destructive Terror Champa
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CHAMPA)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--ko
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --ko
 function scard.kofilter(c,e)
 	return c:IsPowerBelow(15000) and c:IsCanBeEffectTarget(e)

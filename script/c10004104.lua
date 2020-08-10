@@ -1,6 +1,8 @@
 --BT4-094 Jiren, Universe's Strongest
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,6)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_JIREN)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_PRIDE_TROOPERS,TRAIT_UNIVERSE_11)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,5 +18,3 @@ function scard.initial_effect(c)
 	--cannot activate
 	aux.AddPermanentPlayerCannotActivate(c,aux.CannotActivateKeySkillValue(CATEGORY_COUNTER+CATEGORY_BLOCKER),aux.SelfAttackerCondition,0,1)
 end
-scard.specified_cost={COLOR_YELLOW,6}
-scard.combo_cost=1

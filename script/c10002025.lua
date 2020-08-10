@@ -1,6 +1,8 @@
 --BT2-022 Mind Controlling Babidi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_EVIL_WIZARD_BABIDI)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_WIZARD)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --play
 scard.con1=aux.ExistingCardCondition(aux.EnergyAreaFilter(Card.IsColor,COLOR_RED),LOCATION_ENERGY,0,6)
 function scard.playfilter(c,e,tp)

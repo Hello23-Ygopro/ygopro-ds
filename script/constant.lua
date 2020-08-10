@@ -767,7 +767,7 @@ STATUS_SUMMON_TURN			=0x0800		--(unused)
 STATUS_KO_CONFIRMED			=0x1000		--Confirmed to be KO-ed
 STATUS_LEAVE_CONFIRMED		=0x2000		--(unused)
 STATUS_BATTLE_DESTROYED		=0x4000		--(unused)
-STATUS_COPYING_EFFECT		=0x8000		--Copying another card's effect
+STATUS_COPYING_EFFECT		=0x8000		--(unused) Copying another card's effect
 STATUS_CHAINING				=0x10000	--(unused)
 STATUS_SUMMON_DISABLED		=0x20000	--(unused)
 STATUS_ACTIVATE_DISABLED	=0x40000	--(unused)
@@ -919,7 +919,7 @@ EFFECT_FLAG_REPEAT				=0x200000	--(unused)
 EFFECT_FLAG_NO_TURN_RESET		=0x400000	--"Once while face-up on the field"
 EFFECT_FLAG_EVENT_PLAYER		=0x800000	--(unused)
 EFFECT_FLAG_OWNER_RELATE		=0x1000000	--(unused)
-EFFECT_FLAG_AVAILABLE_BD		=0x2000000	--(deprecated, only available in YGOPro Percy)
+EFFECT_FLAG_AVAILABLE_BD		=0x2000000	--(N/A)
 EFFECT_FLAG_CLIENT_HINT			=0x4000000	--Enables a tooltip of the effect (can only be used outside initial_effect)
 EFFECT_FLAG_IGNORE_CHAIN_LIMIT	=0x8000000	--Can Chain to EFFECT_FLAG_CHAIN_LIMIT effects
 EFFECT_FLAG_CHAIN_LIMIT			=0x10000000	--Cannot be Chained to
@@ -927,7 +927,7 @@ EFFECT_FLAG_IGNORE_BARRIER		=0x20000000	--Ignores [Barrier]
 EFFECT_FLAG_KEYSKILL			=0x40000000	--[Keyword] skill
 EFFECT_FLAG_IMMEDIATELY_APPLY	=0x80000000	--(unused)
 
-EFFECT_FLAG2_NAGA				=0x0001		--(deprecated)
+EFFECT_FLAG2_NAGA				=0x0001		--(N/A)
 EFFECT_FLAG2_COF				=0x0002		--(unused)
 EFFECT_FLAG2_MAJESTIC_MUST_COPY	=0x80000000	--(unused, only available in YGOPro Percy)
 --Effect Code

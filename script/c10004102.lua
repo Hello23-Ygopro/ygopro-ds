@@ -1,6 +1,8 @@
 --BT4-092 Multimech Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA)
 	aux.AddSpecialTrait(c,TRAIT_SPECIAL_MODEL_KIT)
 	aux.AddEra(c,ERA_SPECIAL)
@@ -17,8 +19,6 @@ function scard.initial_effect(c)
 	c:RegisterEffect(e1)
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_BULMA) and c:IsEnergyAbove(3)

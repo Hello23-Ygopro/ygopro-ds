@@ -1,6 +1,7 @@
 --BT5-102 Revival of the Emperor
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--add special trait
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(scard.lfilter))
 end
-scard.specified_cost={COLOR_YELLOW,2}
 --play
 function scard.lfilter(c)
 	return c:IsColor(COLOR_YELLOW) and c:IsSpecialTrait(TRAIT_SHENRON)

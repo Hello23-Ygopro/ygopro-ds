@@ -1,6 +1,8 @@
 --BT2-084 Perfect Force Cell
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CELL)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_ANDROID))
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --drop
 function scard.dropfilter(c,e)
 	return c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)

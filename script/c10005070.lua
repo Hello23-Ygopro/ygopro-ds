@@ -1,6 +1,8 @@
 --BT5-057 Spirited Search Pan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_PAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=0
 --search (play)
 function scard.playfilter(c,e,tp)
 	return (aux.IsCode(c,CARD_SUPER_SAIYAN_SON_GOKU) or c:IsCode(CARD_SPIRITED_SEARCH_SS_TRUNKS))

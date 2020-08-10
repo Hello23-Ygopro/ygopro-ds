@@ -1,6 +1,8 @@
 --BT2-073 Piercing Super Saiyan 2 Son Gohan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -24,8 +26,6 @@ function scard.initial_effect(c)
 		Duel.RegisterEffect(ge1,0)
 	end
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --drop
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetFlagEffect(sid)>0 and ep~=tp

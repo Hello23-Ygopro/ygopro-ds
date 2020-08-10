@@ -1,6 +1,7 @@
 --BT4-109 Invasive Power Mira
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MIRA)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,4 +12,3 @@ function scard.initial_effect(c)
 	--double strike
 	aux.EnableDoubleStrike(c)
 end
-scard.combo_cost=0

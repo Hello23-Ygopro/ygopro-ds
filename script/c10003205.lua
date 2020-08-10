@@ -1,12 +1,12 @@
 --TB1-049 Shining Blaster
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, return
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
 --negate attack, return
 function scard.retfilter(c,e)
 	return c:IsEnergyBelow(4) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)

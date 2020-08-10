@@ -1,6 +1,8 @@
 --BT5-096 Bitter Past Ginyu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GINYU)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --search (play)
 scard.cost1=aux.MergeCost(aux.PaySkillCost(COLOR_YELLOW,3,0),aux.SelfDropCost)
 function scard.playfilter(c,e,tp)

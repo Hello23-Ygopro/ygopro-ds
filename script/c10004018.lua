@@ -1,6 +1,8 @@
 --BT4-016 Epochal Grudge Great Ape Baby
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BABY)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT,TRAIT_GREAT_APE,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -17,8 +19,6 @@ function scard.initial_effect(c)
 	local e2=aux.AddAutoSkill(c,0,EVENT_PLAY,nil,scard.op2,EFFECT_FLAG_CARD_TARGET,scard.con2)
 	e2:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=1
 --draw, gain skill
 scard.con1=aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_MACHINE_MUTANT)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

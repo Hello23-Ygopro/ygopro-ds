@@ -1,6 +1,8 @@
 --EX03-11 Undying Link Zamasu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ZAMASU)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--damage, untap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --damage, untap
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_ZAMASU,CHARACTER_GOKU_BLACK),aux.EnergyEqualAboveCondition(PLAYER_SELF,5))
 function scard.untfilter(c,e)

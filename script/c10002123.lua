@@ -1,6 +1,8 @@
 --BT2-108_SPR The Infinite Force Meta-Cooler　Core (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_META_COOLER_CORE)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_META_COOLER_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	aux.AddSingleAutoSkill(c,1,EVENT_PLAY,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET,scard.con1)
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --gain skill
 scard.cost1=aux.DropCost(aux.BattleAreaFilter(Card.IsCharacter,CHARACTER_META_COOLER),LOCATION_BATTLE,0,1)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

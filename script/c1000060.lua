@@ -1,6 +1,8 @@
 --P-052 Ribrianne, Transformation Complete
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_RIBRIANNE)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_MAIDEN_SQUADRON,TRAIT_UNIVERSE_2)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -22,8 +24,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,4}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_RIBRIANNE) and c:IsEnergyAbove(5)

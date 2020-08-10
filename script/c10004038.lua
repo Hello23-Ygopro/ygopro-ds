@@ -1,6 +1,8 @@
 --BT4-034 Raging Energy Blast Gotenks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_GOTENKS)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_HIRUDEGARN_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (to hand), untap
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --search (to hand), untap
 function scard.thfilter(c,charname)
 	return c:IsCharacter(charname) and c:IsAbleToHand()

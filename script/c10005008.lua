@@ -1,6 +1,8 @@
 --BT5-007 Grandpa Gohan, to the Rescue
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FORTUNETELLER_BABA_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--search (play, gain skill)
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --search (play, gain skill)
 function scard.costfilter(c,charname)
 	return c:IsCharacter(charname) and c:IsAbleToDeck()

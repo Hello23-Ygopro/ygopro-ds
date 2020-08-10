@@ -1,6 +1,8 @@
 --TB1-046 Spectrum Attack Obuni
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_OBUNI)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_10)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--draw, to deck
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --draw, to deck
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Draw(tp,1,REASON_EFFECT)>0 then Duel.ShuffleHand(tp) end

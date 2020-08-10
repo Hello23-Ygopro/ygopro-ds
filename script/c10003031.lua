@@ -1,6 +1,7 @@
 --BT3-030 Planet M-2
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddActivateBattleSkill(c,1,scard.op2,aux.SelfSwitchtoRestCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
 --draw
 scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_DR_MYUU)
 scard.op1=aux.DuelOperation(Duel.Draw,PLAYER_SELF,1,REASON_EFFECT)

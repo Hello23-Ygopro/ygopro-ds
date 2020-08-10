@@ -1,6 +1,8 @@
 --TB01-077_SPR Frieza, Emperor of Universe 7 (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -25,8 +27,6 @@ function scard.initial_effect(c)
 	e1:SetOperation(scard.op1)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_7) and c:IsEnergyAbove(5)

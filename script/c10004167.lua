@@ -1,6 +1,8 @@
 --EX03-14 Last One Standing Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,1,EVENT_PLAY,nil,scard.op2,nil,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --ko
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(nil),0,LOCATION_BATTLE,1,1,HINTMSG_KO)
 scard.op1=aux.TargetCardsOperation(Duel.KO,REASON_EFFECT)

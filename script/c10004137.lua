@@ -1,6 +1,7 @@
 --BT4-124 Beyond Darkness Demigra
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_DEMIGRA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_GOD)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -15,7 +16,6 @@ function scard.initial_effect(c)
 	--confirm, combo
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,aux.TargetSendtoComboOperation,EFFECT_FLAG_CARD_TARGET)
 end
-scard.combo_cost=1
 --confirm, combo
 function scard.tcfilter(c,tp)
 	return c:IsBattle() and c:IsCanCombo(tp)

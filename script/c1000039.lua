@@ -1,6 +1,8 @@
 --P-035 Bardock, Will of Iron
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BARDOCK)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_GREAT_APE)
 	aux.AddEra(c,ERA_BARDOCK_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--evolve
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --evolve
 scard.con1=aux.TurnPlayerCondition(PLAYER_SELF)
 function scard.evofilter(c,e)

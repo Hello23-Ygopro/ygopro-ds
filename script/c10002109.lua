@@ -1,12 +1,12 @@
 --BT2-098 Father-Son Kamehameha
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--ko
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --ko
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local cost=Duel.GetEnergyCount(1-tp)

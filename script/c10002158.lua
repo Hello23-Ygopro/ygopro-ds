@@ -1,6 +1,7 @@
 --EX02-04 Time Ruler Towa
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOWA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--gain control
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.OverRealmPlayCondition)
 end
-scard.combo_cost=0
 --gain control
 function scard.ctfilter(c)
 	return c:IsEnergyBelow(2) and c:IsControlerCanBeChanged()

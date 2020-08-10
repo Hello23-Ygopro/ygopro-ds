@@ -1,6 +1,8 @@
 --P-032 Kaio-Ken Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddActivateMainSkill(c,1,scard.op2,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfRestCondition)
 end
-scard.specified_cost={COLOR_BLUE,4}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_BLUE) and c:IsCharacter(CHARACTER_SON_GOKU) and c:IsEnergyAbove(7)

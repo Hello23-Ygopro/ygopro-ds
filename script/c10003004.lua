@@ -2,6 +2,8 @@
 --Not fully implemented: Cards do not switch to Rest Mode when attacking
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -24,8 +26,6 @@ function scard.initial_effect(c)
 	e2:SetOperation(scard.op2)
 	c:RegisterEffect(e2)
 end
-scard.specified_cost={COLOR_RED,3}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_SON_GOKU_GT) and c:IsEnergyAbove(5)

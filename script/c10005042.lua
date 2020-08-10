@@ -1,6 +1,8 @@
 --BT5-037 Vexing Outcome Veku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_VEKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (to hand, draw)
 	aux.AddActivateMainSkill(c,0,scard.op1,aux.SelfDropCost,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,1}
-scard.combo_cost=1
 --union-fusion
 scard.uniffilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_SON_GOKU)
 scard.uniffilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_VEGETA)

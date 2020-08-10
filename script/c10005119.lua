@@ -1,6 +1,7 @@
 --BT5-101 Time Magic
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, gain skill
@@ -8,7 +9,6 @@ function scard.initial_effect(c)
 	--sparking
 	aux.EnableSparking(c)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --negate attack, gain skill
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW)
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)

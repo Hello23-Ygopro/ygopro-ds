@@ -1,6 +1,8 @@
 --TB2-013 Dark Duo Babidi
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_EVIL_WIZARD_BABIDI)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_WIZARD,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --untap
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_RED)
 function scard.untfilter(c)

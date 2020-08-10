@@ -1,12 +1,12 @@
 --BT1-106 Recoome Eraser Gun
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, gain skill
 	aux.AddCounterAttackSkill(c,0,scard.op1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
 --negate attack, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW)(e,tp,eg,ep,ev,re,r,rp) then

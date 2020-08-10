@@ -1,6 +1,8 @@
 --P-081 Frieza, Striking Back
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (play)
 	aux.AddSingleAutoSkill(c,1,EVENT_BATTLE_KOING,scard.tg2,scard.op2,EFFECT_FLAG_CARD_TARGET,aux.bdocon)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --tap
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToSwitchToRest),0,LOCATION_BATTLE,0,1,HINTMSG_TOREST)
 scard.op1=aux.TargetCardsOperation(Duel.SwitchtoRest,REASON_EFFECT)

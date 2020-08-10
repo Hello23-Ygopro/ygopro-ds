@@ -1,6 +1,8 @@
 --BT1-069 Trunks, Protector of Children
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_YOUTH)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_BATTLE_OF_GODS_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--draw, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --draw, gain skill
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

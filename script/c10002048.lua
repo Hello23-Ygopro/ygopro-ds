@@ -1,6 +1,8 @@
 --BT2-042 Trunks, The Constant Hope
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 	aux.AddSingleAutoSkill(c,0,EVENT_BE_BATTLE_TARGET,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --triple strike
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

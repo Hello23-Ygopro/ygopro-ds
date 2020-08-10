@@ -1,6 +1,8 @@
 --BT5-038 Gogeta, Hero Revived
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GOGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -18,8 +20,6 @@ function scard.initial_effect(c)
 	aux.EnableSparking(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SparkingCondition(10))
 end
-scard.specified_cost={COLOR_BLUE,4}
-scard.combo_cost=1
 --union-fusion
 scard.uniffilter1=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_SON_GOKU)
 scard.uniffilter2=aux.FilterBoolFunction(Card.IsCharacter,CHARACTER_VEGETA)

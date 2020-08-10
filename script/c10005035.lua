@@ -1,6 +1,8 @@
 --BT5-030 Resolute Strength Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	aux.EnableBurst(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_IGNORE_BARRIER,aux.EvolvePlayCondition,aux.BurstCost(5))
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --evolve
 function scard.evofilter(c)
 	return aux.IsCode(c,CARD_SUPER_SAIYAN_SON_GOKU) and c:IsColor(COLOR_BLUE) and c:IsEnergyAbove(2)

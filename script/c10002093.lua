@@ -1,6 +1,8 @@
 --BT2-083 Martial Expert Tien Shinhan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,2)
 	aux.AddCharacter(c,CHARACTER_TIEN_SHINHAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--to hand, ko
 	aux.AddActivateMainSkill(c,1,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=2
 --play
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	return aux.SelfLeaderCondition(Card.IsColor,COLOR_GREEN)(e,tp,eg,ep,ev,re,r,rp)

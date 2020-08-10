@@ -1,6 +1,8 @@
 --BT3-103 Burgeoning Power Bergamo
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BERGAMO)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--drop, untap, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_DAMAGE_STEP_END,scard.tg1,scard.op1,nil,aux.TurnPlayerCondition(PLAYER_OPPO))
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --drop, untap, gain skill
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

@@ -1,6 +1,8 @@
 --BT3-060 Dauntless Spirit SSB Vegeta
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_FUTURE_TRUNKS_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--drop, gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_DAMAGING,nil,scard.op1)
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=0
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsCharacter(CHARACTER_VEGETA) and c:IsEnergyAbove(3)

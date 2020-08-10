@@ -1,6 +1,7 @@
 --TB2-067 Announcer, Play-By-Play Pro
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ANNOUNCER)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--draw
 	aux.AddSingleAutoSkill(c,1,EVENT_PLAY,nil,aux.DuelOperation(Duel.Draw,PLAYER_SELF,2,REASON_EFFECT),nil,scard.con2)
 end
-scard.combo_cost=0
 --negate attack, play
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

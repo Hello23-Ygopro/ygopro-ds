@@ -1,6 +1,8 @@
 --P-078 Demon Sword Janemba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_JANEMBA)
 	aux.AddSpecialTrait(c,TRAIT_EVIL_INCARNATE)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -13,8 +15,6 @@ function scard.initial_effect(c)
 	--warp, drop
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --warp, drop
 scard.cost1=aux.SelfSendtoDeckCost(SEQ_DECK_BOTTOM)
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToWarp),0,LOCATION_BATTLE,0,1,HINTMSG_WARP)

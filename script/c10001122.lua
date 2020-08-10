@@ -1,12 +1,12 @@
 --BT1-107 Cold Bloodlust
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate skill
 	aux.AddCounterPlaySkill(c,0,scard.op1,nil,scard.tg1,nil,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_FRIEZAS_ARMY))
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --negate skill
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(aux.BattleAreaFilter(nil),nil)

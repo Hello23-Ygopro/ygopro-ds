@@ -1,6 +1,7 @@
 --SD3-04 Encroaching Threat Masked Saiyan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MASKED_SAIYAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -12,4 +13,3 @@ function scard.initial_effect(c)
 	--reduce energy cost
 	aux.AddPermanentUpdateEnergyCost(c,-1,nil,aux.WarpEqualAboveCondition(PLAYER_SELF,7),LOCATION_HAND+LOCATION_WARP)
 end
-scard.combo_cost=0

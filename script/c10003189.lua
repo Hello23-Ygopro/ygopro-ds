@@ -1,6 +1,8 @@
 --TB1-033 Multi-Form Tien Shinhan
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TIEN_SHINHAN)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--drop, search (play)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_UNIVERSE_7))
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --lose power
 function scard.val1(e,c)
 	local tp=c:GetControler()

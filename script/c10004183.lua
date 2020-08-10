@@ -1,6 +1,7 @@
 --EX03-28 Smiling Madness Towa
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOWA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--drop, gain control
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_CHOOSE,scard.con1)
 end
-scard.combo_cost=0
 --drop, gain control
 scard.con1=aux.AND(aux.EvolvePlayCondition,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_ANDROID))
 scard.tg1=aux.TargetCardFunction(PLAYER_OPPO,aux.HandFilter(Card.IsAbleToDrop),0,LOCATION_HAND,1,1,HINTMSG_DROP)

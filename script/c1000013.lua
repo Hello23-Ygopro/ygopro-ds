@@ -1,6 +1,8 @@
 --P-013 Hit, Conqueror of Time
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_HIT)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--drop, gain skill
 	aux.AddAutoSkill(c,0,EVENT_CUSTOM+EVENT_MAIN_PHASE_START,nil,scard.op1,nil,aux.TurnPlayerCondition(PLAYER_OPPO))
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --drop, gain skill
 function scard.dropfilter(c)
 	return c:IsColor(COLOR_RED) and c:IsAbleToDrop()

@@ -1,6 +1,8 @@
 --BT3-049 Power Absorbing Majin Buu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --gain skill
 function scard.costfilter(c,e)
 	return c:IsCharacter(CHARACTER_SOUTH_SUPREME_KAI) and c:IsCanBeEffectTarget(e)

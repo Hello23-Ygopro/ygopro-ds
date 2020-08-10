@@ -2,6 +2,8 @@
 --Not fully implemented: Cards do not switch to Rest Mode when attacking
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOHAN_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--search (drop), return, untap
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --search (drop), return, untap
 function scard.dropfilter(c)
 	return c:IsHasEffect(EFFECT_DRAGON_BALL) and c:IsAbleToDrop()

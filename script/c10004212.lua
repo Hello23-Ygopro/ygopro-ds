@@ -1,6 +1,8 @@
 --TB2-017 Razor's Edge Yakon
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_YAKON)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--absorb, drop
 	aux.AddAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain power
 function scard.val1(e,c)
 	return c:GetAbsorbedCount()*5000

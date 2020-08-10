@@ -1,6 +1,8 @@
 --TB2-044 Best Buddy Chiaotzu
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_CHIAOTZU)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_WORLD_TOURNAMENT)
 	aux.AddEra(c,ERA_WORLD_MA_TOURNAMENT_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--untap
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.TurnPlayerCondition(PLAYER_SELF))
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=1
 --untap
 function scard.untfilter(c)
 	return c:IsCode(CARD_TIEN_SHINHAN_TRADING_MOVES) and c:IsAbleToSwitchToActive()

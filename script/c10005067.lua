@@ -1,6 +1,8 @@
 --BT5-055 Twin Onslaught SS4 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,3)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	aux.EnableBurst(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1,aux.BurstCost(5))
 end
-scard.specified_cost={COLOR_GREEN,3}
-scard.combo_cost=1
 --burst (ko, gain skill)
 function scard.lfilter(c)
 	return c:IsColor(COLOR_GREEN) and c:IsSpecialTrait(TRAIT_SHENRON)

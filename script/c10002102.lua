@@ -1,6 +1,8 @@
 --BT2-091 Twin Sister Android 18
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_ANDROID_18)
 	aux.AddSpecialTrait(c,TRAIT_ANDROID)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_GREEN,1}
-scard.combo_cost=0
 --drop, untap
 function scard.untfilter(c,e)
 	return c:IsCharacter(CHARACTER_ANDROID_17) and c:IsAbleToSwitchToActive() and c:IsCanBeEffectTarget(e)

@@ -1,6 +1,8 @@
 --BT3-090 No Openings Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU_CHILDHOOD)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_YOUNG_SON_GOKU_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--play, to hand
 	aux.AddSingleAutoSkill(c,0,EVENT_CUSTOM+EVENT_COMBO_END,nil,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=1
 --play, to hand
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_YELLOW)
 function scard.thfilter(c,e)

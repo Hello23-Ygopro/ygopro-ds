@@ -1,6 +1,7 @@
 --BT5-111_SPR Black Masked Saiyan, the Devastator (Alias)
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BLACK_MASKED_SAIYAN)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	--warp
 	aux.AddAutoSkill(c,0,EVENT_CUSTOM+EVENT_ATTACK_END,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,scard.con1)
 end
-scard.combo_cost=0
 --warp
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

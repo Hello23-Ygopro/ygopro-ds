@@ -1,6 +1,8 @@
 --P-008 Clan of Terror Mecha Frieza
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_FRIEZA)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--confirm hand, play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=1
 --confirm hand, play
 function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsCanBePlayed(e,0,tp,false,false) and c:IsCanBeEffectTarget(e)

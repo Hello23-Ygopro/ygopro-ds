@@ -1,6 +1,8 @@
 --TB1-006 Majin Buu, Full of Energy
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_MAJIN_BUU)
 	aux.AddSpecialTrait(c,TRAIT_MAJIN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -16,8 +18,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_MAJIN_BUU)

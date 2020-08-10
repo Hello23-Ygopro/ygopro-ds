@@ -1,12 +1,12 @@
 --BT4-070 Sacrifice
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--drop, negate attack
 	aux.AddCounterAttackSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --drop, negate attack
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

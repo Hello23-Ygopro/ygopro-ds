@@ -2,6 +2,8 @@
 --Not fully implemented: Cards do not switch to Rest Mode when attacking
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_VEGETA_GT)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BABY_SAGA)
@@ -20,8 +22,6 @@ function scard.initial_effect(c)
 	e2:SetOperation(scard.op2)
 	c:RegisterEffect(e2)
 end
-scard.specified_cost={COLOR_RED,1}
-scard.combo_cost=0
 --to hand, untap, gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,2,HINTMSG_ATOHAND)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

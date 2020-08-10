@@ -1,12 +1,12 @@
 --BT4-043 Phantom Flame Cannon
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--gain skill, to deck
 	aux.AddActivateBattleSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_HIRUDEGARN))
 end
-scard.specified_cost={COLOR_BLUE,1}
 --gain skill, to deck
 function scard.tdfilter(c,e)
 	return c:IsAbleToDeck() and c:IsCanBeEffectTarget(e)

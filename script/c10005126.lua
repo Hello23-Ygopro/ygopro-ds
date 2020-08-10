@@ -1,6 +1,7 @@
 --BT5-107 Dragon Ball Seeker Bulma
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_BULMA)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_PILAF_SAGA)
@@ -10,7 +11,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.combo_cost=0
 --search (drop)
 function scard.dropfilter(c)
 	return c:IsHasEffect(EFFECT_DRAGON_BALL) and c:IsAbleToDrop()

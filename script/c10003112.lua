@@ -1,6 +1,8 @@
 --BT3-102 Nappa, Vegeta's Attendant
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_NAPPA_ADOLESCENCE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BARDOCK_SAGA)
@@ -9,8 +11,6 @@ function scard.initial_effect(c)
 	--gain skill
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,scard.op1,nil,scard.con1)
 end
-scard.specified_cost={COLOR_YELLOW,1}
-scard.combo_cost=0
 --gain skill
 scard.con1=aux.ExistingCardCondition(aux.BattleAreaFilter(Card.IsRest),0,LOCATION_BATTLE)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

@@ -1,6 +1,8 @@
 --TB1-030 Beerus, Universe 7 Divine Vanquisher
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_BEERUS)
 	aux.AddSpecialTrait(c,TRAIT_GOD,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.SelfAttackTargetCondition(Card.IsLeader))
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=1
 --drop
 function scard.dropfilter(c,e)
 	return not c:IsLeader() and c:IsEnergyAbove(0) and c:IsAbleToDrop() and c:IsCanBeEffectTarget(e)

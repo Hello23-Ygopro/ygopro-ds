@@ -1,6 +1,7 @@
 --BT2-099 Cell's Birth
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--field
@@ -10,7 +11,6 @@ function scard.initial_effect(c)
 	--drop
 	aux.AddAutoSkill(c,0,EVENT_PLAY,nil,aux.SelfDropOperation,nil,scard.con2)
 end
-scard.specified_cost={COLOR_GREEN,1}
 --reduce energy cost
 scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_CELL)
 scard.tg1=aux.TargetBoolFunction(Card.IsCharacter,CHARACTER_CELL)

@@ -1,6 +1,8 @@
 --BT5-020 Spike, to the Rescue
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SPIKE)
 	aux.AddSpecialTrait(c,TRAIT_EARTHLING,TRAIT_DEVIL_CLAN)
 	aux.AddEra(c,ERA_FORTUNETELLER_BABA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,1,EVENT_KOED,scard.tg1,scard.op2,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

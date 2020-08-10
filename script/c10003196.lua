@@ -1,6 +1,8 @@
 --TB1-040 Universe 9 Striker Comfrey
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_COMFREY)
 	aux.AddSpecialTrait(c,TRAIT_ALIEN,TRAIT_UNIVERSE_9)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
@@ -10,8 +12,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_BLUE,2}
-scard.combo_cost=0
 --play
 function scard.playfilter(c,e,tp,cost)
 	return c:IsSpecialTrait(TRAIT_UNIVERSE_9) and c:IsEnergyBelow(cost) and c:IsCanBePlayed(e,0,tp,false,false)

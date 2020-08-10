@@ -1,6 +1,8 @@
 --BT3-015 Bodyguard Ledgic
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_LEDGIC)
 	aux.AddSpecialTrait(c,TRAIT_BODYGUARD)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--free play
 	aux.AddPermanentFreePlay(c,scard.con1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --free play
 function scard.con1(e)
 	local tp=e:GetHandlerPlayer()

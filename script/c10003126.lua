@@ -1,6 +1,7 @@
 --BT3-114 Towa, Reprogrammed Menace
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_TOWA)
 	aux.AddSpecialTrait(c,TRAIT_DEMON_REALM_RACE)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -11,7 +12,6 @@ function scard.initial_effect(c)
 	--untap, gain control
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET,aux.EvolvePlayCondition)
 end
-scard.combo_cost=0
 --untap, gain control
 function scard.ctfilter(c)
 	return (c:IsAbleToSwitchToActive() or c:IsControlerCanBeChanged()) and c:IsEnergyBelow(6)

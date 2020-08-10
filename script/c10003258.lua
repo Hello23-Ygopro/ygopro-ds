@@ -1,12 +1,12 @@
 --TB1-096 Cocotte Zone
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, tap
 	aux.AddCounterAttackSkill(c,0,scard.op1,nil,nil,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_YELLOW,1}
 --negate attack, tap
 function scard.tapfilter(c,e)
 	return c:IsAbleToSwitchToRest() and c:IsCanBeEffectTarget(e)

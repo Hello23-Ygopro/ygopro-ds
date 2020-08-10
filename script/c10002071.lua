@@ -1,6 +1,7 @@
 --BT2-064 Mafuba
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_BLUE,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--negate attack, seal
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	e1:SetOperation(scard.op3)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_BLUE,1}
 scard.donot_drop_as_cost=true
 --negate attack, seal
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

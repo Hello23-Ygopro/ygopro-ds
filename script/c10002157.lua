@@ -1,6 +1,7 @@
 --EX02-03 Supreme Kai of Time, Continuity Keeper
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SUPREME_KAI_OF_TIME)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_DARK_DEMON_REALM_SAGA)
@@ -10,7 +11,6 @@ function scard.initial_effect(c)
 	--search (warp, gain skill)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.combo_cost=0
 --search (warp, gain skill)
 function scard.warpfilter(c)
 	return c:IsBattle() and c:IsColor(COLOR_BLACK) and c:IsEnergyBelow(5) and c:IsAbleToWarp()

@@ -1,6 +1,7 @@
 --BT5-109 Dende, New to the Job
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_DENDE)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN,TRAIT_GOD)
 	aux.AddEra(c,ERA_MAJIN_BUU_SAGA)
@@ -26,7 +27,6 @@ function scard.initial_effect(c)
 		Duel.RegisterEffect(ge2,0)
 	end
 end
-scard.combo_cost=0
 --drop
 function scard.checkop(e,tp,eg,ep,ev,re,r,rp)
 	for tc in aux.Next(eg) do

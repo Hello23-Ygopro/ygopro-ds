@@ -1,6 +1,8 @@
 --P-003 Super Saiyan 3 Son Goku
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_SON_GOKU)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_BABIDI_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	--return
 	aux.AddAutoSkill(c,1,EVENT_PHASE+PHASE_END,nil,aux.SelfSendtoHandOperation,nil,aux.TurnPlayerCondition(PLAYER_SELF))
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=0
 --gain skill
 function scard.powfilter(c)
 	return (c:IsLeader() or c:IsBattle()) and c:IsColor(COLOR_RED)

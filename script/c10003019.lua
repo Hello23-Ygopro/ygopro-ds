@@ -1,6 +1,8 @@
 --BT3-018 Meta-Rilldo, Form Perfected
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,4)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_GENERAL_RILLDO)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_BLACK_STAR_DRAGON_BALL_SAGA)
@@ -14,8 +16,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,4}
-scard.combo_cost=1
 --ex-evolve
 function scard.evofilter(c)
 	return c:IsColor(COLOR_RED) and c:IsCharacter(CHARACTER_GENERAL_RILLDO) and c:IsEnergyAbove(5)

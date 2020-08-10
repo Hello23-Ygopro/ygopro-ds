@@ -1,12 +1,12 @@
 --BT4-022 Vengeful Onslaught
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,1)
 	--extra card
 	aux.EnableExtraAttribute(c)
 	--untap, gain skill
 	aux.AddActivateMainSkill(c,0,scard.op1,nil,scard.tg1,EFFECT_FLAG_CARD_TARGET,aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_MACHINE_MUTANT))
 end
-scard.specified_cost={COLOR_RED,1}
 --untap, gain skill
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsPowerBelow,15000),LOCATION_BATTLE,0,1,1,HINTMSG_TARGET)
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)

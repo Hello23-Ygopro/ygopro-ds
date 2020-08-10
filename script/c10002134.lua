@@ -1,6 +1,8 @@
 --BT2-119 Cabira, The Obedient Soldier
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_CABIRA)
 	aux.AddSpecialTrait(c,TRAIT_CHILLEDS_ARMY)
 	aux.AddEra(c,ERA_CHILLED_SAGA)
@@ -12,8 +14,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateBattleSkill(c,0,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --gain skill
 scard.cost1=aux.SwitchtoRestCost(aux.BattleAreaFilter(Card.IsCode,CARD_BT2102_CHILLEDS_ARMY_TOKEN),LOCATION_BATTLE,0,1)
 function scard.powfilter(c)

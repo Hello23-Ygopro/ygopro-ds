@@ -1,6 +1,8 @@
 --BT5-022 King Piccolo, Terror Unleashed
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_KING_PICCOLO)
 	aux.AddSpecialTrait(c,TRAIT_NAMEKIAN)
 	aux.AddEra(c,ERA_KING_PICCOLO_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	local e1=aux.AddActivateMainSkill(c,0,scard.op1,scard.cost1,nil,EFFECT_FLAG_CARD_TARGET,aux.SparkingCondition(10))
 	e1:SetCountLimit(1)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --sparking (untap)
 function scard.costfilter(c)
 	return c:IsCode(CARD_KING_PICCOLO_TERROR_UNLEASHED,CARD_A_KINGS_RETURN_TO_YOUTH) and c:IsAbleToWarp()

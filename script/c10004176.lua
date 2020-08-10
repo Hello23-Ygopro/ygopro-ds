@@ -2,6 +2,8 @@
 --Not fully implemented: Cards do not switch to Rest Mode when attacking
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_YELLOW,2)
+	aux.AddComboCost(c,0)
 	aux.AddCharacter(c,CHARACTER_COOLER)
 	aux.AddSpecialTrait(c,TRAIT_FRIEZA_CLAN)
 	aux.AddEra(c,ERA_COOLER_SAGA)
@@ -21,8 +23,6 @@ function scard.initial_effect(c)
 	e2:SetOperation(scard.op2)
 	c:RegisterEffect(e2)
 end
-scard.specified_cost={COLOR_YELLOW,2}
-scard.combo_cost=0
 --drop, untap
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if not aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN)(e,tp,eg,ep,ev,re,r,rp) then return end

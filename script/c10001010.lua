@@ -1,6 +1,8 @@
 --BT1-008 Bewitching God Vados
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_RED,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_VADOS)
 	aux.AddSpecialTrait(c,TRAIT_GOD)
 	aux.AddEra(c,ERA_CHAMPA_SAGA)
@@ -11,8 +13,6 @@ function scard.initial_effect(c)
 	--play
 	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
-scard.specified_cost={COLOR_RED,2}
-scard.combo_cost=1
 --play
 function scard.playfilter(c,e,tp)
 	return c:IsSpecialTrait(TRAIT_ALIEN) and c:IsPowerBelow(15000) and c:IsCanBePlayed(e,0,tp,false,false)

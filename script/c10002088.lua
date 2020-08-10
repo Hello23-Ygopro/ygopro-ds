@@ -1,6 +1,8 @@
 --BT2-078 Full Power Trunks
 local scard,sid=aux.GetID()
 function scard.initial_effect(c)
+	aux.AddColorCost(c,COLOR_GREEN,2)
+	aux.AddComboCost(c,1)
 	aux.AddCharacter(c,CHARACTER_TRUNKS_FUTURE)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_EARTHLING)
 	aux.AddEra(c,ERA_ANDROID_CELL_SAGA)
@@ -15,8 +17,6 @@ function scard.initial_effect(c)
 	e1:SetOperation(scard.op1)
 	c:RegisterEffect(e1)
 end
-scard.specified_cost={COLOR_GREEN,2}
-scard.combo_cost=1
 --gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.BattleAreaFilter(nil),tp,0,LOCATION_BATTLE,nil)
