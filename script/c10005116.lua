@@ -6,7 +6,7 @@ function scard.initial_effect(c)
 	aux.AddCharacter(c,CHARACTER_GINYU)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_RESURRECTION_F_SAGA)
+	aux.AddCode(c,CARD_GINYU)
 	--battle card
 	aux.EnableBattleAttribute(c)
 end
-scard.card_code=CARD_GINYU

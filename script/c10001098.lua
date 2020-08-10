@@ -4,6 +4,7 @@ function scard.initial_effect(c)
 	aux.AddCharacter(c,CHARACTER_GINYU)
 	aux.AddSpecialTrait(c,TRAIT_GINYU_FORCE,TRAIT_FRIEZAS_ARMY)
 	aux.AddEra(c,ERA_FRIEZA_SAGA)
+	aux.AddCode(c,CARD_GINYU)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--play or to hand
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	--awaken
 	aux.EnableAwaken(c)
 end
-scard.card_code=CARD_GINYU
 scard.back_side_code=sid+1
 --play or to hand
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)

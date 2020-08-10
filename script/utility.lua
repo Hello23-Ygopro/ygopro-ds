@@ -222,6 +222,14 @@ function Auxiliary.AddCategory(c,...)
 		end
 	end
 end
+--register a card's name that is shared by multiple non-aliased cards
+--required for aux.IsCode
+function Auxiliary.AddCode(c,code)
+	if c.card_code==nil then
+		local mt=getmetatable(c)
+		mt.card_code=code
+	end
+end
 --combine two or more cost functions
 function Auxiliary.MergeCost(...)
 	local func_list={...}

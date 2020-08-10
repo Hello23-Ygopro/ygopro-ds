@@ -5,6 +5,7 @@ function scard.initial_effect(c)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_YOUNG_SON_GOKU_SAGA)
 	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	aux.AddCode(c,CARD_SON_GOKU)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--search (to hand)
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--awaken
 	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
 end
-scard.card_code=CARD_SON_GOKU
 scard.back_side_code=sid+1
 --search (to hand)
 function scard.thfilter(c)

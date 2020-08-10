@@ -6,7 +6,7 @@ function scard.initial_effect(c)
 	aux.AddCharacter(c,CHARACTER_VEGETA)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_JANEMBA_SAGA)
+	aux.AddCode(c,CARD_SUPER_SAIYAN_VEGETA)
 	--battle card
 	aux.EnableBattleAttribute(c)
 end
-scard.card_code=CARD_SUPER_SAIYAN_VEGETA

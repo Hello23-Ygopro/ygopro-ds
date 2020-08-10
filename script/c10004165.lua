@@ -5,6 +5,7 @@ function scard.initial_effect(c)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN,TRAIT_UNIVERSE_7)
 	aux.AddEra(c,ERA_UNIVERSE_SURVIVAL_SAGA)
 	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU,TRAIT_CATEGORY_UNIVERSE)
+	aux.AddCode(c,CARD_SON_GOKU)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--warrior of universe 7
@@ -15,7 +16,6 @@ function scard.initial_effect(c)
 	--awaken
 	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
 end
-scard.card_code=CARD_SON_GOKU
 scard.back_side_code=sid+1
 --bond (draw, gain skill)
 scard.con1=aux.AND(aux.BondCondition(1,Card.IsSpecialTrait,TRAIT_UNIVERSE_7),aux.SelfAttackTargetCondition(Card.IsLeader))

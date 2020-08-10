@@ -5,6 +5,7 @@ function scard.initial_effect(c)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_SPECIAL)
 	aux.AddCategory(c,CHAR_CATEGORY_GT,CHAR_CATEGORY_SON_GOKU)
+	aux.AddCode(c,CARD_SON_GOKU)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--to hand, draw
@@ -12,7 +13,6 @@ function scard.initial_effect(c)
 	--awaken
 	aux.EnableAwaken(c,aux.AwakenLifeCondition(4),0,2)
 end
-scard.card_code=CARD_SON_GOKU
 scard.back_side_code=sid+1
 --to hand, draw
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.LifeAreaFilter(Card.IsAbleToHand),LOCATION_LIFE,0,0,1,HINTMSG_ATOHAND)

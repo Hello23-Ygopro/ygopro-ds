@@ -6,7 +6,7 @@ function scard.initial_effect(c)
 	aux.AddCharacter(c,CHARACTER_GENERAL_RILLDO)
 	aux.AddSpecialTrait(c,TRAIT_MACHINE_MUTANT)
 	aux.AddEra(c,ERA_SUPER_17_SAGA)
+	aux.AddCode(c,CARD_GENERAL_RILLDO)
 	--battle card
 	aux.EnableBattleAttribute(c)
 end
-scard.card_code=CARD_GENERAL_RILLDO

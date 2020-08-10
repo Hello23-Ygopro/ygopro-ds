@@ -5,6 +5,7 @@ function scard.initial_effect(c)
 	aux.AddSpecialTrait(c,TRAIT_SAIYAN)
 	aux.AddEra(c,ERA_THE_EVIL_WIZARD_BABIDI_SAGA)
 	aux.AddCategory(c,CHAR_CATEGORY_SON_GOKU)
+	aux.AddCode(c,CARD_SON_GOKU)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--gain skill
@@ -13,7 +14,6 @@ function scard.initial_effect(c)
 	--awaken
 	aux.EnableAwaken(c)
 end
-scard.card_code=CARD_SON_GOKU
 scard.back_side_code=sid+1
 --gain skill
 scard.cost1=aux.DropCost(aux.HandFilter(nil),LOCATION_HAND,0,1)
