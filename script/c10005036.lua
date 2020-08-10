@@ -17,7 +17,7 @@ end
 function scard.dropfilter(c)
 	return c:IsHasEffect(EFFECT_DRAGON_BALL) and c:IsAbleToDrop()
 end
-function scard.retfilter(c,e)
+function scard.thfilter(c,e)
 	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,scard.dropfilter,LOCATION_DECK,0,0,1,HINTMSG_DROP)
@@ -25,7 +25,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc1=Duel.GetFirstTarget()
 	if not tc1 or not tc1:IsRelateToEffect(e) or Duel.SendtoDrop(tc1,REASON_EFFECT)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local tc2=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.retfilter),tp,0,LOCATION_BATTLE,0,1,nil,e):GetFirst()
+	local tc2=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.thfilter),tp,0,LOCATION_BATTLE,0,1,nil,e):GetFirst()
 	if not tc2 then return end
 	Duel.SetTargetCard(tc2)
 	Duel.SendtoHand(tc2,PLAYER_OWNER,REASON_EFFECT)

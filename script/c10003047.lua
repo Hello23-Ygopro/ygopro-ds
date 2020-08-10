@@ -15,7 +15,7 @@ function scard.initial_effect(c)
 end
 --return, gain skill, draw
 scard.con1=aux.AND(aux.SelfLeaderCondition(Card.IsColor,COLOR_BLUE),aux.LifeEqualBelowCondition(PLAYER_SELF,4))
-function scard.retfilter(c,e)
+function scard.thfilter(c,e)
 	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
@@ -24,7 +24,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	--gain combo power
 	aux.AddTempSkillUpdateComboPower(c,c,1,10000)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.ComboAreaFilter(scard.retfilter),tp,0,LOCATION_COMBO,0,1,nil,e)
+	local g=Duel.SelectMatchingCard(tp,aux.ComboAreaFilter(scard.thfilter),tp,0,LOCATION_COMBO,0,1,nil,e)
 	if g:GetCount()>0 then
 		Duel.BreakEffect()
 		Duel.SetTargetCard(g)

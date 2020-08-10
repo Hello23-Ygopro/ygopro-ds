@@ -15,7 +15,7 @@ function scard.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_PLAY)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e1:SetOperation(scard.regop)
+	e1:SetOperation(scard.regop1)
 	c:RegisterEffect(e1)
 	aux.AddAutoSkill(c,0,EVENT_PHASE+PHASE_END,nil,scard.op1,nil,scard.con1)
 end
@@ -24,7 +24,7 @@ function scard.evofilter(c)
 	return c:IsCharacter(CHARACTER_BULMA) and c:IsEnergyAbove(3)
 end
 --drop, untap, draw
-function scard.regop(e,tp,eg,ep,ev,re,r,rp)
+function scard.regop1(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(sid,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 end
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)

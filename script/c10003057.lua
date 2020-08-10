@@ -12,7 +12,7 @@ function scard.playfilter(c,e,tp)
 	return c:IsBattle() and c:IsColor(COLOR_BLUE) and c:IsEnergyBelow(5) and c:IsCanBePlayed(e,0,tp,false,false)
 end
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,scard.playfilter,LOCATION_HAND,0,0,1,HINTMSG_PLAY)
-function scard.retfilter(c,e)
+function scard.thfilter(c,e)
 	return c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
@@ -21,7 +21,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Play(tc,0,tp,tp,false,false,POS_FACEUP_ACTIVE)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.retfilter),tp,0,LOCATION_BATTLE,1,1,nil,e)
+	local g=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.thfilter),tp,0,LOCATION_BATTLE,1,1,nil,e)
 	if g:GetCount()==0 then return end
 	Duel.BreakEffect()
 	Duel.SetTargetCard(g)

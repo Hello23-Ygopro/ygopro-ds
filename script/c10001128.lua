@@ -17,14 +17,14 @@ function scard.initial_effect(c)
 	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,scard.tg1,scard.op1,EFFECT_FLAG_CARD_TARGET)
 end
 --return
-function scard.retfilter(c,e)
+function scard.thfilter(c,e)
 	return c:IsHasEffect(EFFECT_BLOCKER) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.tg1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
 	if chk==0 then return true end
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-	local g=Duel.GetMatchingGroup(aux.BattleAreaFilter(scard.retfilter),tp,0,LOCATION_BATTLE,nil,e)
+	local g=Duel.GetMatchingGroup(aux.BattleAreaFilter(scard.thfilter),tp,0,LOCATION_BATTLE,nil,e)
 	Duel.SetTargetCard(g)
 end
 scard.op1=aux.TargetSendtoHandOperation(nil)

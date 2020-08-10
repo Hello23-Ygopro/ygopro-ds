@@ -13,7 +13,7 @@ function scard.initial_effect(c)
 end
 --return
 scard.tg1=aux.TargetCardFunction(PLAYER_SELF,aux.BattleAreaFilter(Card.IsAbleToHand),LOCATION_BATTLE,0,1,1,HINTMSG_RTOHAND)
-function scard.retfilter(c,e)
+function scard.thfilter(c,e)
 	return c:IsEnergyBelow(3) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
@@ -22,7 +22,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(tc,PLAYER_OWNER,REASON_EFFECT)
 	end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RTOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.retfilter),tp,0,LOCATION_BATTLE,0,1,nil,e)
+	local g=Duel.SelectMatchingCard(tp,aux.BattleAreaFilter(scard.thfilter),tp,0,LOCATION_BATTLE,0,1,nil,e)
 	if g:GetCount()==0 then return end
 	Duel.BreakEffect()
 	Duel.SetTargetCard(g)
