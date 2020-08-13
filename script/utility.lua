@@ -273,7 +273,6 @@ end
 
 --leader card
 function Auxiliary.EnableLeaderAttribute(c)
-	c:SetStatus(STATUS_NO_ENERGY_COST,true)
 	--register card info
 	Auxiliary.RegisterCardInfo(c)
 	local e0=Effect.CreateEffect(c)
@@ -343,9 +342,6 @@ end
 
 --battle card
 function Auxiliary.EnableBattleAttribute(c)
-	if c:GetOriginalEnergy()==0 then
-		c:SetStatus(STATUS_NO_ENERGY_COST,true)
-	end
 	--register card info
 	Auxiliary.RegisterCardInfo(c)
 	--play procedure
@@ -385,9 +381,6 @@ end
 
 --extra card
 function Auxiliary.EnableExtraAttribute(c)
-	if c:GetOriginalEnergy()==0 then
-		c:SetStatus(STATUS_NO_ENERGY_COST,true)
-	end
 	--register card info
 	Auxiliary.RegisterCardInfo(c)
 end

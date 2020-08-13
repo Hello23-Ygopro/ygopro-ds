@@ -1,23 +1,6 @@
 --Temporary Card functions
---check if a card's energy cost is equal to a given value
-local card_is_level=Card.IsLevel
-function Card.IsLevel(c,lv)
-	if card_is_level then
-		return card_is_level(c,lv)
-	else
-		return c:GetLevel()==lv
-	end
-end
---check if a card's power is equal to a given value
-local card_is_attack=Card.IsAttack
-function Card.IsAttack(c,atk)
-	if card_is_attack then
-		return card_is_attack(c,atk)
-	else
-		return c:GetAttack()==atk
-	end
-end
 --check if a card has a particular character name or special trait
+--Note: Overwritten to check for an infinite number of character names and special traits
 local card_is_set_card=Card.IsSetCard
 function Card.IsSetCard(c,...)
 	local setname_list={...}
@@ -26,45 +9,56 @@ function Card.IsSetCard(c,...)
 	end
 	return false
 end
---Overwritten Card functions
---get a card's current energy cost
---Note: Overwritten to get level 0
+--get a card's energy cost
+--Note: Overwritten to check for the correct value if it is changed while the card is not in LOCATION_MZONE
 local card_get_level=Card.GetLevel
 function Card.GetLevel(c)
-	local res=c:GetOriginalLevel()
+	local res=c:GetOriginalEnergy()
 	local t1={c:IsHasEffect(EFFECT_UPDATE_TOTAL_ENERGY_COST)}
 	for _,te1 in pairs(t1) do
 		res=res+te1:GetValue()
 	end
-	local t2={c:IsHasEffect(EFFECT_CHANGE_ENERGY_COST)}
+	local t2={c:IsHasEffect(EFFECT_CHANGE_TOTAL_ENERGY_COST)}
 	for _,te2 in pairs(t2) do
-		res=res+card_get_level(c)
-		if te2:GetValue()==0 then res=0 end
+		res=te2:GetValue()
 	end
-	if res<0 then res=0 end
 	return res
 end
 Card.GetEnergy=Card.GetLevel
+--check if a card's energy cost is equal to a given value
+--Note: See Card.GetEnergy
+local card_is_level=Card.IsLevel
+function Card.IsLevel(c,lv)
+	return c:GetLevel()==lv
+end
+Card.IsEnergy=Card.IsLevel
 --check if a card's energy cost is less than or equal to a given value
+--Note: See Card.GetEnergy
 local card_is_level_below=Card.IsLevelBelow
 function Card.IsLevelBelow(c,lv)
 	return c:GetLevel()<=lv
 end
 Card.IsEnergyBelow=Card.IsLevelBelow
 --check if a card's energy cost is greater than or equal to a given value
+--Note: See Card.GetEnergy
 local card_is_level_above=Card.IsLevelAbove
 function Card.IsLevelAbove(c,lv)
 	return c:GetLevel()>=lv
 end
 Card.IsEnergyAbove=Card.IsLevelAbove
+--check if a card's power is equal to a given value
+local card_is_attack=Card.IsAttack
+function Card.IsAttack(c,atk)
+	return c:GetAttack()==atk
+end
 --get a card's current combo power
---Note: Overwritten to get a card's combo power that is not on the field
+--Note: Overwritten to check for the correct value if it is changed while the card is not in LOCATION_MZONE
 local card_get_defense=Card.GetDefense
 function Card.GetDefense(c)
-	local t={c:IsHasEffect(EFFECT_UPDATE_COMBO_POWER)}
-	local res=card_get_defense(c)
-	for _,te in pairs(t) do
-		res=res+te:GetValue()
+	local res=c:GetOriginalComboPower()
+	local t1={c:IsHasEffect(EFFECT_UPDATE_COMBO_POWER)}
+	for _,te1 in pairs(t1) do
+		res=res+te1:GetValue()
 	end
 	return res
 end
@@ -102,9 +96,9 @@ function Card.GetComboCost(c)
 	local res=c.combo_cost
 	if not res and not c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then return false end
 	if c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then res=0 end
-	local t={c:IsHasEffect(EFFECT_UPDATE_COMBO_COST)}
-	for _,te in pairs(t) do
-		res=res+te:GetValue()
+	local t1={c:IsHasEffect(EFFECT_UPDATE_COMBO_COST)}
+	for _,te1 in pairs(t1) do
+		res=res+te1:GetValue()
 	end
 	return res
 end
@@ -329,6 +323,8 @@ Card.IsCharacterSetCard=Card.IsSetCard
 Card.IsSpecialTraitSetCard=Card.IsSetCard
 --get a card's original energy cost
 Card.GetOriginalEnergy=Card.GetOriginalLevel
+--get a card's original combo power
+Card.GetOriginalComboPower=Card.GetBaseDefense
 --get the energy cost a card had before it left the battle area
 Card.GetPreviousEnergyInPlay=Card.GetPreviousLevelOnField
 --get the player who played a card

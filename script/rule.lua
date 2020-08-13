@@ -3,7 +3,7 @@ Rule={}
 --Not fully implemented: Tap a card to have it attack
 function Rule.RegisterRules(c)
 	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_NO_TURN_RESET)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_NO_TURN_RESET)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_ADJUST)
 	e1:SetRange(LOCATION_ALL)
@@ -186,21 +186,17 @@ function Rule.ApplyRules(e,tp,eg,ep,ev,re,r,rp)
 	e10:SetCode(EVENT_ADJUST)
 	e10:SetOperation(Rule.KnockOutOperation2)
 	Duel.RegisterEffect(e10,0)
-	--set life
+	--win game
 	local e11=Effect.GlobalEffect()
-	e11:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e11:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e11:SetCode(EVENT_ADJUST)
-	e11:SetOperation(Rule.SetLifeCountOperation)
+	e11:SetOperation(Rule.WinOperation)
 	Duel.RegisterEffect(e11,0)
-	--win game
-	local e12=Effect.GlobalEffect()
-	e12:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e12:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e12:SetCode(EVENT_ADJUST)
-	e12:SetOperation(Rule.WinOperation)
-	Duel.RegisterEffect(e12,0)
 	--override yugioh rules
+	--set lp
+	Rule.set_lp()
+	--set level status
+	Rule.set_level_status()
 	--cannot summon
 	Rule.cannot_summon()
 	--cannot mset
@@ -468,13 +464,6 @@ function Rule.KnockOutOperation2(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Readjust()
 	end
 end
---set life
-function Rule.SetLifeCountOperation(e,tp,eg,ep,ev,re,r,rp)
-	local ct1=Duel.GetMatchingGroupCount(aux.LifeAreaFilter(nil),PLAYER_ONE,LOCATION_LIFE,0,nil)
-	local ct2=Duel.GetMatchingGroupCount(aux.LifeAreaFilter(nil),PLAYER_TWO,LOCATION_LIFE,0,nil)
-	if Duel.GetLifeCount(PLAYER_ONE)~=ct1 then Duel.SetLP(PLAYER_ONE,ct1) end
-	if Duel.GetLifeCount(PLAYER_TWO)~=ct2 then Duel.SetLP(PLAYER_TWO,ct2) end
-end
 --win game
 function Rule.WinOperation(e,tp,eg,ep,ev,re,r,rp)
 	local win={}
@@ -489,6 +478,44 @@ function Rule.WinOperation(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --override yugioh rules
+--set lp
+function Rule.set_lp(tp)
+	local e1=Effect.GlobalEffect()
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_ADJUST)
+	e1:SetOperation(Rule.SetLPOperation)
+	Duel.RegisterEffect(e1,0)
+end
+function Rule.SetLPOperation(e,tp,eg,ep,ev,re,r,rp)
+	local ct1=Duel.GetMatchingGroupCount(aux.LifeAreaFilter(nil),PLAYER_ONE,LOCATION_LIFE,0,nil)
+	local ct2=Duel.GetMatchingGroupCount(aux.LifeAreaFilter(nil),PLAYER_TWO,LOCATION_LIFE,0,nil)
+	if Duel.GetLifeCount(PLAYER_ONE)~=ct1 then Duel.SetLP(PLAYER_ONE,ct1) end
+	if Duel.GetLifeCount(PLAYER_TWO)~=ct2 then Duel.SetLP(PLAYER_TWO,ct2) end
+end
+--set level status
+function Rule.set_level_status()
+	local e1=Effect.GlobalEffect()
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_ADJUST)
+	e1:SetOperation(Rule.SetLevelStatusOp)
+	Duel.RegisterEffect(e1,0)
+end
+function Rule.EnableLevelStatusFilter(c)
+	return not c:IsStatus(STATUS_NO_ENERGY_COST) and c:GetEnergy()==0
+end
+function Rule.DisableLevelStatusFilter(c)
+	return c:IsStatus(STATUS_NO_ENERGY_COST) and c:GetEnergy()>0
+end
+function Rule.SetLevelStatusOp(e,tp,eg,ep,ev,re,r,rp)
+	local g1=Duel.GetMatchingGroup(Rule.EnableLevelStatusFilter,0,LOCATION_ALL,LOCATION_ALL,nil)
+	for c1 in aux.Next(g1) do
+		c1:SetStatus(STATUS_NO_ENERGY_COST,true)
+	end
+	local g2=Duel.GetMatchingGroup(Rule.DisableLevelStatusFilter,0,LOCATION_ALL,LOCATION_ALL,nil)
+	for c2 in aux.Next(g2) do
+		c2:SetStatus(STATUS_NO_ENERGY_COST,false)
+	end
+end
 --cannot summon
 function Rule.cannot_summon()
 	local e1=Effect.GlobalEffect()
