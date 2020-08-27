@@ -1690,16 +1690,40 @@ function Auxiliary.PayEnergyCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local t3={c:IsHasEffect(EFFECT_UPDATE_GREEN_PLAY_COST)}
 	local t4={c:IsHasEffect(EFFECT_UPDATE_YELLOW_PLAY_COST)}
 	if #t1>0 and color==COLOR_RED then
-		for _,te1 in pairs(t1) do color_cost=color_cost+te1:GetValue() end
+		for _,te1 in pairs(t1) do
+			if type(te1:GetValue())=="function" then
+				color_cost=color_cost+te1:GetValue()(te1,c)
+			else
+				color_cost=color_cost+te1:GetValue()
+			end
+		end
 	end
 	if #t2>0 and color==COLOR_BLUE then
-		for _,te2 in pairs(t2) do color_cost=color_cost+te2:GetValue() end
+		for _,te2 in pairs(t2) do
+			if type(te2:GetValue())=="function" then
+				color_cost=color_cost+te2:GetValue()(te2,c)
+			else
+				color_cost=color_cost+te2:GetValue()
+			end
+		end
 	end
 	if #t3>0 and color==COLOR_GREEN then
-		for _,te3 in pairs(t3) do color_cost=color_cost+te3:GetValue() end
+		for _,te3 in pairs(t3) do
+			if type(te3:GetValue())=="function" then
+				color_cost=color_cost+te3:GetValue()(te3,c)
+			else
+				color_cost=color_cost+te3:GetValue()
+			end
+		end
 	end
 	if #t4>0 and color==COLOR_YELLOW then
-		for _,te4 in pairs(t4) do color_cost=color_cost+te4:GetValue() end
+		for _,te4 in pairs(t4) do
+			if type(te4:GetValue())=="function" then
+				color_cost=color_cost+te4:GetValue()(te4,c)
+			else
+				color_cost=color_cost+te4:GetValue()
+			end
+		end
 	end
 	--check for no specified cost effect before "When you activate an Extra Card"
 	if c:IsHasEffect(EFFECT_NO_SPECIFIED_COST) then
@@ -1762,19 +1786,49 @@ function Auxiliary.PaySkillCost(color,color_cost,colorless_cost)
 				--check for unspecified cost changing effect
 				local t5={c:IsHasEffect(EFFECT_UPDATE_COLORLESS_SKILL_COST)}
 				if #t1>0 and color==COLOR_RED then
-					for _,te1 in pairs(t1) do min_color_cost=min_color_cost+te1:GetValue() end
+					for _,te1 in pairs(t1) do
+						if type(te1:GetValue())=="function" then
+							min_color_cost=min_color_cost+te1:GetValue()(te1,c)
+						else
+							min_color_cost=min_color_cost+te1:GetValue()
+						end
+					end
 				end
 				if #t2>0 and color==COLOR_BLUE then
-					for _,te2 in pairs(t2) do min_color_cost=min_color_cost+te2:GetValue() end
+					for _,te2 in pairs(t2) do
+						if type(te2:GetValue())=="function" then
+							min_color_cost=min_color_cost+te2:GetValue()(te2,c)
+						else
+							min_color_cost=min_color_cost+te2:GetValue()
+						end
+					end
 				end
 				if #t3>0 and color==COLOR_GREEN then
-					for _,te3 in pairs(t3) do min_color_cost=min_color_cost+te3:GetValue() end
+					for _,te3 in pairs(t3) do
+						if type(te3:GetValue())=="function" then
+							min_color_cost=min_color_cost+te3:GetValue()(te3,c)
+						else
+							min_color_cost=min_color_cost+te3:GetValue()
+						end
+					end
 				end
 				if #t4>0 and color==COLOR_YELLOW then
-					for _,te4 in pairs(t4) do min_color_cost=min_color_cost+te4:GetValue() end
+					for _,te4 in pairs(t4) do
+						if type(te4:GetValue())=="function" then
+							min_color_cost=min_color_cost+te4:GetValue()(te4,c)
+						else
+							min_color_cost=min_color_cost+te4:GetValue()
+						end
+					end
 				end
 				if #t5>0 then
-					for _,te5 in pairs(t5) do min_colorless_cost=min_colorless_cost+te5:GetValue() end
+					for _,te5 in pairs(t5) do
+						if type(te5:GetValue())=="function" then
+							min_color_cost=min_color_cost+te5:GetValue()(te5,c)
+						else
+							min_color_cost=min_color_cost+te5:GetValue()
+						end
+					end
 				end
 				--check for no specified cost effect
 				if c:IsHasEffect(EFFECT_NO_SPECIFIED_COST) then

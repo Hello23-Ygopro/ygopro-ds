@@ -16,11 +16,19 @@ function Card.GetLevel(c)
 	local res=c:GetOriginalEnergy()
 	local t1={c:IsHasEffect(EFFECT_UPDATE_TOTAL_ENERGY_COST)}
 	for _,te1 in pairs(t1) do
-		res=res+te1:GetValue()
+		if type(te1:GetValue())=="function" then
+			res=res+te1:GetValue()(te1,c)
+		else
+			res=res+te1:GetValue()
+		end
 	end
 	local t2={c:IsHasEffect(EFFECT_CHANGE_TOTAL_ENERGY_COST)}
 	for _,te2 in pairs(t2) do
-		res=te2:GetValue()
+		if type(te2:GetValue())=="function" then
+			res=te2:GetValue()(te2,c)
+		else
+			res=te2:GetValue()
+		end
 	end
 	return res
 end
@@ -58,7 +66,11 @@ function Card.GetDefense(c)
 	local res=c:GetOriginalComboPower()
 	local t1={c:IsHasEffect(EFFECT_UPDATE_COMBO_POWER)}
 	for _,te1 in pairs(t1) do
-		res=res+te1:GetValue()
+		if type(te1:GetValue())=="function" then
+			res=res+te1:GetValue()(te1,c)
+		else
+			res=res+te1:GetValue()
+		end
 	end
 	return res
 end
@@ -98,7 +110,11 @@ function Card.GetComboCost(c)
 	if c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then res=0 end
 	local t1={c:IsHasEffect(EFFECT_UPDATE_COMBO_COST)}
 	for _,te1 in pairs(t1) do
-		res=res+te1:GetValue()
+		if type(te1:GetValue())=="function" then
+			res=res+te1:GetValue()(te1,c)
+		else
+			res=res+te1:GetValue()
+		end
 	end
 	return res
 end

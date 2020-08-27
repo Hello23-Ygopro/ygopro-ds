@@ -356,7 +356,11 @@ function Duel.SendtoEnergy(targets,pos,reason)
 				--check for "[Permanent] You can only place up to N energy."
 				local t={Duel.IsPlayerAffectedByEffect(tc:GetOwner(),EFFECT_LIMIT_ENERGY)}
 				for _,te in pairs(t) do
-					val=te:GetValue()
+					if type(te:GetValue())=="function" then
+						val=te:GetValue()(te,tc)
+					else
+						val=te:GetValue()
+					end
 				end
 				if val>0 then
 					local sum=val-Duel.GetEnergyCount(tc:GetOwner())
@@ -373,7 +377,11 @@ function Duel.SendtoEnergy(targets,pos,reason)
 				--check for "[Permanent] You can only place up to N energy."
 				local t={Duel.IsPlayerAffectedByEffect(tc:GetOwner(),EFFECT_LIMIT_ENERGY)}
 				for _,te in pairs(t) do
-					val=te:GetValue()
+					if type(te:GetValue())=="function" then
+						val=te:GetValue()(te,tc)
+					else
+						val=te:GetValue()
+					end
 				end
 				if val>0 then
 					local sum=val-Duel.GetEnergyCount(tc:GetOwner())
@@ -691,10 +699,12 @@ aux.keyskill_select_list={
 	--add new keyword skills here
 }
 --negate a keyword skill of a card
-function Duel.NegateKeySkill(c,code,reset_flag)
+function Duel.NegateKeySkill(targets,code,reset_flag)
 	--code: the code of the keyword skill to negate
 	reset_flag=reset_flag or 0
-	c:RegisterFlagEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_DROP-RESET_LEAVE+reset_flag,0,1,code)
+	for tc in aux.Next(targets) do
+		tc:RegisterFlagEffect(code,RESET_EVENT+RESETS_STANDARD-RESET_DROP-RESET_LEAVE+reset_flag,0,1,code)
+	end
 	return true
 end
 --check if a player can win the game
