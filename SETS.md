@@ -177,4 +177,5 @@
 - **June 5, 2020** : UW01 Starter Deck | Clan Collusion (DBS-SD13) : `-`
 - **June 5, 2020** : UW01 Starter Deck | Saiyan Wonder (DBS-SD14) : `-`
 - **July 17, 2020** : UW01 Booster Pack | Rise of the Unison Warrior (DBS-B10) : `10010000-`
+- **August 7, 2020** : Expansion Set 13 | Special Anniversary Box 2020 (DBS-BE13) : `-`
 </details>

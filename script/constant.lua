@@ -577,6 +577,7 @@ CHARACTER_SYN_SHENRON				=0x1ea	--Introduced by "BT10-093 Syn Shenron"
 CHARACTER_HAZE_SHENRON				=0x1ec	--Introduced by "BT10-117 Haze Shenron, Venomous Mist"
 CHARACTER_MECHIKABURA				=0x1ed	--Introduced by "BT10-141 Mechikabura, the Broken Seal"
 CHARACTER_GOGETA_GT					=0x1ee	--Introduced by "BT10-154 SS4 Gogeta, Peerless Fusion"
+CHARACTER_GARLIC_JR					=0x1ef	--Introduced by "EX13-26 Garlic Jr., Immortal Agent of Destruction"
 --<<Special Trait>>
 TRAIT_GOD							=0x2	--Introduced by "BT1-001 Champa"
 TRAIT_ALIEN							=0x6	--Introduced by "BT1-003 Hit"
