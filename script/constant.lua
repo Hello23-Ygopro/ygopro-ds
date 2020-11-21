@@ -1309,6 +1309,7 @@ EVENT_BECOME_TARGET				=1028	--(unused)
 EVENT_KOED						=1029	--When a card is KO-ed
 EVENT_MOVE						=1030	--(unused, not available in YGOPro Percy)
 EVENT_ADJUST					=1040	--After adjusting the adjust_all() card
+EVENT_BREAK_EFFECT				=1050	--(unused, not available in YGOPro Percy)
 EVENT_SUMMON_SUCCESS			=1100	--(unused)
 EVENT_FLIP_SUMMON_SUCCESS		=1101	--(unused)
 EVENT_PLAY						=1102	--When a card is played in the Battle Area
