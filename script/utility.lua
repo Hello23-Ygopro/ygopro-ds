@@ -262,8 +262,8 @@ function Auxiliary.SortDeck(sort_player,target_player,count,seq)
 		end
 	else Duel.MoveSequence(g:GetFirst(),seq) end
 end
---check if a card has a particular name (not to be confused with Card.IsCode)
---required for effects that check if a non-aliased card has a particular name (e.g. "BT5-003 Oblivious Rampage Son Goku")
+--check if a card has a given name (not to be confused with Card.IsCode)
+--required for effects that check if a non-aliased card has a given name (e.g. "BT5-003 Oblivious Rampage Son Goku")
 function Auxiliary.IsCode(c,code)
 	--c: the card to check
 	--code: the id of the card's name to check
@@ -276,7 +276,7 @@ function Auxiliary.EnableLeaderAttribute(c)
 	--register card info
 	Auxiliary.RegisterCardInfo(c)
 	local e0=Effect.CreateEffect(c)
-	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SINGLE_RANGE)
+	e0:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetCode(EFFECT_REMOVE_TYPE)
 	e0:SetValue(TYPE_TOKEN)
@@ -325,7 +325,7 @@ function Auxiliary.BattleRule(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_CANNOT_BE_BATTLE_TARGET)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetRange(range)
 	e1:SetCondition(Auxiliary.CannotBeBattleTargetCondition)
 	e1:SetValue(Auxiliary.CannotBeBattleTargetValue)
@@ -398,7 +398,7 @@ end
 function Auxiliary.AddSinglePermanentSkill(c,code,con_func,range)
 	--c: the card that has the [Permanent] effect
 	--con_func: condition function
-	--range: location if the [Permanent] effect is only active while in a particular area
+	--range: location if the [Permanent] effect is only active while in a given area
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(code)
@@ -1178,13 +1178,13 @@ end
 --f: Duel.Damage to inflict damage to a player
 --f: Duel.Draw to let a player draw cards
 --f: Duel.GetControl to gain control of cards
---f: Duel.SendDecktoptoDropUpTo to send up to a number of cards from the top of a player's deck to the drop area
---f: Duel.SendDecktoptoEnergy to send cards from the top of a player's deck to the energy area
+--f: Duel.SendDecktoDropUpTo to send up to a number of cards from the top of a player's deck to the drop area
+--f: Duel.SendDecktoEnergy to send cards from the top of a player's deck to the energy area
 function Auxiliary.DuelOperation(f,p,...)
 	local ext_params={...}
 	return	function(e,tp,eg,ep,ev,re,r,rp)
 				local player=(p==PLAYER_SELF and tp) or (p==PLAYER_OPPO and 1-tp)
-				return f(player,table.unpack(ext_params))
+				f(player,table.unpack(ext_params))
 			end
 end
 --target for effects that target cards from the top of your deck
@@ -1229,7 +1229,7 @@ function Auxiliary.TargetDecktopSendtoHandOperation(ct,seq_or_loc,conf)
 				elseif seq_or_loc==SEQ_DECK_SHUFFLE then
 					Duel.ShuffleDeck(tp)
 				elseif seq_or_loc==LOCATION_DROP then
-					Duel.SendDecktoptoDrop(tp,ct-add_count,REASON_EFFECT)
+					Duel.SendDecktoDrop(tp,ct-add_count,REASON_EFFECT)
 				end
 			end
 end
@@ -1252,7 +1252,7 @@ function Auxiliary.TargetDecktopPlayOperation(ct,seq_or_loc,pos,pay_energy)
 				elseif seq_or_loc==SEQ_DECK_SHUFFLE then
 					Duel.ShuffleDeck(tp)
 				elseif seq_or_loc==LOCATION_DROP then
-					Duel.SendDecktoptoDrop(tp,ct-add_count,REASON_EFFECT)
+					Duel.SendDecktoDrop(tp,ct-add_count,REASON_EFFECT)
 				end
 			end
 end
@@ -1371,7 +1371,7 @@ function Auxiliary.TargetDecktopSendtoComboOperation(ct,seq_or_loc)
 				elseif seq_or_loc==SEQ_DECK_SHUFFLE then
 					Duel.ShuffleDeck(tp)
 				elseif seq_or_loc==LOCATION_DROP then
-					Duel.SendDecktoptoDrop(tp,ct-add_count,REASON_EFFECT)
+					Duel.SendDecktoDrop(tp,ct-add_count,REASON_EFFECT)
 				end
 			end
 end
@@ -1892,8 +1892,8 @@ end
 --e.g. "EX03-30 Toppo Unleashed"
 function Auxiliary.DropDecktopCost(ct)
 	return	function(e,tp,eg,ep,ev,re,r,rp,chk)
-				if chk==0 then return Duel.IsPlayerCanSendDecktoptoDrop(tp,ct) end
-				Duel.SendDecktoptoDrop(tp,ct,REASON_COST)
+				if chk==0 then return Duel.IsPlayerCanSendDecktoDrop(tp,ct) end
+				Duel.SendDecktoDrop(tp,ct,REASON_COST)
 			end
 end
 --cost for sending a card to your hand
@@ -2179,7 +2179,7 @@ function Auxiliary.TargetCardFunction(p,f,s,o,min,max,desc,con_func,ex,...)
 				con_func=con_func or aux.TRUE
 				local c=e:GetHandler()
 				local exg=Group.CreateGroup()
-				if c:IsLocationHand() and s==LOCATION_HAND then exg:AddCard(c) end
+				if c:IsLocationHand() and bit.band(s,LOCATION_HAND)~=0 then exg:AddCard(c) end
 				if type(ex)=="Card" then exg:AddCard(ex)
 				elseif type(ex)=="Group" then exg:Merge(ex)
 				elseif type(ex)=="function" then

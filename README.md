@@ -139,7 +139,7 @@ If you do not build your deck according to the following rules, you will lose th
 - `0x200000	Attribute-related` = Lists "color" or a particular color in the card's text
 - `0x400000	Reduce LP` = Inflict damage to the opponent
 - `0x800000	Increase LP` = ～Reserved～
-- `0x1000000	Cannot Be Destroyed` = Cannot be KO-ed; [Indestructible]
+- `0x1000000	Cannot Be Destroyed` = Prevent a card from being KO-ed; [Indestructible]
 - `0x2000000	Cannot Be Targeted` = [Barrier]
 - `0x4000000	Counter` = ～Reserved～
 - `0x8000000	Gamble` = ～Reserved～
@@ -153,6 +153,7 @@ If you do not build your deck according to the following rules, you will lose th
 <summary>Card Search</summary>
 
 You can search for the following specific card information in YGOPro:
+- Card Skill: Use the `No Skill` tab for skill-less cards
 - Card Type: Use the `Type` tab, or type `Type:` in the search
 - Character: **N/A** (You can type `<Character>`, `<` or `>` to list all cards that reference a character)
 - Color: Use the `Color` tab, or type `Color:` in the search bar
@@ -163,7 +164,6 @@ You can search for the following specific card information in YGOPro:
 - Power: Use the `Power` tab
 - Rarity: **N/A**
 - Series (Card Set): **N/A**
-- Skill No Skill: Use the `No Skill` tab for skill-less cards
 - Special Trait: **N/A** (You can type `<<Special Trait>>`, `<<` or `>>` to list all cards that reference a special trait)
 </details>
 <details>

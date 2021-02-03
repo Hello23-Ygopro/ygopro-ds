@@ -45,7 +45,7 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 		Duel.DisableShuffleCheck()
 		ct=ct+Duel.SendtoHand(tc,PLAYER_OWNER,REASON_EFFECT)
 		if ct>0 then Duel.ShuffleHand(tp) end
-		Duel.SendDecktoptoDrop(tp,3-ct,REASON_EFFECT)
+		Duel.SendDecktoDrop(tp,3-ct,REASON_EFFECT)
 	else
 		Duel.KO(tc,REASON_EFFECT)
 	end

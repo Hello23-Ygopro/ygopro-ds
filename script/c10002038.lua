@@ -39,8 +39,8 @@ function scard.con1(e)
 	return val~=0 and e:GetHandler():GetFlagEffect(sid)==0
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	if not Duel.IsPlayerCanSendDecktoptoDrop(tp,1) then return end
+	if not Duel.IsPlayerCanSendDecktoDrop(tp,1) then return end
 	Duel.Hint(HINT_CARD,0,sid)
-	Duel.SendDecktoptoDrop(tp,e:GetLabel()*5,REASON_EFFECT)
+	Duel.SendDecktoDrop(tp,e:GetLabel()*5,REASON_EFFECT)
 	e:GetHandler():RegisterFlagEffect(sid,RESET_EVENT+RESETS_STANDARD,0,1)
 end

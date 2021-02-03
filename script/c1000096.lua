@@ -12,5 +12,5 @@ function scard.initial_effect(c)
 	--over realm
 	aux.EnableOverRealm(c,3)
 	--drop
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,3,REASON_EFFECT),nil,aux.OverRealmPlayCondition)
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,3,REASON_EFFECT),nil,aux.OverRealmPlayCondition)
 end

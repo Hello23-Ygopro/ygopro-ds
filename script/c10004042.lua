@@ -9,7 +9,7 @@ function scard.initial_effect(c)
 	--battle card
 	aux.EnableBattleAttribute(c)
 	--drop
-	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,3,REASON_EFFECT))
+	aux.AddSingleAutoSkill(c,0,EVENT_ATTACK_ANNOUNCE,nil,aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,3,REASON_EFFECT))
 	--play
 	aux.AddActivateMainSkill(c,1,scard.op1,scard.cost1,scard.tg1,EFFECT_FLAG_CARD_TARGET)
 end

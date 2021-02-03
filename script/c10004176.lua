@@ -26,7 +26,7 @@ end
 --drop, untap
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if not aux.SelfLeaderCondition(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN)(e,tp,eg,ep,ev,re,r,rp) then return end
-	Duel.SendDecktoptoDrop(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDrop(tp,3,REASON_EFFECT)
 	if not Duel.IsExistingMatchingCard(aux.DropAreaFilter(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN),tp,LOCATION_DROP,0,1,nil) then return end
 	Duel.BreakEffect()
 	Duel.SwitchtoActive(e:GetHandler(),REASON_EFFECT)

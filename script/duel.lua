@@ -427,26 +427,26 @@ function Duel.SendtoDrop(targets,reason)
 	return res
 end
 --send a card from the top of a player's deck to the drop area
-function Duel.SendDecktoptoDrop(player,count,reason)
+function Duel.SendDecktoDrop(player,count,reason)
 	local g=Duel.GetDecktopGroup(player,count)
 	Duel.DisableShuffleCheck()
 	return Duel.SendtoDrop(g,reason)
 end
 --check if a player can send a card from the top of their deck to the drop area
-function Duel.IsPlayerCanSendDecktoptoDrop(player,count)
+function Duel.IsPlayerCanSendDecktoDrop(player,count)
 	local g=Duel.GetDecktopGroup(player,count)
 	return g:FilterCount(Card.IsAbleToDrop,nil)>0
 end
 --send up to a number of cards from the top of a player's deck to the drop area
-function Duel.SendDecktoptoDropUpTo(player,count,reason)
+function Duel.SendDecktoDropUpTo(player,count,reason)
 	local deck_count=Duel.GetFieldGroupCount(player,LOCATION_DECK,0)
-	if deck_count>0 and Duel.IsPlayerCanSendDecktoptoDrop(player,1) and Duel.SelectYesNo(player,YESNOMSG_DROP) then
+	if deck_count>0 and Duel.IsPlayerCanSendDecktoDrop(player,1) and Duel.SelectYesNo(player,YESNOMSG_DROP) then
 		if deck_count>count then deck_count=count end
 		local t={}
 		for i=1,deck_count do t[i]=i end
 		Duel.Hint(HINT_SELECTMSG,player,HINTMSG_ANNOUNCEDROP)
 		local an=Duel.AnnounceNumber(player,table.unpack(t))
-		return Duel.SendDecktoptoDrop(player,an,reason)
+		return Duel.SendDecktoDrop(player,an,reason)
 	end
 	return 0
 end
@@ -775,7 +775,7 @@ end
 --get the current life a player has
 Duel.GetLifeCount=Duel.GetLP
 --send a card from the top of a player's deck to the energy area
-Duel.SendDecktoptoEnergy=Duel.DiscardDeck
+Duel.SendDecktoEnergy=Duel.DiscardDeck
 --make 2 cards in the battle area participate in a battle
 Duel.DoBattle=Duel.CalculateDamage
 --check if a player can play a token

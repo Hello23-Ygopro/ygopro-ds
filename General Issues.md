@@ -5,9 +5,9 @@
 	- [ ] Rarity
 	- [ ] Card Number
 	- [ ] Block (the card set block the card is part of)
-- You can only search for a card's Character Name by typing `Character Name: Name Goes Here` in the search bar.
-- You can only search for a card's Special Trait by typing `Special Trait: Name Goes Here` in the search bar.
-- You can only search for a card's Era by typing `Era: Name Goes Here` in the search bar.
+- You can only search for a card's Character Name by typing `Character Name:` in the search bar.
+- You can only search for a card's Special Trait by typing `Special Trait:` in the search bar.
+- You can only search for a card's Era by typing `Era:` in the search bar.
 ## Deck Building
 - [ ] **Your deck isn't limited to exactly 50 cards**
 - The player whose deck isn't exactly 50 cards loses the game.

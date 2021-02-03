@@ -15,4 +15,4 @@ function scard.initial_effect(c)
 end
 --drop
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_RED)
-scard.op1=aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,3,REASON_EFFECT)
+scard.op1=aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,3,REASON_EFFECT)

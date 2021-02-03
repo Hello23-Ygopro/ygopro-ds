@@ -15,7 +15,7 @@ scard.front_side_code=sid-1
 --draw, drop
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(tp,1,REASON_EFFECT)
-	Duel.SendDecktoptoDrop(1-tp,2,REASON_EFFECT)
+	Duel.SendDecktoDrop(1-tp,2,REASON_EFFECT)
 end
 --drop, negate attack
 function scard.con1(e,tp,eg,ep,ev,re,r,rp)

@@ -7,7 +7,7 @@ function scard.initial_effect(c)
 	--leader card
 	aux.EnableLeaderAttribute(c)
 	--drop
-	local e1=aux.AddActivateMainSkill(c,0,aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,2,REASON_EFFECT))
+	local e1=aux.AddActivateMainSkill(c,0,aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,2,REASON_EFFECT))
 	e1:SetCountLimit(1)
 	--draw
 	aux.AddSingleAutoSkill(c,1,EVENT_ATTACK_ANNOUNCE,nil,scard.op1)

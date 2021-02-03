@@ -13,7 +13,7 @@ function scard.initial_effect(c)
 end
 --drop, draw, token
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDropUpTo(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDropUpTo(tp,3,REASON_EFFECT)
 	if not Duel.IsExistingMatchingCard(aux.DropAreaFilter(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN),tp,LOCATION_DROP,0,1,nil) then return end
 	Duel.BreakEffect()
 	Duel.Draw(tp,1,REASON_EFFECT)

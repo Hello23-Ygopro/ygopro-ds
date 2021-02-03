@@ -24,7 +24,7 @@ function scard.evofilter(c,e,tp)
 		and c:IsCanBePlayed(e,SUMMON_TYPE_EVOLVE,tp,false,false) and c:IsCanBeEffectTarget(e)
 end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDrop(tp,10,REASON_EFFECT)
+	Duel.SendDecktoDrop(tp,10,REASON_EFFECT)
 	local c=e:GetHandler()
 	if not c:IsCanEvolve() then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EVOLVEINTO)

@@ -14,7 +14,7 @@ function scard.initial_effect(c)
 end
 --drop
 scard.con1=aux.SelfLeaderCondition(Card.IsColor,COLOR_RED+COLOR_BLUE)
-scard.op1=aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,2,REASON_EFFECT)
+scard.op1=aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,2,REASON_EFFECT)
 --gain skill
 function scard.op2(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

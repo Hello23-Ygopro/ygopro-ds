@@ -9,5 +9,5 @@ function scard.initial_effect(c)
 	--battle card
 	aux.EnableBattleAttribute(c)
 	--charge
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoptoEnergy,PLAYER_SELF,1,REASON_EFFECT))
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoEnergy,PLAYER_SELF,1,REASON_EFFECT))
 end

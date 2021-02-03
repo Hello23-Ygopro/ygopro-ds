@@ -15,7 +15,7 @@ end
 scard.back_side_code=sid+1
 --drop, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDropUpTo(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDropUpTo(tp,3,REASON_EFFECT)
 	if not Duel.GetOperatedGroup():IsExists(aux.DropAreaFilter(Card.IsSpecialTrait,TRAIT_FRIEZA_CLAN),1,nil) then return end
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) or not c:IsFaceup() then return end

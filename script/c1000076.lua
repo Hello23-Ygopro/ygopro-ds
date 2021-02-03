@@ -20,7 +20,7 @@ end
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if not tc or not tc:IsRelateToEffect(e) or Duel.SendtoDrop(tc,REASON_EFFECT)==0 then return end
-	Duel.SendDecktoptoDropUpTo(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDropUpTo(tp,3,REASON_EFFECT)
 	Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_DROP)
 	local g=Duel.SelectMatchingCard(1-tp,aux.HandFilter(scard.dropfilter),1-tp,LOCATION_HAND,0,1,1,nil,e)
 	if g:GetCount()==0 then return end

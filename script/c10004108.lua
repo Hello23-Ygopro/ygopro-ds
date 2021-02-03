@@ -14,7 +14,7 @@ end
 scard.back_side_code=sid+1
 --drop, draw
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SendDecktoptoDrop(tp,3,REASON_EFFECT)==0 then return end
+	if Duel.SendDecktoDrop(tp,3,REASON_EFFECT)==0 then return end
 	local c=e:GetHandler()
 	local g=Duel.GetOperatedGroup()
 	if not g:IsExists(aux.DropAreaFilter(aux.NOT(Card.IsColor,COLOR_BLACK)),1,nil)

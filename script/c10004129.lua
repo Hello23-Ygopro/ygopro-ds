@@ -14,4 +14,4 @@ function scard.initial_effect(c)
 end
 --drop
 scard.con1=aux.SelfLeaderCondition(Card.IsCharacter,CHARACTER_DEMIGRA)
-scard.op1=aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,2,REASON_EFFECT)
+scard.op1=aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,2,REASON_EFFECT)

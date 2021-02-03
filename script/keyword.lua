@@ -954,7 +954,7 @@ function Auxiliary.EnableBarrier(c,con_func,s_range,o_range,targ_func)
 		if targ_func then e1:SetTarget(targ_func) end
 	else
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetProperty(EFFECT_FLAG_KEYSKILL+EFFECT_FLAG_SINGLE_RANGE)
+		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_KEYSKILL)
 	end
 	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
 	e1:SetRange(range)
@@ -1028,7 +1028,7 @@ function Auxiliary.EnableDeflect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetCode(EFFECT_IMMUNE_EFFECT)
-	e1:SetProperty(EFFECT_FLAG_KEYSKILL+EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_KEYSKILL)
 	e1:SetRange(LOCATION_BATTLE)
 	e1:SetCondition(Auxiliary.DeflectCondition)
 	e1:SetValue(Auxiliary.DeflectValue)
@@ -1163,7 +1163,7 @@ function Auxiliary.BurstCost(ct)
 				local g=Duel.GetDecktopGroup(tp,ct)
 				if chk==0 then return g:IsExists(Card.IsAbleToDrop,ct,nil)
 					and e:GetHandler():IsHasEffect(EFFECT_BURST) end
-				Duel.SendDecktoptoDrop(tp,ct,REASON_COST)
+				Duel.SendDecktoDrop(tp,ct,REASON_COST)
 			end
 end
 --"[Sparking N] (This skill takes effect when you have N or more cards in your Drop Area.)"

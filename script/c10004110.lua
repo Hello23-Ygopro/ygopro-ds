@@ -21,5 +21,5 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	--gain power
 	aux.AddTempSkillUpdatePower(c,c,1,5000)
 	Duel.BreakEffect()
-	Duel.SendDecktoptoDrop(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDrop(tp,3,REASON_EFFECT)
 end

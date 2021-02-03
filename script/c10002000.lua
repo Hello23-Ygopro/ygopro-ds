@@ -16,7 +16,7 @@ end
 scard.back_side_code=sid+1
 --drop, gain skill
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SendDecktoptoDropUpTo(tp,1,REASON_EFFECT)==0 then return end
+	if Duel.SendDecktoDropUpTo(tp,1,REASON_EFFECT)==0 then return end
 	local tc=Duel.GetOperatedGroup():GetFirst()
 	if not tc:IsColor(COLOR_RED) then return end
 	local c=e:GetHandler()

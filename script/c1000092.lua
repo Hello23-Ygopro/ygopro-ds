@@ -23,5 +23,5 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	if tc and tc:IsRelateToEffect(e) then
 		Duel.SendtoWarp(tc,REASON_EFFECT)
 	end
-	Duel.SendDecktoptoDrop(1-tp,2,REASON_EFFECT)
+	Duel.SendDecktoDrop(1-tp,2,REASON_EFFECT)
 end

@@ -18,7 +18,7 @@ end
 scard.back_side_code=sid+1
 --drop, draw
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDropUpTo(tp,2,REASON_EFFECT)
+	Duel.SendDecktoDropUpTo(tp,2,REASON_EFFECT)
 	Duel.BreakEffect()
 	Duel.Draw(tp,1,REASON_EFFECT)
 end

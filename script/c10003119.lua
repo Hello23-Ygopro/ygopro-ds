@@ -14,7 +14,7 @@ end
 scard.back_side_code=sid+1
 --drop, draw
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDrop(tp,2,REASON_EFFECT)
+	Duel.SendDecktoDrop(tp,2,REASON_EFFECT)
 	if Duel.IsExistingMatchingCard(aux.BattleAreaFilter(Card.IsColor,COLOR_RED+COLOR_BLUE),tp,LOCATION_BATTLE,0,1,nil)
 		and Duel.IsExistingMatchingCard(aux.DropAreaFilter(Card.IsColor,COLOR_RED+COLOR_BLUE),tp,LOCATION_DROP,0,1,nil)
 		and e:GetHandler():IsRelateToEffect(e) then

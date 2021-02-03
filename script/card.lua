@@ -1,5 +1,5 @@
 --Temporary Card functions
---check if a card has a particular character name or special trait
+--check if a card has a given character name or special trait
 --Note: Overwritten to check for an infinite number of character names and special traits
 local card_is_set_card=Card.IsSetCard
 function Card.IsSetCard(c,...)
@@ -75,7 +75,7 @@ function Card.GetDefense(c)
 	return res
 end
 Card.GetComboPower=Card.GetDefense
---check if a card has a particular skill
+--check if a card has a given skill
 --Note: Overwritten to not count a negated keyword skill
 local card_is_has_effect=Card.IsHasEffect
 function Card.IsHasEffect(c,code)
@@ -119,25 +119,19 @@ function Card.GetComboCost(c)
 	return res
 end
 --check if a card's combo cost is equal to a given value
---reserved
---[[
 function Card.IsComboCost(c,cost)
 	local res=c.combo_cost
 	if not res and not c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then return false end
 	if c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then res=0 end
 	return res==cost
 end
-]]
 --check if a card's combo cost is less than or equal to a given value
---reserved
---[[
 function Card.IsComboCostBelow(c,cost)
 	local res=c.combo_cost
 	if not res and not c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then return false end
 	if c:IsHasEffect(EFFECT_GAIN_COMBO_COST) then res=0 end
 	return res<=cost
 end
-]]
 --check if a card's combo cost is greater than or equal to a given value
 function Card.IsComboCostAbove(c,cost)
 	local res=c.combo_cost
@@ -153,7 +147,7 @@ end
 function Card.IsHasComboPower(c)
 	return c:IsComboPowerAbove(0)
 end
---check if a card has a particular character name
+--check if a card has a given character name
 function Card.IsCharacter(c,...)
 	local setname_list={...}
 	if not CharacterList then CharacterList={} end
@@ -178,7 +172,7 @@ function Card.GetCharacter(c)
 	end
 	return charname
 end
---check if a card has a particular special trait
+--check if a card has a given special trait
 function Card.IsSpecialTrait(c,...)
 	local setname_list={...}
 	if not SpecialTraitList then SpecialTraitList={} end
@@ -265,6 +259,17 @@ function Card.IsAbleToSwitchToRest(c)
 	end
 	return false
 end
+--check if a card can be switched to active mode during the charge phase
+function Card.IsAbleToSwitchToActiveRule(c)
+	if c:IsLocation(LOCATION_ENERGYREST) then
+		return c:IsAbleToGrave()
+	elseif c:IsLocation(LOCATION_BATTLE) then
+		return c:IsDefensePos()
+	elseif c:IsLocation(LOCATION_FIELD) and c:GetFlagEffect(EFFECT_REST_MODE)>0 then
+		return c:IsFaceup()
+	end
+	return false
+end
 --check if a card can be used to pay for energy costs
 function Card.IsAbleToPayForEnergy(c)
 	if not c:IsAbleToSwitchToRest() then return false end
@@ -333,9 +338,9 @@ function Card.GetDamageCount(c)
 	return c:GetFlagEffect(EFFECT_DAMAGE_TURN)
 end
 --Renamed Card functions
---check if a card's character name includes a particular name
+--check if a card's character name includes a given name
 Card.IsCharacterSetCard=Card.IsSetCard
---check if a card's special trait includes a particular name
+--check if a card's special trait includes a given name
 Card.IsSpecialTraitSetCard=Card.IsSetCard
 --get a card's original energy cost
 Card.GetOriginalEnergy=Card.GetOriginalLevel
@@ -345,7 +350,7 @@ Card.GetOriginalComboPower=Card.GetBaseDefense
 Card.GetPreviousEnergyInPlay=Card.GetPreviousLevelOnField
 --get the player who played a card
 Card.GetPlayPlayer=Card.GetSummonPlayer
---check if a card has a particular color
+--check if a card has a given color
 Card.IsColor=Card.IsAttribute
 --get a card's current power
 Card.GetPower=Card.GetAttack

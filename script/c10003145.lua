@@ -18,7 +18,7 @@ scard.back_side_code=sid+1
 function scard.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetDecktopGroup(tp,3)
 	if chk==0 then return g:FilterCount(Card.IsAbleToDrop,nil)>0 end
-	Duel.SendDecktoptoDrop(tp,3,REASON_COST)
+	Duel.SendDecktoDrop(tp,3,REASON_COST)
 	g:KeepAlive()
 	e:SetLabelObject(g)
 end

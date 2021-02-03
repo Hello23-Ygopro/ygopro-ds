@@ -10,7 +10,7 @@ function scard.initial_effect(c)
 	--blocker
 	aux.EnableBlocker(c)
 	--drop
-	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoptoDropUpTo,PLAYER_SELF,2,REASON_EFFECT))
+	aux.AddSingleAutoSkill(c,0,EVENT_PLAY,nil,aux.DuelOperation(Duel.SendDecktoDropUpTo,PLAYER_SELF,2,REASON_EFFECT))
 	--gain skill
 	aux.AddSingleAutoSkill(c,1,EVENT_BE_BATTLE_TARGET,nil,scard.op1,nil,aux.OppoLeaderCondition(Card.IsColor,COLOR_RED+COLOR_BLUE))
 end

@@ -27,5 +27,5 @@ end
 --to deck, drop
 function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoDeck(e:GetHandler(),PLAYER_OWNER,SEQ_DECK_BOTTOM,REASON_EFFECT)
-	Duel.SendDecktoptoDrop(1-tp,2,REASON_EFFECT)
+	Duel.SendDecktoDrop(1-tp,2,REASON_EFFECT)
 end

@@ -22,7 +22,7 @@ function scard.thfilter(c,e)
 	return c:IsCharacter(CHARACTER_META_COOLER,CHARACTER_META_COOLER_CORE) and c:IsAbleToHand() and c:IsCanBeEffectTarget(e)
 end
 function scard.op2(e,tp,eg,ep,ev,re,r,rp)
-	Duel.SendDecktoptoDropUpTo(tp,3,REASON_EFFECT)
+	Duel.SendDecktoDropUpTo(tp,3,REASON_EFFECT)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,aux.DropAreaFilter(scard.thfilter),tp,LOCATION_DROP,0,0,1,nil,e)
 	if g:GetCount()==0 then return end

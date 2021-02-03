@@ -12,8 +12,8 @@ function Rule.RegisterRules(c)
 	c:RegisterEffect(e1)
 end
 function Rule.ApplyRules(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetFlagEffect(PLAYER_ONE,10000000)>0 then return end
-	Duel.RegisterFlagEffect(PLAYER_ONE,10000000,0,0,0)
+	if Duel.GetFlagEffect(PLAYER_ONE,FLAG_CODE_RULES)>0 then return end
+	Duel.RegisterFlagEffect(PLAYER_ONE,FLAG_CODE_RULES,0,0,0)
 	--remove rules
 	Rule.remove_rules(PLAYER_ONE)
 	Rule.remove_rules(PLAYER_TWO)
@@ -21,8 +21,8 @@ function Rule.ApplyRules(e,tp,eg,ep,ev,re,r,rp)
 	Rule.shuffle_deck(PLAYER_ONE)
 	Rule.shuffle_deck(PLAYER_TWO)
 	--check deck size
-	local b1=Duel.GetFieldGroupCount(PLAYER_ONE,LOCATION_DECK,0)~=50
-	local b2=Duel.GetFieldGroupCount(PLAYER_TWO,LOCATION_DECK,0)~=50
+	local b1=Duel.GetFieldGroupCount(PLAYER_ONE,LOCATION_DECK,0)<50
+	local b2=Duel.GetFieldGroupCount(PLAYER_TWO,LOCATION_DECK,0)<50
 	--check for tokens
 	local b3=Duel.GetMatchingGroupCount(Card.IsToken,PLAYER_ONE,LOCATION_DECK,0,nil)>0
 	local b4=Duel.GetMatchingGroupCount(Card.IsToken,PLAYER_TWO,LOCATION_DECK,0,nil)>0
@@ -228,7 +228,7 @@ function Rule.ApplyRules(e,tp,eg,ep,ev,re,r,rp)
 end
 --remove rules
 function Rule.remove_rules(tp)
-	local g=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_ALL,0,nil,10000000)
+	local g=Duel.GetMatchingGroup(Card.IsCode,tp,LOCATION_ALL,0,nil,CARD_RULES)
 	if g:GetCount()==0 then return end
 	Duel.DisableShuffleCheck()
 	Duel.SendtoDeck(g,PLAYER_OWNER,SEQ_DECK_UNEXIST,REASON_RULE)
@@ -274,13 +274,13 @@ end
 --untap
 function Rule.UntapCondition(e)
 	local turnp=Duel.GetTurnPlayer()
-	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAbleToSwitchToActive),turnp,LOCATION_INPLAY,0,1,nil)
-		or Duel.IsExistingMatchingCard(aux.EnergyAreaFilter(Card.IsAbleToSwitchToActive),turnp,LOCATION_ENERGY,0,1,nil)
+	return Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsAbleToSwitchToActiveRule),turnp,LOCATION_INPLAY,0,1,nil)
+		or Duel.IsExistingMatchingCard(aux.EnergyAreaFilter(Card.IsAbleToSwitchToActiveRule),turnp,LOCATION_ENERGY,0,1,nil)
 end
 function Rule.UntapOperation(e,tp,eg,ep,ev,re,r,rp)
 	local turnp=Duel.GetTurnPlayer()
-	local g1=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsAbleToSwitchToActive),turnp,LOCATION_INPLAY,0,nil)
-	local g2=Duel.GetMatchingGroup(aux.EnergyAreaFilter(Card.IsAbleToSwitchToActive),turnp,LOCATION_ENERGY,0,nil)
+	local g1=Duel.GetMatchingGroup(aux.FaceupFilter(Card.IsAbleToSwitchToActiveRule),turnp,LOCATION_INPLAY,0,nil)
+	local g2=Duel.GetMatchingGroup(aux.EnergyAreaFilter(Card.IsAbleToSwitchToActiveRule),turnp,LOCATION_ENERGY,0,nil)
 	g1:Merge(g2)
 	Duel.SwitchtoActive(g1,REASON_RULE)
 end
@@ -580,9 +580,12 @@ function Rule.cannot_main_phase2()
 	local e1=Effect.GlobalEffect()
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CANNOT_M2)
+	e1:SetCode(EFFECT_SKIP_M2)
 	e1:SetTargetRange(1,1)
 	Duel.RegisterEffect(e1,0)
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_CANNOT_M2)
+	Duel.RegisterEffect(e2,0)
 end
 --cannot change position
 function Rule.cannot_change_position()

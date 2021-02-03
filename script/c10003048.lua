@@ -28,5 +28,5 @@ function scard.op1(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 	Duel.BreakEffect()
-	Duel.SendDecktoptoEnergy(tp,2,REASON_EFFECT)
+	Duel.SendDecktoEnergy(tp,2,REASON_EFFECT)
 end
