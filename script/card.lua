@@ -1,6 +1,6 @@
 --Temporary Card functions
---check if a card has a given character name or special trait
---Note: Overwritten to check for an infinite number of character names and special traits
+--check if a card has a given setname
+--Note: Overwritten to check for an infinite number of setnames
 local card_is_set_card=Card.IsSetCard
 function Card.IsSetCard(c,...)
 	local setname_list={...}
@@ -9,6 +9,25 @@ function Card.IsSetCard(c,...)
 	end
 	return false
 end
+--check if a card's power is equal to a given value
+local card_is_attack=Card.IsAttack
+function Card.IsAttack(c,atk)
+	if card_is_attack then
+		return card_is_attack(c,atk)
+	else
+		return c:GetAttack()==atk
+	end
+end
+--check if a card's combo power is equal to a given value
+local card_is_defense=Card.IsDefense
+function Card.IsDefense(c,def)
+	if card_is_defense then
+		return card_is_defense(c,def)
+	else
+		return c:GetDefense()==def
+	end
+end
+--Overwritten Card functions
 --get a card's energy cost
 --Note: Overwritten to check for the correct value if it is changed while the card is not in LOCATION_MZONE
 local card_get_level=Card.GetLevel
@@ -54,11 +73,6 @@ function Card.IsLevelAbove(c,lv)
 	return c:GetLevel()>=lv
 end
 Card.IsEnergyAbove=Card.IsLevelAbove
---check if a card's power is equal to a given value
-local card_is_attack=Card.IsAttack
-function Card.IsAttack(c,atk)
-	return c:GetAttack()==atk
-end
 --get a card's current combo power
 --Note: Overwritten to check for the correct value if it is changed while the card is not in LOCATION_MZONE
 local card_get_defense=Card.GetDefense
@@ -75,6 +89,20 @@ function Card.GetDefense(c)
 	return res
 end
 Card.GetComboPower=Card.GetDefense
+--check if a card's combo power is less than or equal to a given value
+--Note: See Card.GetComboPower
+local card_is_defense_below=Card.IsDefenseBelow
+function Card.IsDefenseBelow(c,def)
+	return c:GetComboPower()<=def
+end
+Card.IsComboPowerBelow=Card.IsDefenseBelow
+--check if a card's combo power is greater than or equal to a given value
+--Note: See Card.GetComboPower
+local card_is_defense_above=Card.IsDefenseAbove
+function Card.IsDefenseAbove(c)
+	return c:GetComboPower()>=def
+end
+Card.IsComboPowerAbove=Card.IsDefenseAbove
 --check if a card has a given skill
 --Note: Overwritten to not count a negated keyword skill
 local card_is_has_effect=Card.IsHasEffect
@@ -148,6 +176,7 @@ function Card.IsHasComboPower(c)
 	return c:IsComboPowerAbove(0)
 end
 --check if a card has a given character name
+--Note: Add character names gained by effects to CharacterList
 function Card.IsCharacter(c,...)
 	local setname_list={...}
 	if not CharacterList then CharacterList={} end
@@ -173,6 +202,7 @@ function Card.GetCharacter(c)
 	return charname
 end
 --check if a card has a given special trait
+--Note: Add special traits gained by effects to SpecialTraitList
 function Card.IsSpecialTrait(c,...)
 	local setname_list={...}
 	if not SpecialTraitList then SpecialTraitList={} end
@@ -184,6 +214,18 @@ function Card.IsSpecialTrait(c,...)
 		end
 	end
 	return false
+end
+--get all special traits a card has
+function Card.GetSpecialTrait(c)
+	local traitname=0
+	local ct=1
+	while ct<=4095 and traitname==0 do
+		if c:IsSpecialTrait(ct) then
+			traitname=traitname+ct
+		end
+		ct=ct+1
+	end
+	return traitname
 end
 --check if a card is skill-less
 function Card.IsHasNoSkill(c)
@@ -360,8 +402,6 @@ Card.IsPower=Card.IsAttack
 Card.IsPowerBelow=Card.IsAttackBelow
 --check if a card's power is greater than or equal to a given value
 Card.IsPowerAbove=Card.IsAttackAbove
---check if a card's combo power is greater than or equal to a given value
-Card.IsComboPowerAbove=Card.IsDefenseAbove
 --check if a card can be ko-ed
 Card.IsCanBeKOed=Card.IsDestructable
 --check if a card can be played
